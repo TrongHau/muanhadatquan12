@@ -1,0 +1,7 @@
+/node_modules
+/resources/views/cache
+/.env
+/storage
+!vendor/backpack
+/vendor
+/public/storage
