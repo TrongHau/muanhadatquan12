@@ -58,81 +58,16 @@ $province = ' . var_export($province, true) . ';
 
     }
     public function homeTinTuc() {
-        $category = Category::get();
-        $result = [];
-        foreach($category as $item) {
-            $article = Article::select('category_id', 'title', 'slug', 'views', 'image')->where('status', PUBLISHED_ARTICLE)->where('category_id', $item->id)->orderBy('id', 'desc')->limit(8)->get();
-            $result[$item->id] = [];
-            foreach($article as $key => $item2) {
-                $result[$item->id][$key] = $item2->toArray();
-                $result[$item->id][$key]['slug_category'] = $item->slug;
-                $result[$item->id][$key]['category_parent_id'] = $item->parent_id;
-            }
-        }
 
-        // lời khuyên
-        $category = Category::whereIn('id', [16, 17, 18, 19, 20, 21])->get();
-        $loikhuyen = [];
-        $i = 0;
-        foreach($category as $item) {
-            $article = Article::select('category_id', 'title', 'slug', 'views', 'image')->where('status', PUBLISHED_ARTICLE)->where('category_id', $item->id)->orderBy('id', 'desc')->limit(8)->get();
-            foreach($article as $key => $item2) {
-                $loikhuyen[$i] = $item2->toArray();
-                $loikhuyen[$i]['slug_category'] = $item->slug;
-                $loikhuyen[$i]['category_parent_id'] = $item->parent_id;
-                $i++;
-            }
-        }
-        // tư vấn luật
-        $category = Category::whereIn('id', [9, 10, 11, 12, 13, 14, 15])->get();
-        $tuvanluat = [];
-        $i = 0;
-        foreach($category as $item) {
-            $article = Article::select('category_id', 'title', 'slug', 'views', 'image')->where('status', PUBLISHED_ARTICLE)->where('category_id', $item->id)->orderBy('id', 'desc')->limit(8)->get();
-            foreach($article as $key => $item2) {
-                $tuvanluat[$key] = $item2->toArray();
-                $tuvanluat[$key]['slug_category'] = $item->slug;
-                $tuvanluat[$key]['category_parent_id'] = $item->parent_id;
-                $i++;
-            }
-        }
-        // tất cả tin mới
-        $category = Category::whereIn('id', [4, 5, 6, 7, 8])->get();
-        $all_tin_tuc_moi = [];
-        $i = 0;
-        foreach($category as $item) {
-            $article = Article::select('category_id', 'title', 'slug', 'views', 'image')->where('status', PUBLISHED_ARTICLE)->where('category_id', $item->id)->orderBy('id', 'desc')->limit(8)->get();
-            foreach($article as $key => $item2) {
-                $all_tin_tuc_moi[$key] = $item2->toArray();
-                $all_tin_tuc_moi[$key]['slug_category'] = $item->slug;
-                $all_tin_tuc_moi[$key]['category_parent_id'] = $item->parent_id;
-                $i++;
-            }
-        }
         // tin nỗi bật
         $noibat = [];
-        $article = Article::select('category_id', 'title', 'slug', 'views', 'image', 'short_content')->where('status', PUBLISHED_ARTICLE)->where('featured', 1)->orderBy('id', 'desc')->limit(15)->get();
+        $article = Article::select('category_id', 'title', 'slug', 'views', 'image', 'short_content', 'created_at')->where('status', PUBLISHED_ARTICLE)->where('featured', 1)->orderBy('id', 'desc')->limit(10)->get();
         foreach($article as $key => $item) {
             $noibat[$key] = $item->toArray();
             $category = $item->category->first();
             $noibat[$key]['slug_category'] = $category->slug;
             $noibat[$key]['category_parent_id'] = $category->parent_id;
         }
-        file_put_contents(resource_path().'/views/cache/tintuc.blade.php',
-            '<?php 
-if ( !ENV(\'IN_PHPBB\') )
-{
-    die(\'Hacking attempt\');
-    exit;
-}
-global $tintuc;
-global $loikhuyen;
-global $tuvanluat;
-    
-$tintuc = ' . var_export($result, true) . ';
-$loikhuyen = ' . var_export($loikhuyen, true) . ';
-$tuvanluat = ' . var_export($tuvanluat, true) . ';
-?>');
 
         file_put_contents(resource_path().'/views/cache/tin_noi_bat.blade.php',
             '<?php 
@@ -143,17 +78,6 @@ if ( !ENV(\'IN_PHPBB\') )
 }
 global $noibat;
 $noibat = ' . var_export($noibat, true) . ';
-?>');
-
-        file_put_contents(resource_path().'/views/cache/all_tin_tuc_moi.blade.php',
-            '<?php 
-if ( !ENV(\'IN_PHPBB\') )
-{
-    die(\'Hacking attempt\');
-    exit;
-}
-global $all_tin_tuc_moi;
-$all_tin_tuc_moi = ' . var_export($noibat, true) . ';
 ?>');
 
         return response(['Ok']);

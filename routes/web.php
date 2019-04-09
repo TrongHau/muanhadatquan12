@@ -18,11 +18,13 @@ Route::group(['middlewareGroups' => ['web']], function () {
 //Route::get('sync/tintuc', 'SyncController@homeTinTuc');
 //Route::get('sync/delete', 'SyncController@deleteFolderTemp');
 
+
+
 Route::post('get-district', ['as' => 'get.district', 'uses' => 'HomeController@getDistrict']);
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::post('/get_district', ['as' => 'get.district', 'uses' => 'HomeController@getDistrict']);
 Route::post('/get_ward', ['as' => 'get.ward', 'uses' => 'HomeController@getWard']);
-Route::get('/demo', ['as' => 'get.ward1', 'uses' => 'ArticleController@demo']);
+Route::get('/demo', ['as' => 'get.ward1', 'uses' => 'SyncController@homeTinTuc']);
 
 Auth::routes();
 
@@ -36,6 +38,7 @@ Route::get('auth/facebook/callback', 'Auth\AuthFacebookController@handleProvider
 Route::get('auth/google', 'Auth\AuthGoogleController@redirectToProvider');
 Route::get('auth/google/callback', 'Auth\AuthGoogleController@handleProviderCallback');
 Route::get('/xac-nhan-email/{token}', 'UserController@verifyEmail');
+Route::get('/tim-kiem-tin-tuc', 'CatalogController@searchKey');
 
 Route::prefix('guest/')->group(function () {
     Route::get('dang-tin-ban-cho-thue', ['as' => 'guest.article.getArticleLease', 'uses' => 'ArticleController@newGuestArticleForLease']);
@@ -198,7 +201,7 @@ Route::get('/can-thue-kho-nha-xuong-dat-{position}/{title}bds-{id}', 'DetailCont
 Route::get('/can-thue-loai-bat-dong-san-khac-{position}/{title}bds-{id}', 'DetailController@articleForBuyDetail');
 
 // tim kiem nang cao
-Route::get('/tim-kiem-nang-cao/{method}/{province_d}/{district_id}/{ward_id}/{street_id}/{area}/{price}/{bed_room}/{toilet}/{ddlHomeDirection}/', 'SearchController@advance');
+Route::get('/tim-kiem-nang-cao/{method}/{province_d}/{district_id}/{ward_id}/{street_id}/{area}/{price}/{bed_room}/{toilet}/{ddlHomeDirection}/{title_article?}', 'SearchController@advance');
 
 
 // tin tuc

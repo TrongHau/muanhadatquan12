@@ -53,9 +53,17 @@ class UserController extends Controller
 //            'phone' => 'required|unique:users',
             'province_id' => 'required',
             'district_id' => 'required',
+            'nick_name' => 'max:200',
+            'tax_code' => 'max:200',
+            'skype' => 'max:200',
+            'zalo' => 'max:200',
+            'viber' => 'max:200',
+            'company' => 'max:200',
+            'facebook' => 'max:200',
         ]);
         $profile = [
             'name' => $request->name,
+            'gender' => $request->gender,
             'nick_name' => $request->nick_name,
             'birth_day' => date("Y/m/d", strtotime($request->input('birth_day'))),
             'province_id' => $request->province_id,
@@ -72,6 +80,7 @@ class UserController extends Controller
             'skype' => $request->skype,
             'zalo' => $request->zalo,
             'viber' => $request->viber,
+            'company' => $request->company,
             'facebook' => $request->facebook,
 
         ];

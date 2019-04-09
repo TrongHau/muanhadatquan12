@@ -1,97 +1,134 @@
-@section('contentCSS')
-    <link rel="stylesheet" type="text/css" href="/css/app.css" media="all">
-    <style>
-        .header-top-left h1 {
-            margin: 5px;
-        }
-        .col-md-offset-2 {
-            margin-left: auto;
-            margin-right: auto;
-            float: inherit;
-        }
-        .container {
-            width: 100%;
-        }
-        .panel-default {
-            border-color: white;
-            box-shadow: none;
-        }
-        .panel-default>.panel-heading {
-            color: #333;
-            background-color: #fff;
-            border-color: #d3e0e9;
-        }
-
-    </style>
-@endsection
 @extends('layouts.app')
+@section('contentCSS')
+@endsection
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">DDaj</div>
+    <div class="main-l">
+        <div class="box1-left">
+            <div class="tit_C cachtren2">
+                <span class="icon_star_xanh"></span>Cài đặt mật khẩu mới</div>
+            <form id="LoginForm" action="{{ route('password.request') }}" method="post">
+                {{ csrf_field() }}
+                <div class="detail_R">
+                    <div class="row_ad">
+                        <label for="LoginForm_email" class="required">Email: </label>
+                        <div class="row50 success">
+                            <input class="ipt1" size="40" name="email" value="{{ $email or old('email') }}" id="LoginForm_email" type="text">
+                        </div>
+                        @if ($errors->has('email'))
+                            <div style="padding-left: 135px;" class="errorMessage" id="LoginForm_email_em_">{{ $errors->first('email') }}</div>
+                        @endif
+                    </div>
 
-                    <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('password.request') }}">
-                            {{ csrf_field() }}
-
-                            <input type="hidden" name="token" value="{{ $token }}">
-
-                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control" name="email" value="{{ $email or old('email') }}" required autofocus>
-
-                                    @if ($errors->has('email'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
+                    <div class="row_ad">
+                        <label for="LoginForm_password" class="required">Mật khẩu mới: </label>
+                        <div class="row50 success">
+                            <input class="ipt1" size="40" name="password" value="{{ old('password') }}" id="LoginForm_password" type="password">
+                        </div>
+                        @if ($errors->has('password'))
+                            <div style="padding-left: 135px;" class="errorMessage" id="LoginForm_password_em_">{{ $errors->first('password') }}</div>
+                        @endif
+                    </div>
+                    <div class="row_ad">
+                        <label for="LoginForm_password" class="required">Xác nhận mật khẩu: </label>
+                        <div class="row50 success">
+                            <input  class="ipt1" size="40" name="password_confirmation" value="{{ old('password_confirmation') }}" id="password_confirmation" type="password">
+                        </div>
+                        @if ($errors->has('password_confirmation'))
+                            <div style="padding-left: 135px;" class="errorMessage" id="LoginForm_password_em_">{{ $errors->first('password_confirmation') }}</div>
+                        @endif
+                    </div>
+                    <div class="row_ad">
+                        <div class="row_ad">
+                            <label>&nbsp;</label>
+                            <div class="row50">
+                                <input type="submit" class="bt_sb" value="Đặt lại mật khẩu">
                             </div>
+                        </div>
+                        <label>&nbsp;</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="main-r">
+        <div class="boxsearch-right box1-right">
+            <div class="tit_C cachtren2">
+                <span class="icon_star_xanh"></span>
+                LỢI ÍCH ĐĂNG KÝ THÀNH VIÊN
+            </div>
+            <div class="detail_R">
+                <div class="mi_neny_dk clearfix">
+                    <div class="info_neny_dk">
+                        <div class="ten_neny_dk">Cập nhật thời gian thực</div>
 
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label for="password" class="col-md-4 control-label">Password</label>
+                        <div class="text_neny_dk">Chúng tôi sẽ gửi email cho bạn các gói dịch vụ mới cũng như thông tin thị trường nhà đất mới nhất, tin tức của bạn</div>
+                    </div>
+                </div>
 
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" required>
+                <div class="mi_neny_dk clearfix">
+                    <div class="info_neny_dk">
+                        <div class="ten_neny_dk">Theo dõi ưa thích của bạn</div>
 
-                                    @if ($errors->has('password'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
+                        <div class="text_neny_dk">Chúng tôi sẽ gửi email cho bạn các gói dịch vụ mới cũng như thông tin thị trường nhà đất mới nhất, tin tức của bạn</div>
+                    </div>
+                </div>
 
-                            <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                                <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-                                <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                <div class="mi_neny_dk clearfix">
+                    <div class="info_neny_dk">
+                        <div class="ten_neny_dk">Tư vấn và hướng dẫn</div>
 
-                                    @if ($errors->has('password_confirmation'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        Reset Password
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+                        <div class="text_neny_dk">Chúng tôi sẽ gửi email cho bạn các gói dịch vụ mới cũng như thông tin thị trường nhà đất mới nhất, tin tức của bạn</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <style>
+        .login-social {
+            margin: auto;
+        }
+        .login .login-social .login-facebook {
+            float: left;
+        }
+        .login .login-social .login-facebook, .login .login-social .login-google {
+            height: 38px;
+            border: 1px solid #d7d7d7;
+            width: 210px;
+        }
+        .login .login-social .login-facebook span, .login .login-social .login-facebook div {
+            color: #055698;
+        }
+        .login .login-social .login-facebook div, .login .login-social .login-google div {
+            width: 20px;
+            height: 20px;
+            margin: 9px;
+            font-size: 22px;
+            float: left;
+        }
+        .login .login-social .login-google a, .login .login-social .login-google div {
+            color: #EB4F38;
+        }
+        .login .login-social .login-google {
+            float: right;
+        }
+        .login .login-social .login-facebook a, .login .login-social .login-google a {
+            font-size: 13px;
+        }
+        .login .login-social .login-facebook a, .login .login-social .login-facebook div {
+            color: #055698;
+        }
+        .login .login-social .login-facebook a, .login .login-social .login-google a {
+            line-height: 38px;
+            float: left;
+            cursor: pointer;
+            display: block;
+            width: 150px;
+            height: 38px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    </style>
 @endsection
 @section('contentJS')
 

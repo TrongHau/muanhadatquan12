@@ -34,17 +34,24 @@ class SearchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function advance(Request $request, $method = -1, $province_id = -1, $district_id = -1, $ward_id = -1, $street_id = -1, $area = -1, $price = -1, $bed_room = -1, $toilet = -1, $ddlHomeDirection = -1) {
+    public function advance(Request $request, $method = -1, $province_id = -1, $district_id = -1, $ward_id = -1, $street_id = -1, $area = -1, $price = -1, $bed_room = -1, $toilet = -1, $ddlHomeDirection = -1, $title_article = '') {
         session_start();
         $titleArticle = TypeModel::where('url', $method)->first();
         if(!$titleArticle)
             return view('errors.404');
-        $article = ArticleForLeaseModel::where('status', PUBLISHED_ARTICLE);
         // hiển thị tất cả các loại
-        if($method == 'tat-ca-nha-ban') {
-            $article = $article->whereIn('type_article', ['Bán căn hộ chung cư', 'Bán nhà riêng', 'Bán biệt thự, liền kề', 'Bán nhà mặt phố']);
-        }elseif($method == 'tat-ca-dat-ban') {
-            $article = $article->whereIn('type_article', ['Bán đất nền dự án', 'Bán đất', 'Bán trang trại, khu nghỉ dưỡng', 'Bán kho, nhà xưởng']);
+        if($method == 'nha-dat-ban') {
+            $article = ArticleForLeaseModel::where('status', PUBLISHED_ARTICLE);
+            $article = $article->where('method_article', 'Nhà đất bán');
+        }elseif($method == 'nha-dat-cho-thue') {
+            $article = ArticleForLeaseModel::where('status', PUBLISHED_ARTICLE);
+            $article = $article->where('method_article', 'Nhà đất cho thuê');
+        }elseif($method == 'nha-dat-can-mua') {
+            $article = ArticleForBuyModel::where('status', PUBLISHED_ARTICLE);
+            $article = $article->where('method_article', 'Nhà đất cần mua');
+        }elseif($method == 'nha-dat-can-thue') {
+            $article = ArticleForBuyModel::where('status', PUBLISHED_ARTICLE);
+            $article = $article->where('method_article', 'Nhà đất cần thuê');
         }
         if($district_id > 0) {
             $article = $article->where('district_id', $district_id);
@@ -62,6 +69,9 @@ class SearchController extends Controller
         }
         if($ward_id > 0) {
             $article = $article->where('ward_id', $ward_id);
+        }
+        if($title_article) {
+            $article = $article->where('title', 'like', '%'.$title_article.'%');
         }
         if($street_id > 0) {
             $article = $article->where('street_id', $street_id);

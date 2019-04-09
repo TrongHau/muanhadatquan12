@@ -36,7 +36,7 @@ $Agent = new Agent();
                                 $page = $article->links();
                                 $article = $article->toArray();
                                 ?>
-                                @foreach($article['data'] as $key => $item)
+                                @foreach($article['datalink_blue'] as $key => $item)
                                     @if($key == 0 && $item['image'])
                                         <div id="ctl23_ctl00_panelCate" class="detailsView-title-style">
                                             <div class="font-title-list-news">
@@ -48,7 +48,7 @@ $Agent = new Agent();
                                             </a>&nbsp;&nbsp;</div>
                                         <div class="tt-thumb-cnt">
                                             <h2>
-                                                <a class="link_blue" href="{{$item['image'] ? '/'.$item['image'] : PATH_LOGO_DEFAULT}}" title="{{$item['title']}}">{{$item['title']}}</a>
+                                                <a class="link_blue" href="/{{$category->slug}}/{{$item['slug']}}" title="{{$item['title']}}">{{$item['title']}}</a>
                                             </h2>
                                             <div class="datetime">
                                                 {{date('d/m/Y', strtotime($item['created_at']))}}

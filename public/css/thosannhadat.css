@@ -1,0 +1,243 @@
+
+.banner_R img{
+    width: 100%;
+}
+
+.fb_iframe_widget iframe
+{
+    min-height: 150px;
+    position: absolute;
+    width: 310px !important;
+    word-wrap: break-word;
+}
+
+.banner-fixed{
+    border: 1px solid #d6d2c8;
+    display: block;
+    min-height: 300px;
+    text-align: center;
+}
+
+.banner-fixed img{
+    min-height: 300px;
+}
+
+.results-wrap{
+    /*margin-bottom: 30px;*/
+}
+
+.banner_R{
+    margin: 10px 0;
+    text-align: center;
+    border: 1px solid #d6d2c8;
+}
+
+.btn_search{
+    background: none repeat scroll 0 0 #d23b15;
+    border: 1px solid #9c1515;
+    color: #fff;
+    margin-bottom: 12px;
+    padding: 3px 5px;
+}
+
+.denden{
+    color: black;
+    font-weight: bold;
+}
+
+ul.chucnang_tindang{
+    float: left;
+    list-style-position: inside;
+    width: 100%;
+}
+
+ul.chucnang_tindang li
+{
+    float: left;
+    margin-right: 10px;
+}
+
+.uptin_icon{
+    background: url("../images/uptin_icon.png") no-repeat scroll left center rgba(0, 0, 0, 0);
+    padding-left: 20px;
+}
+
+.suatin_icon{
+    background: url("../images/suatin_icon.png") no-repeat scroll left center rgba(0, 0, 0, 0);
+    padding-left: 20px;
+}
+
+.resetview_icon{
+    background: url("../images/resetview_icon.png") no-repeat scroll left center rgba(0, 0, 0, 0);
+    padding-left: 20px;
+}
+
+.muatinvip_icon{
+    background: url("../images/muatinvip_icon.png") no-repeat scroll left center rgba(0, 0, 0, 0);
+    padding-left: 20px;
+}
+
+.xoatin_icon{
+    background: url("../images/xoatin_icon.png") no-repeat scroll left center rgba(0, 0, 0, 0);
+    padding-left: 20px;
+}
+
+.info_duan ul li{
+    list-style: none !important;
+}
+
+.list-view .summary
+{
+    margin: 0;
+}
+
+.list-view .pager{
+    float: left;
+    margin-bottom: -11px !important;
+}
+
+.map{
+    font-family: Arial,Helvetica,sans-serif;
+    height: 310px;
+    position: relative;
+    width: 100%;
+}
+
+.pager li:hover a, .pager li.selected a
+{
+    background: none repeat scroll 0 0 #266fb5;
+    color: #fff;
+}
+
+.pager li.next, .pager li.previous{
+    display: none !important;
+}
+
+.list-view .pager{
+	margin: 5px 0 5px;
+}
+
+.box_moinhat{
+	margin: 0 0 7px;
+}
+
+.errorMessage,
+span.required{
+    color: red;
+}
+
+ul.login_logout li.profile a img{
+    float: left;
+    height: 30px !important;
+    margin-right: 5px;
+    width: 35px !important;
+    margin-top: 5px;
+}
+
+.row70{
+    display: inline-block;
+    width: 78%;
+}
+
+.opt2{
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 11px;
+    height: 27px;
+    padding: 5px;
+    width: 34%;
+}
+
+ul.login_logout li.profile{
+    margin-right: 10px;
+}
+
+ul.login_logout li.exit a img{
+    float: left;
+    height: 20px;
+    margin-right: 5px;
+    width: 20px;
+    margin-top: 5px;
+}
+
+ul.login_logout li.exit{
+    padding-left: 0;
+}
+
+.list-view ul.clearfix{
+    padding: 0;
+    margin: 0;
+}
+
+button.bt_napthemgold{
+    background: url("../img/icon_cart.png") no-repeat scroll 9px center / 19px auto #ff5400;
+    border: medium none;
+    color: #fffcf0;
+    font-weight: 700;
+    height: 26px;
+    padding: 6px 15px 6px 35px;
+}
+
+.detail_admin_C .box_napthe_dt_left{
+    width: 48%;
+    float: left;
+}
+.detail_admin_C .box_napthe_dt{
+    width: 50%;
+    float: left;
+}
+
+.detail_admin_C .box_napthe_dt_left{
+    border-right: 1px dotted #d6d2c8;
+    margin-right: 5px;
+}
+
+.cactinhthanh {
+    margin-top: 10px;
+    border: 1px solid #D6D2C8;
+    overflow: hidden;
+    float: left;
+    margin-bottom: 10px;
+    background: #ECE8DC;
+    width: 100%;
+}
+
+.box_20 {
+    float: left;
+    width: 20%;
+    padding: 10px 1%;
+}
+
+.cactinhthanh .box_20 ul
+{
+    margin: 0;
+    padding: 0;
+}
+
+.cactinhthanh .box_20 ul:first-child{
+    margin-bottom: 10px;
+}
+
+.cactinhthanh .box_20 ul li:first-child{
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.cactinhthanh .box_20 ul li a{
+    font-size: 12px;
+    color: #362F2D;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+    list-style: none;
+}
+
+.cactinhthanh .box_20 ul li a:hover{
+    color: red;
+    text-decoration: underline;
+}
+

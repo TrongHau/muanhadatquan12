@@ -449,7 +449,9 @@ class ArticleController extends Controller
             return redirect()->route($typeAuthGuest.'article.getArticleBuy')->with('success', $mes ? $mes : 'Đăng tin thành công');
         }
     }
-    public function loadImage(Request $request){
+    public function loadImage(Request $request)
+    {
         new UploadHandler();
     }
+
 }

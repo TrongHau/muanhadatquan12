@@ -152,4 +152,9 @@ class CatalogController extends Controller
         }
 
     }
+    public function searchKey(Request $request)
+    {
+        $article = ArticleModel::select('title', 'slug', 'short_content', 'image', 'status', 'featured', 'views', 'created_at')->where('status', PUBLISHED_ARTICLE)->where('title', 'like', '%'.$request->q.'%')->paginate(PAGING_LIST_ARTICLE_CATALOG);
+        return view('catalog.article_tin_tuc', compact('category', 'article'));
+    }
 }
