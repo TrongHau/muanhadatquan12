@@ -5,86 +5,59 @@ $paging = $article->links();
 $list = $article->toArray();
 ?>
 @if($list['data'])
-<table class="tbl" border="0" cellpadding="3px" cellspacing="0" width="100%">
-    <tbody><tr class="tit-tbl bg_tit">
-        <th style="width: 40px">
-            STT
-        </th>
-        <th style="width: 70px">
-            Mã tin
-        </th>
-        <th style="width: 330px">
-            Tiêu đề
-        </th>
-        <th style="width: 30px">
-            Xem
-        </th>
-        <th style="width: 90px">
-            Ngày bắt đầu
-        </th>
-        <th style="width: 40px">
-            Ghi chú
-        </th>
-    </tr>
     @foreach($list['data'] as $key => $item)
-        <tr id="item-{{$item['id']}}">
-            <td class="aligncenter">
-                {{++$key + ($list['per_page'] * ($list['current_page'] - 1))}}
-            </td>
-            <td class="aligncenter">
-                <p>
-                    {{$item['id']}}
-                </p>
-                @if($item['aprroval'] == APPROVAL_ARTICLE_PENĐING)
-                    Chưa duyệt
-                @elseif($item['aprroval'] == APPROVAL_ARTICLE_PUBLIC)
-                    Đã duyệt<br/>
-                    {{date_format(date_create($item['updated_at']), "d-m-Y")}}
-                @elseif($item['aprroval'] == APPROVAL_ARTICLE_DELETE)
-                    Không được duyệt<br/>
-                    {{date_format(date_create($item['updated_at']), "d-m-Y")}}
-                @endif
-            </td>
-            <td>
-                <span style="float: left; word-wrap: break-word; color: #055699;" id="view_18965371">
-                    <img style="width: 77px; height: 62px; float: left; padding-right: 8px;" src="{{$item['gallery_image'] ? Helpers::file_path($item['id'], PUBLIC_ARTICLE_BUY, true).THUMBNAIL_PATH.json_decode($item['gallery_image'])[0] : THUMBNAIL_DEFAULT }}" alt="{{$item['title']}}">{{$item['title']}}</span>
-                <div style="clear: both; text-align: right; padding-top: 5px;">
-                    &nbsp;
-                    <a id="MainContent__userPage_ctl00_rpItems_lnkEdit_0" href="/quan-ly-tin/dang-tin-can-mua-can-thue/{{$item['id']}}">
-                        <img src="/imgs/sua.gif"> Sửa</a>&nbsp;
-                    <a id="MainContent__userPage_ctl00_rpItems_lnkDel_0" class="btn-xoa" onclick="deleteArticle('{{$item['id']}}')" href="javascript:void(0)">Xóa</a>
-                    <div style="display: none;">
-
+        <div id="item-{{$item['id']}}" class="list-view">
+            <ul class="clearfix">
+                <div class="box_nhadatban  clearfix">
+                    <div class="tit_nhadatban">
+                        <h4><a title="" target="_blank" href="/{{$item['prefix_url'].'-bds-'.$item['id']}}">{{$item['title']}}</a></h4>
                     </div>
-                </div>
-            </td>
-            <td class="aligncenter">
-                <p>
-                    <a id="pageviews_18965371" href="javascript: PageViewDaily('9fLJVubxXI8tONW9Zh5KSg==')" class="grey" style="text-decoration: underline">{{$item['views'] ? $item['views'] : '_'}}</a>
-                </p>
-                <p>
-                    <br>
-                </p>
-            </td>
-            <td class="aligncenter">
-                <p>
-                    {{date_format(date_create($item['created_at']), "d-m-Y")}}
-                </p>
-            </td>
-            <td class="aligncenter">
-                <p>
-                    <a href="javascript:void(0)" onclick="getAllNote('{{$item['note']}}')" class="grey" style="text-decoration: underline;">{{$item['note'] ? 1 : 0}}</a>
-                </p>
-            </td>
-        </tr>
+                    <div class="detail_nhadatban">
+                        <div class="img_nhadatban">
+                            <a target="_blank" href="/{{$item['prefix_url'].'-bds-'.$item['id']}}"><img src="{{$item['gallery_image'] ? Helpers::file_path($item['id'], PUBLIC_ARTICLE_BUY, true).THUMBNAIL_PATH.json_decode($item['gallery_image'])[0] : THUMBNAIL_DEFAULT }}" alt=""></a>
+                            <!-- <span class="masotin">MST: 889034</span>     -->
+                        </div>
+                        <div class="text_nhadatban">
+                            <div class="info_nhadatban">
+                                <ul>
+                                    <li>Giá: <strong class="camcam">500 Triệu/m2</strong> | Lượt xem: <span class="saleboldtext">{{number_format($item['views'])}}</span></li>
+                                    <li>
+                                        Ngày đăng:
+                                        <span class="datetime">
+                         <span class="camcam">{{date_format(date_create($item['updated_at']), "d-m-Y")}}</span>
+                    </span>
+                                    </li>
+                                    <li>
+                                        Danh mục: <span class="saleboldtext">{{$item['type_article']}}</span>
+                                        -
+                                        Mã Số Tin:<span class="saleboldtext">{{$item['id']}}</span>
+                                    </li>
+                                    <li>
+                                        Tình trạng: <span class="saleboldtext">
+                                        @if($item['aprroval'] == 0)
+                                                Chưa duyệt
+                                            @elseif($item['aprroval'] == 1)
+                                                <span class="camcam">Đã duyệt - {{date_format(date_create($item['updated_at']), "d-m-Y")}}</span>
+                                            @endif
+                                    </span>
+                                    </li>
+                                    <li>
+                                        <ul class="chucnang_tindang">
+                                            <li class="suatin_icon"><a href="/quan-ly-tin/dang-tin-can-mua-can-thue/{{$item['id']}}">Sửa tin</a></li>
+                                            <li class="xoatin_icon"><a class="delete-property" onclick="deleteArticle('{{$item['id']}}')" data-property-id="994" href="javascript:void(0)">Xóa tin</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div></ul>
+            <div class="results-wrap clearfix"><div class="summary"></div>
+        </div>
     @endforeach
-
-
-    </tbody>
-</table>
-<div class="pager">
-    <?php echo str_replace('/thong-tin-ca-nhan/quan-ly-mua-can-thue', '/quan-ly-tin/tin-can-thue', $paging) ?>
-</div>
+    <div class="pager" style="float: right;">
+        <?php echo str_replace('/thong-tin-ca-nhan/quan-ly-mua-can-thue', '/quan-ly-tin/tin-can-thue', $paging) ?>
+    </div>
 @else
     Hiện tại bạn vẫn chưa có bài tin đăng nào.
 @endif

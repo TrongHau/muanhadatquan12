@@ -993,3 +993,6 @@ button:disabled {
 .has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline {
     color: #ff0500;
 }
+.main-r a.selected {
+    color: #E47313;
+}

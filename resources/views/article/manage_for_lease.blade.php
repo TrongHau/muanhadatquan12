@@ -4,97 +4,49 @@ $mySelf = Auth::user();
 ?>
 @extends('layouts.app')
 @section('content')
-    <div class="container-default">
-        <div>
-            <link rel="stylesheet" type="text/css" href="/css/manage_article.css" media="all">
-            <div id="content-user">
-                <input type="hidden" name="ctl00$MainContent$_userPage$hdfUserId1" id="hdfUserId1" value="1007909">
-                <div class="has-bg-user">
-                    <div id="column-left-user" style="width: 25%; float: left">
-                        <div id="usercp">
-                            <div class="white-background-new">
-                                @include('user.left_sidebar_avatar', ['mySelf' => $mySelf])
+    @include('user.left_sidebar_avatar', ['mySelf' => $mySelf])
+    <div class="main-l main-l1">
+        <div class="box1-left">
+            <div class="tit_C cachtren2">
+                <span class="icon_star_xanh"></span>QUẢN LÝ TIN RAO BÁN, CHO THUÊ
+            </div>
+            <div class="detail_admin_C detail_R">
+                <table style="margin-bottom: 10px" class="t-4-c">
+                    <tbody>
+                    <tr>
+                        <td class="colorblue">Từ ngày</td>
+                        <td class="colorblue">Đến ngày</td>
+                        <td class="colorblue">Mã tin</td>
+                        <td class="colorblue">Trạng thái</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-right: 10px;">
+                            <input value="{{date('Y-m-d', strtotime('-2 months'))}}" name="date_from" type="date" value="22/06/2018" id="date_from" class="form-control">
+                        </td>
+                        <td style="padding-right: 10px;">
+                            <input value="{{date("Y-m-d")}}" name="date_to" type="date" value="23/12/2018" id="date_to" class="form-control">
+                        </td>
+                        <td style="padding-right: 10px;">
+                            <input placeholder="Bài viết của bạn" name="code" type="text" id="code" class="form-control">
+                        </td>
+                        <td style="padding-right: 10px;">
+                            <div id="divProductType" class="comboboxs advance-select-box pad0">
+                                <select class="select-text form-control" name="aprroval" id="aprroval">
+                                    <option selected="selected" value="-1">Tất cả</option>
+                                    <option value="{{APPROVAL_ARTICLE_PUBLIC}}">Đã duyệt</option>
+                                    <option value="{{APPROVAL_ARTICLE_PENĐING}}">Chưa duyệt</option>
+                                    <option value="{{APPROVAL_ARTICLE_DELETE}}">Đã bị xóa</option>
+                                </select>
                             </div>
-                        </div>
-
-                    </div>
-                    <div id="column-no-right-user" style="width: 75%; float: left">
-
-                        <style type="text/css">
-                            .tblKM {
-                                width: 750px;
-                                border-collapse: collapse;
-                            }
-                            .tblKM tr:hover {
-                                background-color: #cdcdcd;
-                            }
-                            .tblKM td {
-                                padding: 3px;
-                            }
-                            .tblKM th {
-                                padding: 3px;
-                                font-size: 14px;
-                                font-weight: bold;
-                            }
-                            .tblKM tr td:last-child {
-                                text-align: right;
-                            }
-                        </style>
-                        <div class="aligncenter">
-
-                        </div>
-
-                        <div class="moduletitle">
-                            Quản lý tin rao bán, cho thuê
-                        </div>
-                        <table style="width: 100%; margin-top: 20px;" class="t-4-c">
-                            <tbody>
-                            <tr>
-                                <td class="colorblue">Từ ngày</td>
-                                <td class="colorblue">Đến ngày</td>
-                                <td class="colorblue">Mã tin</td>
-                                <td class="colorblue">Trạng thái</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input value="{{date('Y-m-d', strtotime('-2 months'))}}" name="date_from" type="date" value="22/06/2018" id="date_from" class="hasDatepicker keycode">
-                                </td>
-                                <td>
-                                    <input value="{{date("Y-m-d")}}" name="date_to" type="date" value="23/12/2018" id="date_to" class="hasDatepicker keycode">
-                                </td>
-                                <td>
-                                    <input placeholder="Áp dụng với bài viết của bạn" name="code" type="text" id="code" class="keycode">
-                                </td>
-                                <td>
-                                    <div id="divProductType" class="comboboxs advance-select-box pad0">
-                                        <select class="select-text" name="aprroval" id="aprroval">
-                                            <option selected="selected" value="-1">Tất cả</option>
-                                            <option value="{{APPROVAL_ARTICLE_PUBLIC}}">Đã duyệt</option>
-                                            <option value="{{APPROVAL_ARTICLE_PENĐING}}">Chưa duyệt</option>
-                                            <option value="{{APPROVAL_ARTICLE_DELETE}}">Đã bị xóa</option>
-                                        </select>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="3">
-                                    <input type="submit" name="ctl00$MainContent$_userPage$ctl00$btnSearch" value="Tìm kiếm" onclick="doReadySearch();" id="MainContent__userPage_ctl00_btnSearch" class="timkiem" autopostback="true">
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <div class="clear10"></div>
-                        <div id="list_article">
-                            <?php echo $list ?>
-                        </div>
-                        <div class="clear10"></div>
-                        <input type="hidden" name="ctl00$MainContent$_userPage$ctl00$hddPageViewData" id="hddPageViewData" value="9fLJVubxXI8tONW9Zh5KSg%3d%3d">
-
-                        <div class="clear">
-                        </div>
-                    </div>
-                    <div class="clear">
-                    </div>
+                        </td>
+                        <td>
+                            <input type="submit" name="ctl00$MainContent$_userPage$ctl00$btnSearch" value="Tìm kiếm" onclick="doReadySearch();" id="MainContent__userPage_ctl00_btnSearch" class="timkiem form-control bt_sb" style="margin-bottom: 0px;" autopostback="true">
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div id="list_article">
+                    <?php echo $list ?>
                 </div>
             </div>
         </div>
@@ -102,6 +54,7 @@ $mySelf = Auth::user();
 @endsection
 @section('contentJS')
     <script>
+        var pageUrl = '/quan-ly-tin/tin-cho-thue';
         function doReadySearch() {
             getList('/quan-ly-tin/tin-cho-thue');
         }
@@ -119,8 +72,10 @@ $mySelf = Auth::user();
                     },
                     success: function(data) {
                         if(data.success) {
+                            loaded = false;
+                            getList(pageUrl);
                             successModal(data.message);
-                            $('#item-'+code).remove();
+                            // $('#item-'+code).remove();
                         }else {
                             alertModal(data.message);
                         }
@@ -155,6 +110,7 @@ $mySelf = Auth::user();
                     $('#list_article').html(response);
                     $('#list_article').find('.pagination li a').on('click', function (e) {
                         e.preventDefault();
+                        pageUrl = $(this).attr('href');
                         getList($(this).attr('href'));
                     });
                 }
@@ -162,3 +118,6 @@ $mySelf = Auth::user();
         }
     </script>
 @endsection
+
+
+

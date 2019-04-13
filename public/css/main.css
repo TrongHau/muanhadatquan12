@@ -38,7 +38,7 @@ header{}
 	box-shadow: 0px 1px 5px 1px rgba(94, 94, 94, 0.75);
 	}
 .sys-news p{ padding:0; margin:0;line-height: 16px;margin-top: 6px;margin-bottom: 7px;font-family: 'Roboto Condensed', sans-serif;}
-a.l-sele{ color:#3cc1fa; background:url(../img/line-sel.html) repeat-x top;display: block;padding-top: 5px;}
+a.l-sele{ color:#3cc1fa; background:url(../imgs/line-sel.html) repeat-x top;display: block;padding-top: 5px;}
 a.l-sele:hover{ text-decoration:underline}
 .logo{float:left;  padding-top: 9px;  padding-bottom: 11px; width: 20%}
 .navtop{ float:right;width: 72%;position: relative;  padding-top: 9px;  padding-bottom: 11px; display: inline-table;}
@@ -46,7 +46,7 @@ a.l-sele:hover{ text-decoration:underline}
 .menutop li{ display:inline-block; list-style:none;font-family: 'Roboto Condensed', sans-serif;margin-left: 17px;}
 .menutop li a:before{position: relative;top: 0px;display: inline-block;font-family: 'Glyphicons Halflings';font-style: normal;font-weight: 400;line-height: 1;font-size: 11px;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;font-size:11px;margin-right: 5px;}
 .menutop li.m-home a:before{content: "\e021"; }
-.menutop li.m-about a:before{ content:''; background:url(../img/ico-about.html) no-repeat left;margin-right: 6px;position: relative;top: 0px;display: inline-block; width:12px; height:11px}
+.menutop li.m-about a:before{ content:''; background:url(../imgs/ico-about.html) no-repeat left;margin-right: 6px;position: relative;top: 0px;display: inline-block; width:12px; height:11px}
 .menutop li.m-contact a:before{content: "\e182";}
 .menutop li a{ color:#fff; font-size:14px;}
 .menutop li a:hover,.menutop li a.active{ text-decoration:underline}
@@ -86,10 +86,10 @@ a.ico-share{ display:inline-block; color:#fff;-webkit-border-radius: 5px;-moz-bo
 .box-search-left label{}
 .box-search-right{  text-align: right;  float: right;  width: 65%;}
 ul.timkiem_dangtin {  width:60%;  float: left;  padding: 0;  margin: 0; text-align:right}
-ul.timkiem_dangtin li.icon_dangtinban {  background: url(../img/icon_dangtinban.png) left 9px no-repeat;  padding-left: 18px;}
+ul.timkiem_dangtin li.icon_dangtinban {  background: url(../imgs/icon_dangtinban.png) left 9px no-repeat;  padding-left: 18px;}
 ul.timkiem_dangtin li a {  font-weight: bold;  color: #444;  font-family: arial;  white-space: nowrap;}
 ul.timkiem_dangtin li { display:inline-block; list-style: none;  margin-right: 24px;  line-height: 39px;}
-ul.timkiem_dangtin li.icon_canmua {  background: url(../img/icon_canmua.png) left 9px no-repeat;padding-left: 18px;}
+ul.timkiem_dangtin li.icon_canmua {  background: url(../imgs/icon_canmua.png) left 9px no-repeat;padding-left: 18px;}
 .login_logout{ padding:0; margin:0;  float: right;  width: 35%;}
 .login_logout li{ display:inline-block;  line-height: 37px;  padding-left: 0px;}
 .login_logout li a{  color: #444; font-weight:bold;  font-size: 13px;}
@@ -100,7 +100,7 @@ span.icon_star_xanh {  background: url(../imgs/icon_star_xanh.png) no-repeat cen
 .img_NDnoibat {  float: left;  margin-right: 5px;  width: 125px;  background: #EEEDEB;  padding: 1px;  position: relative; max-height: 100px}
 .img_NDnoibat a {  background: #FFF;  padding: 1px;  display: block;}
 .img_NDnoibat a img {  text-align: center;  height: 96px; width: 100%}
-.img_NDnoibat span.iconHot {  position: absolute;  z-index: 4;  width: 30px;  height: 30px;  background: url(../img/icon_hot.png) no-repeat;  top: 2px;  left: 2px;}
+.img_NDnoibat span.iconHot {  position: absolute;  z-index: 4;  width: 30px;  height: 30px;  background: url(../imgs/icon_hot.png) no-repeat;  top: 2px;  left: 2px;}
 .img_NDnoibat span.theloai {  position: relative;  color: #FFF9C8;  z-index: 4;  background: rgba(0, 0, 0, 0.69);  padding: 1px 5px;  margin: -19px 1px 0px 0px;  font-size: 11px;  float: right}
 .text_NDnoibat {}
 .text_NDnoibat h3{ padding:0; margin:0}
@@ -111,7 +111,7 @@ span.icon_star_xanh {  background: url(../imgs/icon_star_xanh.png) no-repeat cen
 .camcam {  color: #ff5400;}
 .text_NDnoibat ul li h3 a {  line-height: 1.4;  font-weight: 700;  color: #444;  text-transform: uppercase;  font-size: 11px;}
 .muatin_noibat{}
-.muatin_noibat a {  color: #0054a6;background: #FBFAF7 url(../img/add_xanh.png) no-repeat center left 15px;  background-size: 15px;  padding: 6px 10px 6px 40px;  display: block;  font-weight: 700;
+.muatin_noibat a {  color: #0054a6;background: #FBFAF7 url(../imgs/add_xanh.png) no-repeat center left 15px;  background-size: 15px;  padding: 6px 10px 6px 40px;  display: block;  font-weight: 700;
 }
 .box_moinhat {  float: left;    margin: 0 9px 7px 0;  width: 48.5%;  padding: 0px 0px 5px 0;  border-bottom: 1px dotted #EEEDEB;}
 .img_moinhat {  float: left;  width: 40px;  height: 60px;  margin: 3px 10px 0px 0px;}
@@ -165,7 +165,7 @@ h2.tieude_nhadatban {  font: 13px arial;  padding:13px 0px; margin:0; float: lef
 .box_nhadatban.vip2{ border:1px solid #5EAB1F}
 .box_nhadatban.vip2 .tit_nhadatban h4 a{ color:#5EAB1F}
 .box_nhadatban { position:relative;border: 1px solid #D6D2C8;  padding: 10px;  margin-bottom: 10px;  clear: both;}
-.star_vipDB {   z-index: 999; background: url(../img/star_vipDB.png) no-repeat;  width: 45px;  height: 51px; right: 0;  top: 0; position: absolute;}
+.star_vipDB {   z-index: 999; background: url(../imgs/star_vipDB.png) no-repeat;  width: 45px;  height: 51px; right: 0;  top: 0; position: absolute;}
 .tit_nhadatban {  margin-bottom: 10px;}
 .tit_nhadatban h4 {  font-size: 13px;  margin: 0px;  padding: 0px;}
 .vipdb .tit_nhadatban a {  color: #F10000;  text-transform: uppercase;}
@@ -174,7 +174,7 @@ h2.tieude_nhadatban {  font: 13px arial;  padding:13px 0px; margin:0; float: lef
 .img_nhadatban {float: left;  padding: 1px;  padding-right: 10px;  width: 25%;    position: relative;  overflow: hidden;}
 .img_nhadatban a { display: block;}
 /*.img_nhadatban a img {  width: 100%;  height: auto;  padding: 1px;  background: #fff;  border: 1px solid #D6D2C8;}*/
-.img_nhadatban a img {  width: 100%;  height: 112px;  padding: 1px;  background: #fff;  border: 1px solid #D6D2C8;}
+.img_nhadatban a img {  width: 153px;  height: 90px;  padding: 1px;  background: #fff;  border: 1px solid #D6D2C8;}
 /*.img_nhadatban a img {  height: auto;  padding: 1px;  background: #fff;  border: 1px solid #D6D2C8;}*/
 .masotin {  position: absolute;font-size: 11px;  font-weight: 700;  background: rgba(0, 0, 0, 0.77);  color: #FFF;  padding: 3px 10px;  left: 3px;  bottom: 3px;}
 /*.text_nhadatban {  width: 74%;   margin-bottom: 12px;float: left;}*/
@@ -188,7 +188,7 @@ h2.tieude_nhadatban {  font: 13px arial;  padding:13px 0px; margin:0; float: lef
 .contact_nhadatban {  float: right;  width: 29%;}
 .contact_nhadatban ul {  padding-left: 10px;  border-left: 1px dotted #8A8A8A;   margin: 0}
 .contact_nhadatban ul li { list-style:none;  margin-bottom: 5px; text-align:center}
-.contact_nhadatban ul li a.bt_map {  width: 13px;  height: 15px;  background: url(../img/bt_map.png) no-repeat;   display: inline-block;background-size: 100%;}
+.contact_nhadatban ul li a.bt_map {  width: 13px;  height: 15px;  background: url(../imgs/bt_map.png) no-repeat;   display: inline-block;background-size: 100%;}
 .gia .camcam {  font: 700 14px arial;}
 .description_nhadatban {  float: left;  width: 74%;  max-height: 58px;  overflow: hidden;}
 
@@ -280,24 +280,24 @@ ul.thongtintaikhoan {   list-style-image: none;  padding: 0;  margin: 0;  list-s
 ul.thongtintaikhoan li {  background-size: 14px; }
 .detail_box_admin_L ul li { padding: 4px 0;padding-left: 25px}
 ul.thongtintaikhoan li span {  font-weight: 700;}
-li.icon_thanhvien {  background: url(../img/icon_thanhvien.png) no-repeat center left;}
-li.icon_mataikhoan {  background: url(../img/icon_mataikhoan.png) no-repeat center left}
-li.icon_soluotup { background: url(../img/icon_soluotup.png) no-repeat center left; }
-li.icon_soluotup { background: url(../img/icon_soluotup.png) no-repeat center left;}
-li.icon_taikhoan {  background: url(../img/icon_taikhoan.png) no-repeat 0px 3px;}
-.icon_napgold {  background: url(../img/icon_napgold.png) no-repeat center left;}
-.icon_muatinvip {  background: url(../img/icon_muatinvip.png) no-repeat center left;}
-.icon_mualuotuptin {  background: url(../img/icon_soluotup.png) no-repeat center left; }
-li.icon_taikhoan {  background: url(../img/icon_taikhoan.png) no-repeat center left;}
-.icon_lichsu_nhantin {  background: url(../img/icon_lichsu_nhantin.png) no-repeat center left;}
-.icon_dangtinraoban_chothue {  background: url(../img/icon_dangtinraoban_chothue.png) no-repeat center left;}
-.icon_cactin_danghienthi {  background: url(../img/icon_cactin_danghienthi.png) no-repeat center left;}
-.icon_vietthumoi {  background: url(../img/icon_vietthumoi.png) no-repeat center left;}
-.icon_cactin_danghienthi {  background: url(../img/icon_cactin_danghienthi.png) no-repeat center left;}
-.icon_thaydoi_thongtincanhan {  background: url(../img/icon_thaydoi_thongtincanhan.png) no-repeat center left;}
-.icon_thaydoi_matkhau {  background: url(../img/icon_thaydoi_matkhau.png) no-repeat center left;}
-.icon_thoatkhoi_hethong {  background: url(../img/icon_thoatkhoi_hethong.png) no-repeat center left;}
-.icon_huongdan_dangtin {  background: url(../img/icon_huongdan_dangtin.png) no-repeat center left;}
+li.icon_thanhvien {  background: url(../imgs/icon_thanhvien.png) no-repeat center left;}
+li.icon_mataikhoan {  background: url(../imgs/icon_mataikhoan.png) no-repeat center left}
+li.icon_soluotup { background: url(../imgs/icon_soluotup.png) no-repeat center left; }
+li.icon_soluotup { background: url(../imgs/icon_soluotup.png) no-repeat center left;}
+li.icon_taikhoan {  background: url(../imgs/icon_taikhoan.png) no-repeat 0px 3px;}
+.icon_napgold {  background: url(../imgs/icon_napgold.png) no-repeat center left;}
+.icon_muatinvip {  background: url(../imgs/icon_muatinvip.png) no-repeat center left;}
+.icon_mualuotuptin {  background: url(../imgs/icon_soluotup.png) no-repeat center left; }
+li.icon_taikhoan {  background: url(../imgs/icon_taikhoan.png) no-repeat center left;}
+.icon_lichsu_nhantin {  background: url(../imgs/icon_lichsu_nhantin.png) no-repeat center left;}
+.icon_dangtinraoban_chothue {  background: url(../imgs/icon_dangtinraoban_chothue.png) no-repeat center left;}
+.icon_cactin_danghienthi {  background: url(../imgs/icon_cactin_danghienthi.png) no-repeat center left;}
+.icon_vietthumoi {  background: url(../imgs/icon_vietthumoi.png) no-repeat center left;}
+.icon_cactin_danghienthi {  background: url(../imgs/icon_cactin_danghienthi.png) no-repeat center left;}
+.icon_thaydoi_thongtincanhan {  background: url(../imgs/icon_thaydoi_thongtincanhan.png) no-repeat center left;}
+.icon_thaydoi_matkhau {  background: url(../imgs/icon_thaydoi_matkhau.png) no-repeat center left;}
+.icon_thoatkhoi_hethong {  background: url(../imgs/icon_thoatkhoi_hethong.png) no-repeat center left;}
+.icon_huongdan_dangtin {  background: url(../imgs/icon_huongdan_dangtin.png) no-repeat center left;}
 .myaccout {  margin-bottom: 12px;}
 ul.statistics_acc {  border: 1px solid #E4E4E4;  margin-bottom: 10px;  background: #FFF;  padding: 0;}
 ul.statistics_acc li:nth-child(2n+1) {
@@ -310,10 +310,10 @@ ul.statistics_acc li {   border-bottom: 1px solid #E0E0E0;  list-style: none;  p
 ul.statistics_acc li label {  font-weight: 700;  width: 220px;  float: left;}
 ul.statistics_acc li span {  font-weight: 700;  float: left;}
 ul.statistics_acc li a {  float: right;}
-a.napthemgol {  background: url(../img/vang_9999.gif) no-repeat center left;  padding-left: 25px; background-size: 19px;}
+a.napthemgol {  background: url(../imgs/vang_9999.gif) no-repeat center left;  padding-left: 25px; background-size: 19px;}
 ul.instructions_acc li {  width: 32%;  padding-right: 10px;  float: left;  padding: 5px 0;  box-sizing: border-box;}
 .instructions_acc{ padding:0; margin:0}
-ul.instructions_acc {  list-style-position: inside;  list-style-image: url(../img/icon_li.png);}
+ul.instructions_acc {  list-style-position: inside;  list-style-image: url(../imgs/icon_li.png);}
 .s-projest{  border: 1px solid #D6D2C8;  padding: 10px;  margin-bottom: 12px}
 .s-projest li{}
 .s-projest li h3{  color: #0054a6;  font-size: 12px;  font-weight: bold;}
@@ -333,7 +333,7 @@ ul.info_no1 {background: #fbfaf7;padding: 5px 10px;font-size: 12px;}
 .info_no2 li{list-style:none}
 ul.info_no1 li {float: left;width: 33%;padding: 5px 0px;list-style:none;  font-size: 11px;}
 ul.info_no1 li label {float: left;margin-right: 5px;}
-.da_xacthuc {background: url(../img/da_xacthuc.png) no-repeat;width: 15px; height: 14px;}
+.da_xacthuc {background: url(../imgs/da_xacthuc.png) no-repeat;width: 15px; height: 14px;}
 /*.connected-carousels{background: #266fb5;}*/
 .connected-carousels{background: white; border: 1px solid #d6d2c8}
 .connected-carousels .carousel li img{max-width:100%}
@@ -343,11 +343,11 @@ ul.next_link li {display:inline-block;padding: 7px 0px;}
 ul.next_link li a {padding: 1px 15px;border-right: 1px solid #D6D2C8; font-weight: 700; color: #666; white-space: nowrap;}
 .save_print {  background: #F3F3F3;
   padding: 10px}
-.save_news {background: url(../img/bt_save.png) no-repeat center left; height: 19px;float: left; background-size: 14px;padding-left: 19px;font-weight: 700; color: #444; margin-right: 20px;
+.save_news {background: url(../imgs/bt_save.png) no-repeat center left; height: 19px;float: left; background-size: 14px;padding-left: 19px;font-weight: 700; color: #444; margin-right: 20px;
 }
-.print_news {background: url(../img/print_news.png) no-repeat center left;height: 19px;float: left;background-size: 14px;padding-left: 19px ;font-weight: 700;color: #444; margin-right: 20px;
+.print_news {background: url(../imgs/print_news.png) no-repeat center left;height: 19px;float: left;background-size: 14px;padding-left: 19px ;font-weight: 700;color: #444; margin-right: 20px;
 }
-.share_news {background: url(../img/share_news.png) no-repeat center left;height: 19px;float: left;background-size: 14px;padding-left: 19px;font-weight: 700;color: #444;margin-right: 20px}
+.share_news {background: url(../imgs/share_news.png) no-repeat center left;height: 19px;float: left;background-size: 14px;padding-left: 19px;font-weight: 700;color: #444;margin-right: 20px}
 .lienhe_nguoiban {background: #F9F7F7;padding: 10px;  margin-top: 10px; margin-bottom:10px}
 .lienhe_nguoiban ul{padding:0;margin:0}
 .lienhe_nguoiban li{ display:block}
@@ -355,7 +355,7 @@ ul.thongsonha {padding:0;margin:0}
 ul.thongsonha li {
   width: 32%;
   float: left;
-  background:url(../img/icon_li.png) no-repeat left;
+  background:url(../imgs/icon_li.png) no-repeat left;
     padding-left: 13px;
   padding-right: 10px;
   list-style: none;
@@ -381,7 +381,7 @@ ul.chon_tienich li span {
   float: left;
 }
 .place_01, .place_02, .place_03, .place_09 {
-  background: url(../img/place_01.png) no-repeat center left;
+  background: url(../imgs/place_01.png) no-repeat center left;
   padding: 6px 0 4px 30px !important;
 }
 .tit_list_tienich {
@@ -390,7 +390,7 @@ ul.chon_tienich li span {
   font-size: 15px;
   border-bottom: 1px solid #969696;
   padding: 6px 0 6px 20px;
-  background: url(../img/bt_map.png) no-repeat center left;
+  background: url(../imgs/bt_map.png) no-repeat center left;
 }
 .diadiem_khoangcach {
   font-weight: 700;
@@ -534,7 +534,7 @@ table.table_admin tr td {
 }
 a.bt_napthemgold {
   padding: 6px 15px 6px 35px;
-  background: #FF5400 url(../img/icon_cart.png) no-repeat 9px center;
+  background: #FF5400 url(../imgs/icon_cart.png) no-repeat 9px center;
   background-size: 19px;
   font-weight: 700;
   border: none;
