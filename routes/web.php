@@ -163,6 +163,7 @@ Route::get('/ban-dat-nen-du-an-{position}/{title}bds-{id}', 'DetailController@ar
 Route::get('/ban-dat-{position}/{title}bds-{id}', 'DetailController@articleForLeaseDetail');
 Route::get('/ban-trang-trai-khu-nghi-duong-{position}/{title}bds-{id}', 'DetailController@articleForLeaseDetail');
 Route::get('/ban-kho-nha-xuong-{position}/{title}bds-{id}', 'DetailController@articleForLeaseDetail');
+Route::get('/ban-du-an-quan-12-{position}/{title}bds-{id}', 'DetailController@articleForLeaseDetail');
 Route::get('/ban-loai-bat-dong-san-khac-{position}/{title}bds-{id}', 'DetailController@articleForLeaseDetail');
 
 Route::get('/nha-dat-cho-thue-{position}/{title}bds-{id}', 'DetailController@articleForLeaseDetail');
@@ -173,6 +174,7 @@ Route::get('/cho-thue-nha-tro-phong-tro-{position}/{title}bds-{id}', 'DetailCont
 Route::get('/cho-thue-van-phong-{position}/{title}bds-{id}', 'DetailController@articleForLeaseDetail');
 Route::get('/cho-thue-cua-hang-ki-ot-{position}/{title}bds-{id}', 'DetailController@articleForLeaseDetail');
 Route::get('/cho-thue-kho-nha-xuong-dat-{position}/{title}bds-{id}', 'DetailController@articleForLeaseDetail');
+Route::get('/cho-du-an-quan-12-{position}/{title}bds-{id}', 'DetailController@articleForLeaseDetail');
 Route::get('/cho-thue-loai-bat-dong-san-khac-{position}/{title}bds-{id}', 'DetailController@articleForLeaseDetail');
 
 
@@ -187,6 +189,7 @@ Route::get('/mua-dat-nen-du-an-{position}/{title}bds-{id}', 'DetailController@ar
 Route::get('/mua-dat-{position}/{title}bds-{id}', 'DetailController@articleForBuyDetail');
 Route::get('/mua-trang-trai-khu-nghi-duong-{position}/{title}bds-{id}', 'DetailController@articleForBuyDetail');
 Route::get('/mua-kho-nha-xuong-{position}/{title}bds-{id}', 'DetailController@articleForBuyDetail');
+Route::get('/mua-du-an-quan-12-{position}/{title}bds-{id}', 'DetailController@articleForBuyDetail');
 Route::get('/mua-cac-loai-bat-dong-san-khac-{position}/{title}bds-{id}', 'DetailController@articleForBuyDetail');
 
 Route::get('/nha-dat-can-thue-{position}/{title}bds-{id}', 'DetailController@articleForBuyDetail');
@@ -199,6 +202,7 @@ Route::get('/can-thue-nha-tro-phong-tro-{position}/{title}bds-{id}', 'DetailCont
 Route::get('/can-thue-van-phong-{position}/{title}bds-{id}', 'DetailController@articleForBuyDetail');
 Route::get('/can-thue-cua-hang-ki-ot-{position}/{title}bds-{id}', 'DetailController@articleForBuyDetail');
 Route::get('/can-thue-kho-nha-xuong-dat-{position}/{title}bds-{id}', 'DetailController@articleForBuyDetail');
+Route::get('/can-thue-du-an-quan-12-{position}/{title}bds-{id}', 'DetailController@articleForBuyDetail');
 Route::get('/can-thue-loai-bat-dong-san-khac-{position}/{title}bds-{id}', 'DetailController@articleForBuyDetail');
 
 // tim kiem nang cao

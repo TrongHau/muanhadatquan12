@@ -3,8 +3,12 @@ use App\Library\Helpers;
 $mySelf = Auth::user();
 global $province;
 ?>
+@section('contentCSS')
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+@endsection
 @extends('layouts.app')
 @section('content')
+    @include('cache.province')
     @include('user.left_sidebar_avatar', ['mySelf' => $mySelf])
     <div class="main-l main-l1">
         <div class="box1-left">
@@ -34,7 +38,6 @@ global $province;
                         <b class="camcam">Một số lưu ý khi đăng tin</b><br>
                         - Thông tin có dấu (<span class="camcam">*</span>) là bắt buộc.<br>
                         - Không gộp nhiều bất động sản trong một tin rao.<br>
-                        - Không đăng lạiTIỆN ÍCH XUNG QUANH tin đã đăng trên thosannhadat.com<br>
                         - Nên dùng trình duyệt Firefox và Chrome để hiển thị tốt nhất.</p>
                 </div>
             </div>
@@ -62,191 +65,113 @@ global $province;
                             <div class="row25">
                                 <select id="method_article" name="method_article" class="ipt1" onchange="typeMethod(this.value);">
                                     <option value="" class="advance-options" style="min-width: 195px;">-- Hình thức --</option>
-                                    <option value="Nhà đất bán" class="advance-options" style="min-width: 195px;">Nhà đất bán</option>
-                                    <option value="Nhà đất cho thuê" class="advance-options" style="min-width: 195px;">Nhà đất cho thuê</option>
+                                    <option value="Nhà đất bán">Nhà đất bán</option>
+                                    <option value="Nhà đất cho thuê">Nhà đất cho thuê</option>
                                 </select>
-                                @if ($errors->has('title'))
-                                    <span style="color: red;">{{ str_replace('title', 'tiêu đề', $errors->first('title')) }}</span>
-                                @endif
                                 @if ($errors->has('method_article'))
                                     <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('method article', 'hình thức', $errors->first('method_article')) }}</p></div>
                                 @endif
                             </div>
-                            <div class="row25"><label>Chọn dự án:</label></div>
+                            <div class="row25"><label>Loại (<span class="camcam">*</span>):</label></div>
                             <div class="row25">
-                                <select class="ipt1" name="Property[project_id]" id="Property_project_id">
-                                    <option value="">Chọn dự án</option>
-                                    <option value="11">KHU BIỆT THỰ, NHÀ PHỐ CAO CẤP TẠI QUẬN 12</option>
+                                <select id="type_article" name="type_article" class="advance-options ipt1">
+                                    <option value="" class="advance-options" style="min-width: 195px;">-- Phân mục --</option>
                                 </select>
+                                @if ($errors->has('type_article'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('type article', 'loại', $errors->first('type_article')) }}</p></div>
+                                @endif
                             </div>
                         </div>
                         <div class="row_ad clearfix">
-                            <div class="row25"><label>Loại (<span class="camcam">*</span>):</label></div>
+                            <div class="row25"><label>Tỉnh/Thành phố (<span class="camcam">*</span>):</label></div>
                             <div class="row25">
-                                <select class="ipt1" name="Property[category_id]" id="Property_category_id">
-                                    <option value="">Chọn loại nhà đất</option>
-                                    <option value="14">Nhà phố - Nhà riêng</option>
-                                    <option value="11">Đất - Đất nền dự án</option>
-                                    <option value="12">Căn hộ Chung Cư</option>
-                                    <option value="26">Nhà đất Quận 12</option>
-                                    <option value="18">Nhà Kho - Nhà xưởng</option>
-                                    <option value="20">Mặt bằng - Cửa hàng</option>
-                                    <option value="19">Khách sạn - Nhà nghỉ</option>
-                                    <option value="10">Biệt Thự - Village</option>
-                                    <option value="17">Trang trại, khu nghỉ dưỡng</option>
-                                    <option value="25">Nhà trọ</option>
-                                    <option value="27">đất quận 12</option>
-                                    <option value="28">nhà quận 12</option>
-                                </select>                                            </div>
-                            <div class="row25"><label>Vị trí nhà đất:</label></div>
+                                <select id="select-province" name="province_id" class="ipt1 select-province">
+                                    <option value="">-- Chọn Tỉnh/Thành phố --</option>
+                                    @foreach($province as $item)
+                                        <option value="{{$item['id']}}">{{$item['_name']}}</option>
+                                    @endforeach
+                                </select>
+                                @if ($errors->has('province_id'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('province id', 'Tỉnh/Thành phố', $errors->first('province_id')) }}</p></div>
+                                @endif
+                            </div>
+                            <div class="row25"><label>Quận/Huyện (<span class="camcam">*</span>):</label></div>
                             <div class="row25">
-                                <select class="ipt1" name="Property[vitrinhadat]" id="Property_vitrinhadat">
-                                    <option value="">Chọn loại nhà đất</option>
-                                    <option value="1">Mặt tiền đường</option>
-                                    <option value="2">Đường nội bộ</option>
-                                    <option value="3">Đường ngõ lớn</option>
-                                    <option value="4">Đường ngỏ nhỏ</option>
-                                    <option value="5">Không cập nhật</option>
-                                </select>                                            </div>
-                        </div>
-                        <div class="row_ad clearfix">
-                            <div class="row25"><label>Địa chỉ (<span class="camcam">*</span>):</label></div>
-                            <div class="row75">
-                                <input size="47" maxlength="255" class="ipt1" id="street" name="Property[street]" type="text" value="16/23 dinh tien hoang" placeholder="Nhập truy vấn" autocomplete="off">                                            </div>
-
-                            <input name="Property[long_attitude]" id="Property_long_attitude" type="hidden">                    <input name="Property[lat_attitude]" id="Property_lat_attitude" type="hidden">                </div>
-
-                        <!-- <div class="row_ad clearfix">
-                            <div class="row25"><label>Phường / xã :</label></div>
-                            <div class="row75">
-                                                                            </div>
-                        </div> -->
-
-                        <div class="row_ad clearfix">
-                            <div class="row25"><label>Tỉnh / Thành phố (<span class="camcam">*</span>):</label></div>
-                            <div class="row25">
-                                <select class="ipt1" id="Property_city_id_dangtin" name="Property[city_id]">
-                                    <option value="">Tỉnh/Thành phố</option>
-                                    <option value="2">Hà Nội</option>
-                                    <option value="3" selected="selected">TP.HCM</option>
-                                    <option value="4">Hải Phòng</option>
-                                    <option value="5">Đà Nẵng</option>
-                                    <option value="12">Bình Dương</option>
-                                    <option value="13">Cần Thơ</option>
-                                    <option value="14">An Giang</option>
-                                    <option value="15">Bà Rịa-Vũng Tàu</option>
-                                    <option value="16">Bạc Liêu</option>
-                                    <option value="17">Bắc Kạn</option>
-                                    <option value="18">Bắc Giang</option>
-                                    <option value="19">Bắc Ninh</option>
-                                    <option value="20">Bến Tre</option>
-                                    <option value="21">Bình Định</option>
-                                    <option value="22">Bình Phước</option>
-                                    <option value="23">Bình Thuận</option>
-                                    <option value="24">Cà Mau</option>
-                                    <option value="25">Cao Bằng</option>
-                                    <option value="26">Đắk Lắk</option>
-                                    <option value="27">Đắk Nông</option>
-                                    <option value="28">Điện Biên</option>
-                                    <option value="29">Đồng Nai</option>
-                                    <option value="30">Đồng Tháp</option>
-                                    <option value="31">Gia Lai</option>
-                                    <option value="32">Hà Giang</option>
-                                    <option value="33">Hà Nam</option>
-                                    <option value="34">Hà Tây</option>
-                                    <option value="35">Hà Tĩnh</option>
-                                    <option value="36">Hải Dương</option>
-                                    <option value="37">Hòa Bình</option>
-                                    <option value="38">Hậu Giang</option>
-                                    <option value="39">Hưng Yên</option>
-                                    <option value="40">Khánh Hòa</option>
-                                    <option value="41">Kiên Giang</option>
-                                    <option value="42">Kon Tum</option>
-                                    <option value="43">Lai Châu</option>
-                                    <option value="44">Lào Cai</option>
-                                    <option value="45">Lạng Sơn</option>
-                                    <option value="46">Lâm Đồng</option>
-                                    <option value="47">Long An</option>
-                                    <option value="48">Nam Định</option>
-                                    <option value="49">Nghệ An</option>
-                                    <option value="50">Ninh Bình</option>
-                                    <option value="51">Ninh Thuận</option>
-                                    <option value="52">Phú Thọ</option>
-                                    <option value="53">Phú Yên</option>
-                                    <option value="54">Quảng Bình</option>
-                                    <option value="55">Quảng Nam</option>
-                                    <option value="56">Quảng Ngãi</option>
-                                    <option value="57">Quảng Ninh</option>
-                                    <option value="58">Quảng Trị</option>
-                                    <option value="59">Sóc Trăng</option>
-                                    <option value="60">Sơn La</option>
-                                    <option value="61">Tây Ninh</option>
-                                    <option value="62">Thái Bình</option>
-                                    <option value="63">Thái Nguyên</option>
-                                    <option value="64">Thanh Hóa</option>
-                                    <option value="65">Thừa Thiên - Huế</option>
-                                    <option value="66">Tiền Giang</option>
-                                    <option value="67">Trà Vinh</option>
-                                    <option value="68">Tuyên Quang</option>
-                                    <option value="69">Vĩnh Long</option>
-                                    <option value="70">Vĩnh Phúc</option>
-                                    <option value="71">Yên Bái</option>
-                                </select>                                            </div>
-                            <div class="row25"><label>Quận / huyện (<span class="camcam">*</span>):</label></div>
-                            <div class="row25">
-                                <select id="Property_district_id_dangtin" class="ipt1" name="Property[district_id]">
-                                    <option value="">Quận / Huyện</option>
-                                    <option value="28">Huyện Nhà Bè</option>
-                                    <option value="27">Huyện Hóc Môn</option>
-                                    <option value="26">Huyện Củ Chi</option>
-                                    <option value="25">Huyện Cần Giờ</option>
-                                    <option value="24">Quận Tân Phú</option>
-                                    <option value="23">Quận Bình Tân</option>
-                                    <option value="29">Huyện Bình Chánh</option>
-                                    <option value="30">Quận Thủ Đức</option>
-                                    <option value="31">Quận Tân Bình</option>
-                                    <option value="32">Quận Bình Thạnh</option>
-                                    <option value="33">Quận Phú Nhuận</option>
-                                    <option value="34">Quận Gò Vấp</option>
-                                    <option value="35">Quận 12</option>
-                                    <option value="36">Quận 11</option>
-                                    <option value="37">Quận 10</option>
-                                    <option value="38">Quận 9</option>
-                                    <option value="39">Quận 8</option>
-                                    <option value="40">Quận 7</option>
-                                    <option value="41">Quận 6</option>
-                                    <option value="42">Quận 5</option>
-                                    <option value="43">Quận 4</option>
-                                    <option value="44">Quận 3</option>
-                                    <option value="45">Quận 2</option>
-                                    <option value="46" selected="selected">Quận 1</option>
-                                </select>                                            </div>
+                                <select name="district_id" class="ipt1 select-district">
+                                    <option value="0" class="advance-options" style="min-width: 168px;">-- Chọn Quận/Huyện --</option>
+                                </select>
+                                @if ($errors->has('district_id'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('district id', 'Quận/Huyện', $errors->first('district_id')) }}</p></div>
+                                @endif
+                            </div>
                         </div>
 
                         <div class="row_ad clearfix">
-                            <div class="row25"><label>Diện tích (<span class="camcam">*</span>):</label></div>
-                            <div class="row25 xuong50">
-                                <input size="47" maxlength="255" class="ver_number ipt1" name="Property[area]" id="Property_area" type="text">                                            </div>
-                            <div class="row25 xuong50">  m2 </div>
+                            <div class="row25"><label>Phường/Xã:</label></div>
+                            <div class="row25">
+                                <select class="ipt1 select-ward" name="ward_id" id="select-ward">
+                                    <option value="0" class="advance-options" style="min-width: 168px;">-- Chọn Đường/Phố --
+                                    </option>
+                                </select>
+                                @if ($errors->has('street_id'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('ward id', 'Đường/Phố', $errors->first('street_id')) }}</p></div>
+                                @endif
+                            </div>
+                            <div class="row25"><label>Đường/Phố:</label></div>
+                            <div class="row25">
+                                <select class="ipt1 select-street" name="street_id" id="select-street">
+                                    <option value="0" class="advance-options" style="min-width: 168px;">-- Chọn Đường/Phố --
+                                    </option>
+                                </select>
+                                @if ($errors->has('street_id'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('ward id', 'Đường/Phố', $errors->first('street_id')) }}</p></div>
+                                @endif
+                            </div>
                         </div>
 
-                        <div class="camcam">Không chỉnh giá nếu muốn để giá thương lượng</div>
+                        <div class="row_ad clearfix">
+                            <div class="row25"><label>Tên dự án:</label></div>
+                            <div class="row25">
+                                <input size="47" maxlength="255" class="ver_number ipt1" name="project" value="{{old('project') ?? $article->project ?? ''}}" id="Property_area" type="text">
+                                @if ($errors->has('project'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('project', 'dự án', $errors->first('project')) }}</p></div>
+                                @endif
+                            </div>
+                            <div class="row25"><label>Diện tích:</label></div>
+                            <div class="row25">
+                                <input size="47" maxlength="255" type="number" class="ver_number ipt1" name="area" value="{{old('area') ?? $article->area ?? ''}}" id="Property_area" style="width: 88%;"><span>m²</span>
+                                @if ($errors->has('area'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('area', 'diện tích', $errors->first('area')) }}</p></div>
+                                @endif
+                            </div>
+                        </div>
                         <div class="row_ad clearfix">
                             <div class="row25"><label>Giá:</label></div>
                             <div class="row25">
-                                <input size="47" maxlength="255" class="ver_number ipt1" name="Property[price]" id="Property_price" type="text" value="0.00">                    </div>
-
-                            <div class="row25"><label>Đơn vị tính :</label></div>
+                                <input name="price" type="number" id="price" value="{{old('price') ?? $article->price ?? ''}}" class="text-field ipt1" numberonly="2" maxlength="6">
+                                @if ($errors->has('price'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('price', 'thành tiền', $errors->first('price')) }}</p></div>
+                                @endif
+                            </div>
+                            <div class="row25"><label>Đơn vị:</label></div>
                             <div class="row25">
-                                <select class="ipt1" name="Property[donvitinh]" id="Property_donvitinh">
-                                    <option value="">Vui lòng chọn ...</option>
-                                    <option value="1">Tỷ</option>
-                                    <option value="2">Triệu</option>
-                                    <option value="3">Triệu/m2</option>
-                                    <option value="4">Trăm nghìn/m2</option>
-                                </select>                                            </div>
+                                <select id="ddlPriceType" name="ddlPriceType" class="ipt1 select-ddlPriceType">
+                                    <option value="Thỏa thuận" class="advance-options" style="min-width: 168px;">Thỏa thuận</option>
+                                </select>
+                                @if ($errors->has('ddlPriceType'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('ddlPriceType', 'đơn vị', $errors->first('ddlPriceType')) }}</p></div>
+                                @endif
+                            </div>
                         </div>
-
+                        <div class="camcam" id="_totalPrice">Không chỉnh giá nếu muốn để giá thỏa thuận</div>
+                        <div class="row_ad clearfix">
+                            <div class="row25"><label>Địa chỉ (<span class="camcam">*</span>):</label></div>
+                            <div class="row75">
+                                <input size="47" maxlength="255" class="ipt1" name="address" id="txtAddress" type="text" value="{{old('address') ?? $article->address ?? ''}}" placeholder="Nhập địa chỉ" autocomplete="off">
+                                @if ($errors->has('address'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('address', 'địa chỉ', $errors->first('address')) }}</p></div>
+                                @endif</div>
+                        </div>
                     </div>
                 </div>
 
@@ -257,6 +182,9 @@ global $province;
                             <div class="row_ad">Nội dung đăng tin (<span class="camcam">*</span>) (3000 từ)</div>
                             <div class="row_ad">
                                 <textarea name="content_article" id="content_article" style="height: 170px; width: 100%;" class="text-field countTypeLength required mt10" rows="50" cols="100" minlength="30" maxlength="3000">{{old('content_article') ?? $article->content_article ?? ''}}</textarea>
+                                @if ($errors->has('content_article'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('content article', 'nội dung', $errors->first('content_article')) }}</p></div>
+                                @endif</div>
                             </div>
                         </div>
                     </div>
@@ -264,9 +192,58 @@ global $province;
                 <div class="box_admin_C">
                     <div class="detail_admin_C">
                         <div class="box_admin_C">
-                            <div class="row_ad"><strong class="xanhxanh">Thông tin mô tả</strong></div>
+                            <div class="row_ad"><strong class="xanhxanh">Hình ảnh</strong></div>
                             <div class="row_ad">Hình ảnh đầu tiên sẽ đặt làm ảnh đại diện (<span class="camcam">*</span>) (tối đa 50Mb)</div>
                             <div class="row_ad">
+                                <div id="fileupload">
+                                    <!-- Redirect browsers with JavaScript disabled to the origin page -->
+                                    <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
+                                    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+                                    <div class="row fileupload-buttonbar">
+                                        <div class="col-lg-10">
+                                            <!-- The fileinput-button span is used to style the file input field as button -->
+                                            <label class="btn btn-success fileinput-button" style="width: 205px;">
+                                                        <i class="glyphicon glyphicon-plus"></i>
+                                                        <span>Thêm nhiều hình ảnh...</span>
+                                                        <input class="hidden" id="file_upload_images" type="file" name="files[]" multiple>
+                                                    </label>
+                                            <div style="padding: 10px 20px 0 30px;display: contents;">
+                                                (hình ảnh đầu tiên sẽ được đặc làm ảnh đại điện cho tin của bạn)
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- The table listing the files available for upload/download -->
+                                    <table role="presentation" class="table table-striped">
+                                        <tbody class="files">
+                                        @if(isset($article->gallery_image) && $article->gallery_image)
+                                            @foreach(json_decode($article->gallery_image) as $item)
+                                                <tr class="template-download fade in">
+                                                    <td>
+                                                            <span class="preview">
+                                                                    <a href="{{ Helpers::file_path($article->id, PUBLIC_ARTICLE_LEASE, true).$item}}"
+                                                                       title="{{$item}}" download="{{$item}}" data-gallery=""><img width="120"
+                                                                                                                                   src="{{ Helpers::file_path($article->id, PUBLIC_ARTICLE_LEASE, true).THUMBNAIL_PATH.$item}}"></a>
+                                                            </span>
+                                                    </td>
+                                                    <td>
+                                                        <p class="name">
+                                                            <a href="{{ Helpers::file_path($article->id, PUBLIC_ARTICLE_LEASE, true).$item}}"
+                                                               title="{{$item}}"
+                                                               download="{{$item}}" data-gallery="">{{$item}}</a>
+                                                        </p>
+                                                        <input hidden="" type="text" name="upload_images[]" value="{{$item}}">
+                                                    </td>
+                                                    <td>
+                                                        <button onclick="remove_exists_img('{{$item}}')" class="btn btn-danger delete">
+                                                            <i class="glyphicon glyphicon-trash"></i>
+                                                            <span>Delete</span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
+                                        </tbody></table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -277,123 +254,162 @@ global $province;
                         <div class="row_ad"><strong class="xanhxanh">Thông tin Bổ sung</strong></div>
                         <div class="row_ad">Các bạn nên điền đầy đủ các thông tin bên dưới đây để những khách hàng có nhu cầu có thể nắm bắt được đầy đủ thông tin về bất động sản của bạn hơn . Theo thống kê thì 1 tin tức được điền đẩy đủ thông tin sẽ có lượng truy cập gấp 2 lần tin không điền đẩy đủ</div>
                         <div class="row_ad clearfix">
-                            <div class="row25"><label>Tình trạng pháp lý (<span class="camcam">*</span>):</label></div>
+                            <div class="row25"><label>Mặt tiền (m):</label></div>
                             <div class="row25">
-                                <select class="ipt1" name="Property[tinhtrangphaply]" id="Property_tinhtrangphaply">
-                                    <option value="">Vui lòng chọn ...</option>
-                                    <option value="1">Không Xác Định</option>
-                                    <option value="2">Sổ Hồng</option>
-                                    <option value="3">Giấy Đỏ</option>
-                                    <option value="4">Giấy Tay</option>
-                                    <option value="5">Đang Hợp Thức Hóa</option>
-                                    <option value="6">Giấy Tờ Hợp Lệ</option>
-                                    <option value="7">Chủ Quyền Tư Nhân</option>
-                                    <option value="8">Hợp Đồng</option>
-                                </select>                                            </div>
-                            <div class="row25"><label>Đường vào(Đơn vị m2):</label></div>
+                                <input name="facade" type="text" value="{{old('facade') ?? $article->facade ?? ''}}" id="txtWidth" maxlength="6" numberonly="2" class="text-field ipt1">
+                                @if ($errors->has('facade'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('facade', 'mặt tiền', $errors->first('facade')) }}</p></div>
+                                @endif                                          </div>
+                            <div class="row25"><label>Đường vào (m):</label></div>
                             <div class="row25">
-                                <input size="47" maxlength="255" class="ipt1" name="Property[duongvao]" id="Property_duongvao" type="text">                    </div>
+                                <input name="land_width" value="{{old('land_width') ?? $article->land_width ?? ''}}" type="text" id="txtLandWidth" maxlength="6" numberonly="2" class="text-field ipt1">
+                                @if ($errors->has('way_in'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('land width', 'đường vào', $errors->first('land_width')) }}</p></div>
+                                @endif
+                            </div>
                         </div>
                         <div class="row_ad clearfix">
                             <div class="row25"><label>Hướng nhà :</label></div>
                             <div class="row25">
-                                <select class="ipt1" name="Property[huongnha]" id="Property_huongnha">
-                                    <option value="">Vui lòng chọn ...</option>
-                                    <option value="1">Không Xác Định</option>
-                                    <option value="2">Đông</option>
-                                    <option value="3">Tây</option>
-                                    <option value="4">Nam</option>
-                                    <option value="5">Bắc</option>
-                                    <option value="6">Đông Bắc</option>
-                                    <option value="7">Tây Bắc</option>
-                                    <option value="8">Đông Nam</option>
-                                    <option value="9">Tây Nam</option>
-                                </select>                    </div>
+                                <select id="ddlHomeDirection" name="ddl_home_direction" class="dropdown-list ipt1">
+                                    <option value="KXĐ">KXĐ</option>
+                                    <option value="Đông">Đông</option>
+                                    <option value="Tây">Tây</option>
+                                    <option value="Nam">Nam</option>
+                                    <option value="Bắc">Bắc</option>
+                                    <option value="Đông-Bắc">Đông-Bắc</option>
+                                    <option value="Tây-Bắc">Tây-Bắc</option>
+                                    <option value="Tây-Nam">Tây-Nam</option>
+                                    <option value="Đông-Nam">Đông-Nam</option>
+                                </select>
+                                @if ($errors->has('ddlHomeDirection'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('ddlHomeDirection', 'hướng nhà', $errors->first('ddlHomeDirection')) }}</p></div>
+                                @endif                 </div>
+                            <div class="row25"><label>Hướng ban công:</label></div>
+                            <div class="row25">
+                                <select id="ddlBaconDirection" name="ddl_bacon_direction" class="dropdown-list ipt1">
+                                    <option value="KXĐ">KXĐ</option>
+                                    <option value="Đông">Đông</option>
+                                    <option value="Tây">Tây</option>
+                                    <option value="Nam">Nam</option>
+                                    <option value="Bắc">Bắc</option>
+                                    <option value="Đông-Bắc">Đông-Bắc</option>
+                                    <option value="Tây-Bắc">Tây-Bắc</option>
+                                    <option value="Tây-Nam">Tây-Nam</option>
+                                    <option value="Đông-Nam">Đông-Nam</option>
+                                </select>
+                                @if ($errors->has('ddlBaconDirection'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('ddlBaconDirection', 'hướng ban công', $errors->first('ddlBaconDirection')) }}</p></div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="row_ad clearfix">
                             <div class="row25"><label>Số tầng:</label></div>
                             <div class="row25">
-                                <input size="47" maxlength="255" class="ipt1" name="Property[floor]" id="Property_floor" type="text" value="0">                                            </div>
-                        </div>
-                        <div class="row_ad clearfix">
+                                <input name="floor" type="text" id="txtFloorNumbers" value="{{old('floor') ?? $article->floor ?? ''}}" class="text-field ipt1" maxlength="3" numberonly="1">
+                                @if ($errors->has('floor'))
+                                    <div class="errorMessage" style="display: block;">{{ str_replace('floor', 'số tầng', $errors->first('floor')) }}</div>
+                                @endif
+                            </div>
                             <div class="row25"><label>Số phòng ngủ:</label></div>
                             <div class="row25">
-                                <input size="47" maxlength="255" class="ipt1" name="Property[bed_room]" id="Property_bed_room" type="text" value="0">                                            </div>
+                                <input name="bed_room" type="number" id="txtRoomNumber" value="{{old('bed_room') ?? $article->bed_room ?? ''}}" class="text-field ipt1" maxlength="3" numberonly="1">
+                                @if ($errors->has('bed_room'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('bed_room', 'số phòng ngủ', $errors->first('bed_room')) }}</p></div>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="row_ad clearfix">
                             <div class="row25"><label>Số toilet:</label></div>
                             <div class="row25">
-                                <input size="47" maxlength="255" class="ipt1" name="Property[toilet]" id="Property_toilet" type="text" value="0">                                            </div>
+                                <input name="toilet" type="number" value="{{old('toilet') ?? $article->toilet ?? ''}}" id="txtToiletNumber" class="text-field ipt1" maxlength="3" numberonly="1">
+                                @if ($errors->has('toilet'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('toilet', 'số toilet', $errors->first('toilet')) }}</p></div>
+                                @endif
+                            </div>
                         </div>
                         <div class="row_ad clearfix">
-                            <div class="row25"><label>Số phòng khách:</label></div>
+                            <div class="row25"><label>Nội thất:</label></div>
                             <div class="row25">
-                                <input size="47" maxlength="255" class="ipt1" name="Property[phongkhach]" id="Property_phongkhach" type="text" value="0">                                            </div>
-                            <div class="row25"><label>Số phòng bếp:</label></div>
-                            <div class="row25">
-                                <input size="47" maxlength="255" class="ipt1" name="Property[phongbep]" id="Property_phongbep" type="text" value="0">                                            </div>
-                        </div>
-                        <div class="row_ad clearfix">
-                            <div class="row25"><label>Có ban công:</label></div>
-                            <div class="row25">
-                                <select class="ipt1" name="Property[bancong]" id="Property_bancong">
-                                    <option value="1">Có</option>
-                                    <option value="0" selected="selected">Không</option>
-                                </select>                    </div>
-                        </div>
-                        <div class="row_ad clearfix">
-                            <div class="row25"><label>Diện tích khuôn viên:</label></div>
-                            <div class="row50">
-                                <input size="47" maxlength="255" class="ipt1" placeholder="Chiều ngang x Chiều dài x chiều ngang sau" name="Property[dientichkhuonvien]" id="Property_dientichkhuonvien" type="text">                    </div>
-                        </div>
-                        <div class="row_ad clearfix">
-                            <div class="row25"><label>Diện tích xây dựng:</label></div>
-                            <div class="row50">
-                                <input size="47" maxlength="255" class="ipt1" placeholder="Chiều ngang trước x Chiều dài x chiều ngang sau" name="Property[dientichxaydung]" id="Property_dientichxaydung" type="text">                    </div>
+                                <textarea name="furniture" id="txtInterior" rows="10" cols="50" class="text-field" style="width: 524px; height: 130px" maxlength="200">{{old('furniture') ?? $article->furniture ?? ''}}</textarea>
+                                @if ($errors->has('furniture'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('furniture', 'nội thất', $errors->first('furniture')) }}</p></div>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="box_admin_C">
                     <div class="detail_admin_C">
                         <div class="row_ad"><strong class="xanhxanh">THÔNG TIN LIÊN HỆ</strong></div>
                         <div class="row_ad clearfix ">
                             <div class="row25"><label>Họ và tên (<span class="camcam">*</span>):</label></div>
                             <div class="row50">
-                                <input size="47" maxlength="255" class="ipt1" name="Property[hoten]" id="Property_hoten" type="text" value="Hau Trong">                                            </div>
-                        </div>
+                                <input name="contact_name" type="text" required id="txtBrName" class="text-field ipt1" maxlength="200" value="{{old('contact_name') ?? $article->contact_name ?? $mySelf->name}}">
+                                @if ($errors->has('contact_name'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('contact name', 'tên liên hệ', $errors->first('contact_name'))}}</p></div>
+                                @endif
+                            </div>
                         <div class="row_ad clearfix">
                             <div class="row25"><label>Địa chỉ:</label></div>
                             <div class="row50">
-                                <input size="47" maxlength="255" class="ipt1" name="Property[diachi]" id="Property_diachi" type="text" value="16/23 dinh tien hoang">                    </div>
+                                <input name="contact_address" type="text" id="txtBrAddress" class="text-field ipt1" value="{{old('contact_address') ?? $article->contact_address ?? (($mySelf->address ? $mySelf->address.', ' : '').($mySelf->street ? $mySelf->street.', ' : '').($mySelf->ward ? $mySelf->ward.', ' : '').($mySelf->district ? $mySelf->district.', ' : '').($mySelf->province ? $mySelf->province.', Việt Nam' : ''))}}" maxlength="200" style="width: 100%;">
+                                @if ($errors->has('contact_address'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('contact address', 'địa chỉ', $errors->first('contact_address'))}}</p></div>
+                                @endif
                         </div>
                         <div class="row_ad clearfix">
                             <div class="row25"><label>Di động (<span class="camcam">*</span>):</label></div>
                             <div class="row50">
-                                <input size="47" maxlength="255" class="ipt1" name="Property[dienthoai]" id="Property_dienthoai" type="text" value="0903353794">                                            </div>
+                                <input type="text" name="contact_phone" class="select-text-content ipt1" value="{{old('contact_phone') ?? $article->contact_phone ?? $mySelf->phone}}" placeholder="" style="width: 175px;">
+                                @if ($errors->has('contact_phone'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('contact phone', 'di động', $errors->first('contact_phone'))}}</p></div>
+                                @endif
+                            </div>
                         </div>
                         <div class="row_ad clearfix">
                             <div class="row25"><label>Email:</label></div>
                             <div class="row50">
-                                <input size="47" maxlength="255" class="ipt1" name="Property[email]" id="Property_email" type="text" value="tt.hau94@gmail.com">                    </div>
+                                <input name="contact_email" type="text" id="txtBrEmail" class="text-field email-field ipt1" maxlength="100" style="width: 100%;" email="1" value="{{old('contact_email') ?? $article->contact_email ?? $mySelf->email}}">
+                                @if ($errors->has('contact_email'))
+                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('contact email', 'email', $errors->first('contact_email')) }}</p></div>
+                                @endif
                         </div>
                     </div>
                 </div>
-
                 <div class="box_admin_C">
                     <div class="detail_admin_C">
                         <div class="row_ad"><strong class="xanhxanh">Xác thực thông tin</strong></div>
                         <div class="row_ad">
                             <div class="row25"><label>Mã xác nhận(<span class="camcam">*</span>):</label></div>
                             <div class="row50">
-                                <div class="g-recaptcha" data-sitekey="6LeMeRwTAAAAALI3cY0P-_Qw8fkUzJG3j75OrVl1"><div style="width: 304px; height: 78px;"><div><iframe src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6LeMeRwTAAAAALI3cY0P-_Qw8fkUzJG3j75OrVl1&amp;co=aHR0cDovL211YW5oYWRhdHF1YW4xMi5jb206ODA.&amp;hl=vi&amp;v=v1554100419869&amp;size=normal&amp;cb=5897i7is27kq" width="304" height="78" role="presentation" name="a-b26adf31yocv" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox"></iframe></div><textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid rgb(193, 193, 193); margin: 10px 25px; padding: 0px; resize: none; display: none;"></textarea></div></div>
+                                <div class="g-recaptcha" data-sitekey="{{env('NOCAPTCHA_SECRET')}}"></div>
                             </div>
                         </div>
 
                         <div class="row_ad cangiua">
-                            <input id="btnSave" name="btnSave" type="submit" class="bt_cam bt_sb" value="Đăng tin">
-                            <input id="Button5" type="button" onclick="window.location.href= 'http://muanhadatquan12.com/member/site/index'" class="bt_cam bt_sb" value="Hủy bỏ">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <input type="hidden" name="submit_type" class="submit_type" value="">
+                            @if(isset($article->id))
+                                <input type="hidden" name="id" value="{{ $article->id }}">
+                                <input type="hidden" name="remove_imgs" id="remove_imgs" value="">
+                                @if($article->status == PUBLISHED_ARTICLE)
+                                    <input type="submit" name="ctl00$MainContent$_userPage$ctl00$btnSave" value="Lưu tin" id="btnSave" class="bluebotton bt_cam bt_sb" style="width:80px;">
+                                @else
+                                    <input type="submit" name="ctl00$MainContent$_userPage$ctl00$btnSave" value="Đăng tin" id="btnSave" class="bluebotton bt_cam bt_sb" style="width:80px;">
+                                @endif
+                            @else
+                                <input type="submit" name="ctl00$MainContent$_userPage$ctl00$btnSave" value="Đăng tin" id="btnSave" class="bluebotton bt_cam bt_sb" style="width:80px;">
+                            @endif
+                            <input id="btnCancel" type="button" value="Lưu Nháp" name="btnCancel" class="orangebutton bt_cam bt_sb" onclick="DirectDraft()">
                         </div>
                     </div>
                 </div>
-            </form></div>
-
+            </div>
+                    </div>
+            </div>
+            </form>
+        </div>
     </div>
 @endsection
 @section('contentJS')
@@ -431,7 +447,8 @@ global $province;
                 document.getElementById('type_article').options[6]=new Option("Bán đất", "Bán đất", false, false);
                 document.getElementById('type_article').options[7]=new Option("Bán trang trại, khu nghỉ dưỡng", "Bán trang trại, khu nghỉ dưỡng", false, false);
                 document.getElementById('type_article').options[8]=new Option("Bán kho, nhà xưởng", "Bán kho, nhà xưởng", false, false);
-                document.getElementById('type_article').options[9]=new Option("Bán loại bất động sản khác", "Bán loại bất động sản khác", false, false);
+                document.getElementById('type_article').options[9]=new Option("Bán dự án quận 12", "Bán dự án quận 12", false, false);
+                document.getElementById('type_article').options[10]=new Option("Bán loại bất động sản khác", "Bán loại bất động sản khác", false, false);
 
                 document.getElementById('ddlPriceType').options[0]=new Option("Thỏa thuận", "Thỏa thuận", false, false);
                 document.getElementById('ddlPriceType').options[1]=new Option("Triệu", "Triệu", false, false);
@@ -448,7 +465,8 @@ global $province;
                 document.getElementById('type_article').options[5]=new Option("Cho thuê văn phòng", "Cho thuê văn phòng", false, false);
                 document.getElementById('type_article').options[6]=new Option("Cho thuê cửa hàng, ki ốt", "Cho thuê cửa hàng, ki ốt", false, false);
                 document.getElementById('type_article').options[7]=new Option("Cho thuê kho, nhà xưởng, đất", "Cho thuê kho, nhà xưởng, đất", false, false);
-                document.getElementById('type_article').options[8]=new Option("Cho thuê loại bất động sản khác", "Cho thuê loại bất động sản khác", false, false);
+                document.getElementById('type_article').options[8]=new Option("Cho dự án quận 12", "Cho dự án quận 12", false, false);
+                document.getElementById('type_article').options[9]=new Option("Cho thuê loại bất động sản khác", "Cho thuê loại bất động sản khác", false, false);
 
                 document.getElementById('ddlPriceType').options[0]=new Option("Thỏa thuận", "Thỏa thuận", false, false);
                 document.getElementById('ddlPriceType').options[1]=new Option("Nghìn/tháng", "Nghìn/tháng", false, false);

@@ -52,7 +52,7 @@ $list = $article->toArray();
                         </div>
                     </div>
                 </div></ul>
-            <div class="results-wrap clearfix"><div class="summary"></div>
+            <div class="results-wrap clearfix"><div class="summary"></div></div>
         </div>
     @endforeach
     <div class="pager" style="float: right;">
