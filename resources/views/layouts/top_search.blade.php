@@ -28,122 +28,75 @@ use App\Library\Helpers;
                 <div class="menu">
                     <ul>
                         <li class='home'><a href="index.html"><img src="/imgs/icon_home.png" alt=""/></a></li>
-                        <li class=''><a href='danh-sach-nha-dat/1.html' target='_self'><span>Nhà đất bán</span></a>
+                        <li class="lv0"><a href="/nha-dat-ban" class="haslink ">Đất bán</a>
                             <ul>
-                                <li class=''><a href='danh-sach-bat-dong-san/1/dat---dat-nen-du-an.html' target='_self'><span>Bán đất nền dự án</span></a>
-                                    <ul></ul>
+                                <li class="lv1"><a href="/ban-can-ho-chung-cu" class="haslink ">Bán
+                                        căn hộ chung cư</a></li>
+                                <li class="lv1"><a href="/ban-nha-rieng" class="haslink ">Bán nhà
+                                        riêng</a></li>
+                                <li class="lv1"><a href="/ban-biet-thu-lien-ke" class="haslink ">Bán biệt thự, liền kề</a></li>
+                                <li class="lv1"><a href="/ban-nha-mat-pho" class="haslink ">Bán nhà
+                                        mặt phố</a></li>
+                                <li class="lv1"><a href="/ban-dat-nen-du-an" class="haslink ">Bán
+                                        đất nền dự án</a></li>
+                                <li class="lv1"><a href="/ban-dat" class="haslink ">Bán đất</a>
                                 </li>
-                                <li class=''><a
-                                            href='danh-sach-bat-dong-san/1/nha-mat-pho---nha-rieng---nha-lien-ke.html'
-                                            target='_self'><span>Bán nhà phố, nhà riêng</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a href='danh-sach-bat-dong-san/1/can-ho-chung-cu.html'
-                                                target='_self'><span>Bán căn hộ, chung cư</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a href='danh-sach-bat-dong-san/1/biet-thu---village.html'
-                                                target='_self'><span>Bán biệt thự</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a href='danh-sach-bat-dong-san/1/nha-tro.html' target='_self'><span>Bán Nhà Trọ</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a
-                                            href='danh-sach-bat-dong-san/1/khach-san---nha-nghi---nha-tro---van-phong.html'
-                                            target='_self'><span>Bán khách sạn, nhà nghỉ</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a href='danh-sach-bat-dong-san/1/nha-kho---nha-xuong.html' target='_self'><span>Bán kho, nhà xưởng</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a href='danh-sach-bat-dong-san/1/mat-bang---cua-hang---shop---ki-ot.html'
-                                                target='_self'><span>Bán mặt bằng, cửa hàng</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a href='danh-sach-bat-dong-san/1/cac-loai-bat-dong-san-khac.html'
-                                                target='_self'><span>Bất động sản khác</span></a>
-                                    <ul></ul>
-                                </li>
+                                <li class="lv1"><a href="/ban-trang-trai-khu-nghi-duong" class="haslink ">Bán trang trại, khu nghỉ dưỡng</a></li>
+                                <li class="lv1"><a href="/ban-kho-nha-xuong" class="haslink ">Bán kho, nhà xưởng</a></li>
+                                <li class="lv1"><a href="/ban-du-an-quan-12" class="haslink ">Bán dự án quận 12</a></li>
+                                <li class="lv1"><a href="/ban-loai-bat-dong-san-khac" class="haslink ">Bán loại bất động sản khác</a></li>
                             </ul>
                         </li>
-                        <li class=''><a href='danh-sach-nha-dat/3.html' target='_self'><span>DỰ ÁN QUẬN 12</span></a>
-                        </li>
-                        <li class=''><a href='danh-sach-nha-dat/2.html' target='_self'><span>Nhà Đất Cho Thuê</span></a>
+                        <li class=''><a href='du-an-quan-12' target='_self'><span>DỰ ÁN QUẬN 12</span></a></li>
+                        <li class="lv0"><a href="/nha-dat-cho-thue" class="haslink ">Cho thuê</a>
                             <ul>
-                                <li class=''><a
-                                            href='danh-sach-bat-dong-san/2/nha-mat-pho---nha-rieng---nha-lien-ke.html'
-                                            target='_self'><span>Cho thuê nhà phố, nhà riêng</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a href='danh-sach-bat-dong-san/2/mat-bang---cua-hang---shop---ki-ot.html'
-                                                target='_self'><span>Cho thuê mặt bằng, cửa hàng</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a href='danh-sach-bat-dong-san/2/nha-kho---nha-xuong.html' target='_self'><span>Cho thuê kho, nhà xưởng</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a
-                                            href='danh-sach-bat-dong-san/2/khach-san---nha-nghi---nha-tro---van-phong.html'
-                                            target='_self'><span>Cho thuê khách sạn nhà nghỉ</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a href='danh-sach-bat-dong-san/2/biet-thu---village.html'
-                                                target='_self'><span>Cho thuê biệt thự</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a href='danh-sach-bat-dong-san/2/trang-trai-khu-nghi-duong.html'
-                                                target='_self'><span>Cho thuê trang trại, khu nghỉ dưỡng</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a href='danh-sach-bat-dong-san/2/cac-loai-bat-dong-san-khac.html'
-                                                target='_self'><span>Cho thuê bất động sản khác</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a href='danh-sach-bat-dong-san/2/can-ho-chung-cu.html'
-                                                target='_self'><span>Cho thuê căn hộ, chung cư</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a href='danh-sach-bat-dong-san/2/dat---dat-nen-du-an.html' target='_self'><span>Cho thuê đất nền dự án</span></a>
-                                    <ul></ul>
-                                </li>
+                                <li class="lv1"><a href="/cho-thue-can-ho-chung-cu" class="haslink ">Cho thuê căn hộ chung cư</a></li>
+                                <li class="lv1"><a href="/cho-thue-nha-rieng" class="haslink ">Cho
+                                        thuê nhà riêng</a></li>
+                                <li class="lv1"><a href="/cho-thue-nha-mat-pho" class="haslink ">Cho
+                                        thuê nhà mặt phố</a></li>
+                                <li class="lv1"><a href="/cho-thue-nha-tro-phong-tro" class="haslink ">Cho thuê nhà trọ, phòng trọ</a></li>
+                                <li class="lv1"><a href="/cho-thue-van-phong" class="haslink ">Cho
+                                        thuê văn phòng</a></li>
+                                <li class="lv1"><a href="/cho-thue-cua-hang-ki-ot" class="haslink ">Cho thuê cửa hàng - ki ốt</a></li>
+                                <li class="lv1"><a href="/cho-thue-kho-nha-xuong-dat" class="haslink ">Cho thuê kho, nhà xưởng, đất</a></li>
+                                <li class="lv1"><a href="/cho-thue-du-an-quan-12" class="haslink ">Cho thuê dự án quận 12</a></li>
+                                <li class="lv1"><a href="/cho-thue-loai-bat-dong-san-khac" class="haslink ">Cho thuê loại bất động sản khác</a></li>
                             </ul>
                         </li>
-                        <li class=''><a href='danh-sach-nha-dat/4.html' target='_self'><span>Cần mua</span></a>
+
+                        <li class="lv0"><a href="/nha-dat-can-mua" class="haslink">Cần mua</a>
                             <ul>
-                                <li class=''><a href='danh-sach-bat-dong-san/4/dat---dat-nen-du-an.html' target='_self'><span>Đất nền dự án</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a
-                                            href='danh-sach-bat-dong-san/4/nha-mat-pho---nha-rieng---nha-lien-ke.html'
-                                            target='_self'><span>Nhà phố, nhà riêng</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a href='danh-sach-bat-dong-san/4/can-ho-chung-cu.html'
-                                                target='_self'><span>Căn hộ, chung cư</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a href='danh-sach-bat-dong-san/4/nha-kho---nha-xuong.html' target='_self'><span>Kho, nhà xưởng</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a
-                                            href='danh-sach-bat-dong-san/4/khach-san---nha-nghi---nha-tro---van-phong.html'
-                                            target='_self'><span>Khách sạn nhà nghỉ</span></a>
-                                    <ul></ul>
-                                </li>
-                                <li class=''><a href='danh-sach-bat-dong-san/4/cac-loai-bat-dong-san-khac.html'
-                                                target='_self'><span>Bất động sản khác</span></a>
-                                    <ul></ul>
-                                </li>
+                                <li class="lv1"><a href="/mua-can-ho-chung-cu" class="haslink ">Mua căn hộ chung cư</a></li>
+                                <li class="lv1"><a href="/mua-nha-rieng" class="haslink ">Mua
+                                        nhà riêng</a></li>
+                                <li class="lv1"><a href="/mua-nha-biet-thu-lien-ke" class="haslink ">Mua nhà biệt thự, liền kề</a></li>
+                                <li class="lv1"><a href="/mua-nha-mat-pho" class="haslink ">Mua nhà mặt phố</a></li>
+                                <li class="lv1"><a href="/mua-dat-nen-du-an" class="haslink ">Mua đất nền dự án</a></li>
+                                <li class="lv1"><a href="/mua-dat" class="haslink ">Mua
+                                        đất</a></li>
+                                <li class="lv1"><a href="/mua-trang-trai-khu-nghi-duong" class="haslink ">Mua trang trại, khu nghỉ dưỡng</a></li>
+                                <li class="lv1"><a href="/mua-kho-nha-xuong" class="haslink ">Mua kho, nhà xưởng</a></li>
+                                <li class="lv1"><a href="/mua-du-an-quan-12" class="haslink ">Mua dự án quận 12</a></li>
+                                <li class="lv1"><a href="/mua-cac-loai-bat-dong-san-khac" class="haslink ">Mua loại bất động sản khác</a></li>
                             </ul>
                         </li>
-                        <li class=' new'><a href='#new' target='_self'><span>THÔNG TIN NHÀ ĐẤT</span></a>
-                            <ul></ul>
+                        <li class="lv0"><a href="/nha-dat-can-thue" class="haslink">Cần thuê</a>
+                            <ul>
+                                <li class="lv1"><a href="/can-thue-can-ho-chung-cu" class="haslink ">Cần thuê căn hộ chung cư</a></li>
+                                <li class="lv1"><a href="/can-thue-nha-rieng" class="haslink ">Cần thuê nhà riêng</a></li>
+                                <li class="lv1"><a href="/can-thue-nha-mat-pho" class="haslink ">Cần thuê nhà mặt phố</a></li>
+                                <li class="lv1"><a href="/can-thue-nha-tro-phong-tro" class="haslink ">Cần thuê nhà trọ, phòng trọ</a></li>
+                                <li class="lv1"><a href="/can-thue-van-phong" class="haslink ">Cần thuê văn phòng</a></li>
+                                <li class="lv1"><a href="/can-thue-cua-hang-ki-ot" class="haslink ">Cần thuê cửa hàng - ki ốt</a></li>
+                                <li class="lv1"><a href="/can-thue-kho-nha-xuong-dat" class="haslink ">Cần thuê kho, nhà xưởng, đất</a></li>
+                                <li class="lv1"><a href="/can-thue-du-an-quan-12" class="haslink ">Cần thuê dự án quận 12</a></li>
+                                <li class="lv1"><a href="/can-thue-loai-bat-dong-san-khac" class="haslink ">Cần thuê loại bất động sản khác</a></li>
+                            </ul>
                         </li>
-                        <li class=''><a href='trang/bao-gia-dich-vu.html'
-                                        target='_self'><span>Báo giá dịch vụ</span></a>
-                            <ul></ul>
-                        </li>
+                        <li class="lv0"><a href="/tin-tuc-nha-dat" class="haslink ">Tin tức nhà đất</a></li>
+                        <li class="lv0"><a href="/kien-thuc-nha-dat" class="haslink ">Kiến thức nhà đất</a></li>
+                        <li class="lv0"><a href="/ho-tro" class="haslink ">Hỗ trợ</a></li>
                     </ul>
                 </div>
             </div>

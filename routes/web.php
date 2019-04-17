@@ -211,30 +211,9 @@ Route::get('/tim-kiem-nang-cao/{method}/{province_d}/{district_id}/{ward_id}/{st
 
 // tin tuc
 
-Route::get('/chinh-sach-quan-ly/{prefix?}', 'CatalogController@Article');
-Route::get('/thong-tin-quy-hoach/{prefix?}', 'CatalogController@Article');
-Route::get('/nha-moi-gioi/{prefix?}', 'CatalogController@Article');
-Route::get('/doanh-nghiep/{prefix?}', 'CatalogController@Article');
-Route::get('/du-an/{prefix?}', 'CatalogController@Article');
+Route::get('/tin-tuc-nha-dat/{prefix?}', 'CatalogController@Article');
+Route::get('/kien-thuc-nha-dat/{prefix?}', 'CatalogController@Article');
 Route::get('/ho-tro/{prefix?}', 'CatalogController@Article');
-Route::get('/tin-tuc/{prefix?}', 'CatalogController@Article');
-Route::get('/tin-thi-truong/{prefix?}', 'CatalogController@Article');
-Route::get('/phan-tich-nhan-dinh/{prefix?}', 'CatalogController@Article');
-Route::get('/bat-dong-san-the-gioi/{prefix?}', 'CatalogController@Article');
-Route::get('/tai-chinh-chung-khoan-bat-dong-san/{prefix?}', 'CatalogController@Article');
-Route::get('/tu-van-luat-bat-dong-san/{prefix?}', 'CatalogController@Article');
-Route::get('/trinh-tu-thu-tuc/{prefix?}', 'CatalogController@Article');
-Route::get('/quyen-so-huu/{prefix?}', 'CatalogController@Article');
-Route::get('/tranh-chap/{prefix?}', 'CatalogController@Article');
-Route::get('/xay-dung-hoan-cong/{prefix?}', 'CatalogController@Article');
-Route::get('/nghia-vu-tai-chinh/{prefix?}', 'CatalogController@Article');
-Route::get('/cac-van-de-co-yeu-to-nuoc-ngoai/{prefix?}', 'CatalogController@Article');
-Route::get('/loi-khuyen/{prefix?}', 'CatalogController@Article');
-Route::get('/loi-khuyen-cho-nguoi-mua/{prefix?}', 'CatalogController@Article');
-Route::get('/loi-khuyen-cho-nguoi-ban/{prefix?}', 'CatalogController@Article');
-Route::get('/loi-khuyen-cho-nha-dau-tu/{prefix?}', 'CatalogController@Article');
-Route::get('/loi-khuyen-cho-nguoi-thue/{prefix?}', 'CatalogController@Article');
-Route::get('/loi-khuyen-cho-nguoi-cho-thue/{prefix?}', 'CatalogController@Article');
 
 
 
