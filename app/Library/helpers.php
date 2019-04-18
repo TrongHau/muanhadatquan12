@@ -33,7 +33,7 @@ class Helpers
         $data = str_replace('data:image/jpeg;base64,', '', $data);
         $data = str_replace(' ', '+', $data);
         $data = base64_decode($data);
-        $fileName = ($fileName ?? rand() . '_' . time()) . '.' .$type;
+        $fileName = ($fileName ? $fileName : rand() . '_' . time()) . '.' .$type;
         Storage::put('public' . $path . $fileName, $data);
         return $fileName;
     }

@@ -211,7 +211,7 @@ class ArticleForLeaseController extends CrudController
         $this->crud->hasAccessOrFail('update');
 
         // get entry ID from Request (makes sure its the last ID for nested resources)
-        $id = $this->crud->getCurrentEntryId() ?? $id;
+        $id = $this->crud->getCurrentEntryId() ? $this->crud->getCurrentEntryId(): $id;
 
         // get the info for that entry
         $this->data['entry'] = $this->crud->getEntry($id);
@@ -228,7 +228,7 @@ class ArticleForLeaseController extends CrudController
         $this->crud->hasAccessOrFail('delete');
 
         // get entry ID from Request (makes sure its the last ID for nested resources)
-        $id = $this->crud->getCurrentEntryId() ?? $id;
+        $id = $this->crud->getCurrentEntryId() ? $this->crud->getCurrentEntryId() : $id;
         $article = $this->crud->getModel()::where('id', $id)->first();
         if($article->gallery_image) {
             foreach (json_decode($article->gallery_image) as $item) {

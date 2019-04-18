@@ -140,7 +140,7 @@ class UserController extends Controller
             return Helpers::ajaxResult(false, 'Vui lòng điền số điện thoại.', null);
         if(User::where('phone', $request->phone)->first())
             return Helpers::ajaxResult(false, 'Số điện thoại đã sử dụng', null);
-        $existOtp = VerifySMSModel::where(['user_id' => Auth::user()->id ?? session()->getId(), 'type' => 'verify_phone'])->first();
+        $existOtp = VerifySMSModel::where(['user_id' => Auth::user()->id ? Auth::user()->id : session()->getId(), 'type' => 'verify_phone'])->first();
         if($existOtp) {
             $timeExpried = $existOtp->otp_time_expried - time();
             if($timeExpried > 0) {
@@ -165,7 +165,7 @@ class UserController extends Controller
         }else{
             PhoneModel::create([
                 'phone' => $request->phone,
-                'user_id' => Auth::user()->id ?? '',
+                'user_id' => Auth::user()->id ? Auth::user()->id : '',
                 'count_sms' => 1,
             ]);
         }
@@ -173,7 +173,7 @@ class UserController extends Controller
         $Content = "Ma xac thuc Batdongsan.company cua ban la: " . $otp;
         Helpers::sendSMS($request->phone, $Content);
         $newOtp = VerifySMSModel::create([
-            'user_id' => Auth::user()->id ?? session()->getId(),
+            'user_id' => Auth::user()->id ? Auth::user()->id : session()->getId(),
             'phone' => $request->phone,
             'otp' => $otp,
             'otp_time_expried' =>strtotime(TIME_EXPIRED_OTP),
@@ -189,7 +189,7 @@ class UserController extends Controller
         if(!$request->otp)
             return Helpers::ajaxResult(false, 'Vui lòng điền mã xác thực.', null);
 
-        $existOtp = VerifySMSModel::where(['user_id' => Auth::user()->id ?? session()->getId(), 'type' => 'verify_phone', 'phone' => $request->phone])->first();
+        $existOtp = VerifySMSModel::where(['user_id' => Auth::user()->id ? Auth::user()->id : session()->getId(), 'type' => 'verify_phone', 'phone' => $request->phone])->first();
         if($existOtp) {
             $phoneFlag = PhoneModel::find($existOtp->phone);
             if($phoneFlag && $phoneFlag->status == 0)

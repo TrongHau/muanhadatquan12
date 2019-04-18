@@ -143,7 +143,7 @@ class CatalogController extends Controller
             $article->where('id', $article->id)->increment('views');
             return view('detail.article_tin_tuc', compact('article', 'articleRelate', 'tagRelate'));
         } else {
-            $category = CategoryModel::where('slug', $prefix ?? $request->path())->first();
+            $category = CategoryModel::where('slug', $prefix ? $prefix : $request->path())->first();
             if(!$category)
                 return view('errors.404');
             $arrCat = [];
