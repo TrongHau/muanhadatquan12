@@ -68,7 +68,7 @@ class ArticleController extends Controller
     }
     public function listDrafArticle(Request $request)
     {
-        $page = $request->page ?? 1;
+        $page = $request->page ? $request->page : 1;
         $articleForLease = ArticleForLeaseModel::selectRaw('id, method_article, type_article,prefix_url, title, views, created_at, status, aprroval, gallery_image, note, updated_at, project, province_id, province, district_id, district, address, ddlPriceType, price_real, price, area, null as price_from, null as price_to, null as area_from, null as area_to, \'lease\' as typeOf')
             ->where('status', DRAFT_ARTICLE)
             ->where('created_at', '>=', date('Y-m-d', strtotime('-2 months')))
@@ -122,7 +122,7 @@ class ArticleController extends Controller
         return view('article.item_article_buy', compact('article'));
     }
     public function getListArticleForDraf(Request $request) {
-        $page = $request->page ?? 1;
+        $page = $request->page ? $request->page: 1;
         $articleForLease = ArticleForLeaseModel::selectRaw('id, method_article, type_article,prefix_url, title, views, created_at, status, aprroval, gallery_image, note, updated_at, project, province_id, province, district_id, district, address, ddlPriceType, price_real, price, area, null as price_from, null as price_to, null as area_from, null as area_to, \'lease\' as typeOf')
             ->where('status', DRAFT_ARTICLE)
             ->where('user_id', Auth::user()->id);
@@ -249,10 +249,10 @@ class ArticleController extends Controller
             'street' => ($request->street_id && $request->district_id && $request->province_id) ? StreetModel::where('id', $request->street_id)->where('_province_id', $request->province_id)->where('_district_id', $request->district_id)->first()->_name : '',
             'address' => $request->address,
             'project' => $request->project,
-            'area' => $request->area ?? 0,
+            'area' => $request->area ? $request->area : 0,
             'price' => $request->price,
             'ddlPriceType' => $request->ddlPriceType,
-            'price_real' => ($request->price ?? 0) * Helpers::convertCurrency($request->ddlPriceType),
+            'price_real' => ($request->price ? $request->price : 0) * Helpers::convertCurrency($request->ddlPriceType),
             'content_article' => $request->content_article,
             'facade' => $request->facade,
             'land_width' => $request->land_width,
@@ -303,7 +303,7 @@ class ArticleController extends Controller
             }
             $result->update($article);
         }else {
-            $article['user_id'] = Auth::user()->id ?? 0;
+            $article['user_id'] = Auth::user()->id ? Auth::user()->id : 0;
             $article['aprroval'] = APPROVAL_ARTICLE_DEFAULT;
             $article['start_news'] = time();
             if($article['status'] != DRAFT_ARTICLE && Auth::check()) {
@@ -433,7 +433,7 @@ class ArticleController extends Controller
             }
             $result->update($article);
         }else {
-            $article['user_id'] = Auth::user()->id ?? 0;
+            $article['user_id'] = Auth::user()->id ? Auth::user()->id : 0;
             $article['aprroval'] = APPROVAL_ARTICLE_DEFAULT;
             $article['start_news'] = time();
             if($article['status'] != DRAFT_ARTICLE && Auth::check()) {
