@@ -17,10 +17,7 @@
 <footer>
     <div class="container clearfix">
         <div class="box-footer3">
-            <p>Địa Chỉ: Đường T&ocirc; Ngọc V&acirc;n, Quận 12, TP HCM</p>
-
-            <p><strong>Tel</strong>: <strong>0985.678.311</strong><br />
-                <strong>Email:</strong> muanhadatq12.com@gmail.com</p>
+            <p><strong>Tel</strong>: <strong>{{ENV('PHONE_CONTACT')}}</strong><br />
         </div>
     </div>
 

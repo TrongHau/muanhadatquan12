@@ -26,7 +26,9 @@ global $noibat;
                             <option value="nha-dat-cho-thue">Nhà cho thuê</option>
                             <option value="nha-dat-can-mua">Nhà đất cần mua</option>
                             <option value="nha-dat-can-thue">Nhà đất cần thuê</option>
-                        </select>            </div>
+                            <option value="du-an-quan-12">Dự án quận 12</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="row_timkiemR clearfix">
                     <label>Tỉnh, thành phố</label>
@@ -48,7 +50,7 @@ global $noibat;
                 </div>
 
                 <div class="row_timkiemR clearfix">
-                    <label>Quận, huyện</label>
+                    <label>Phường, xã</label>
                     <div class="divipt">
                         <select class="advance-options select-ward">
                             <option value="-1" class="advance-options">-- Chọn Phường/Xã --
@@ -58,7 +60,7 @@ global $noibat;
                 </div>
 
                 <div class="row_timkiemR clearfix">
-                    <label>Quận, huyện</label>
+                    <label>Đường, phố</label>
                     <div class="divipt">
                         <select class="advance-options select-street">
                             <option value="-1" class="advance-options">-- Chọn Đường/Phố --</option>
@@ -125,7 +127,7 @@ global $noibat;
                         </select>            </div>
                 </div>
                 <div class="row_timkiemR clearfix">
-                    <label>Theo mức giá</label>
+                    <label>Số phòng ngủ</label>
                     <div class="divipt">
                         <select id="search-advance-bed_room" class="advance-options">
                             <option value="-1" class="advance-options" style="min-width: 168px;">-- Chọn số phòng ngủ --</option>
@@ -138,7 +140,7 @@ global $noibat;
                         </select>            </div>
                 </div>
                 <div class="row_timkiemR clearfix">
-                    <label>Theo mức giá</label>
+                    <label>Theo số toilet</label>
                     <div class="divipt">
                         <select id="search-advance-toilet" class="advance-options">
                             <option value="-1" class="advance-options" style="min-width: 168px;">-- Chọn số toilet --</option>
@@ -151,7 +153,7 @@ global $noibat;
                         </select>            </div>
                 </div>
                 <div class="row_timkiemR clearfix">
-                    <label>Theo mức giá</label>
+                    <label>Theo hướng nhà</label>
                     <div class="divipt">
                         <select id="search-advance-ddlHomeDirection" class="advance-options">
                             <option value="-1" style="min-width: 168px;">-- Chọn hướng nhà --</option>
@@ -177,7 +179,7 @@ global $noibat;
                     alertModal('Vui lòng chọn loại nhà đất tìm kiếm');
                     return false;
                 }
-                window.location.href = window.location.origin + '/tim-kiem-nang-cao/' + $('#search-advance-method').val()+ '/' + ($('.select-province').val() ?  $('.select-province').val() : -1) + '/' + ($('.select-district').val() ? $('.select-district').val() : -1) + '/' + ($('.select-ward').val() ? $('.select-ward').val() : -1) + '/' + ($('.select-street').val() ? $('.select-street').val() : -1) + '/' + $('#search-advance-area').val() + '/' + $('#search-advance-price').val() + '/' + $('#search-advance-bed_room').val() + '/' + $('#search-advance-toilet').val() + '/' + $('#search-advance-ddlHomeDirection').val()+ '/' + $('#title_article').val();
+                window.location.href = window.location.origin + '/tim-kiem-nang-cao/' + $('#search-advance-method').val()+ '/-1/' + ($('.select-province').val() ?  $('.select-province').val() : -1) + '/' + ($('.select-district').val() ? $('.select-district').val() : -1) + '/' + ($('.select-ward').val() ? $('.select-ward').val() : -1) + '/' + ($('.select-street').val() ? $('.select-street').val() : -1) + '/' + $('#search-advance-area').val() + '/' + $('#search-advance-price').val() + '/' + $('#search-advance-bed_room').val() + '/' + $('#search-advance-toilet').val() + '/' + $('#search-advance-ddlHomeDirection').val()+ '/' + $('#title_article').val();
             }
             <?php
             if(isset($method)) {

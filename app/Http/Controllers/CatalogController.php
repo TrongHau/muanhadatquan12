@@ -48,7 +48,15 @@ class CatalogController extends Controller
         if($titleArticle->url == 'nha-dat-ban' || $titleArticle->url == 'nha-dat-cho-thue') {
             $article = $article->where('method_article', $titleArticle->name);
         }else{
-            $article = $article->where('type_article', $titleArticle->name);
+            if($titleArticle->url == 'du-an-quan-12'){
+                $article = $article->where(function($q) {
+                    $q->where('type_article', 'ban-du-an-quan-12')
+                        ->orWhere('type_article', 'cho-thue-du-quan-12');
+                });
+            }else{
+                $article = $article->where('type_article', $titleArticle->name);
+            }
+
         }
         // search
         if($key)
@@ -155,6 +163,7 @@ class CatalogController extends Controller
     public function searchKey(Request $request)
     {
         $article = ArticleModel::select('title', 'slug', 'short_content', 'image', 'status', 'featured', 'views', 'created_at')->where('status', PUBLISHED_ARTICLE)->where('title', 'like', '%'.$request->q.'%')->paginate(PAGING_LIST_ARTICLE_CATALOG);
+        $category = CategoryModel::where('id', 1)->first();
         return view('catalog.article_tin_tuc', compact('category', 'article'));
     }
 }

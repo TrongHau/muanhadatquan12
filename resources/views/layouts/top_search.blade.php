@@ -27,7 +27,7 @@ use App\Library\Helpers;
 
                 <div class="menu">
                     <ul>
-                        <li class='home'><a href="index.html"><img src="/imgs/icon_home.png" alt=""/></a></li>
+                        <li class='home'><a href="/"><img src="/imgs/icon_home.png" alt=""/></a></li>
                         <li class="lv0"><a href="/nha-dat-ban" class="haslink ">Đất bán</a>
                             <ul>
                                 <li class="lv1"><a href="/ban-can-ho-chung-cu" class="haslink ">Bán
@@ -108,7 +108,7 @@ use App\Library\Helpers;
     <div class="container">
         <div class="box-search-left">
             <form method="GET" action="/tim-kiem-tin-tuc">
-                <input placeholder="Nhập vào từ khóa tìm kiếm tin tức" type="text" class="iptser"  name="q" />
+                <input placeholder="Nhập vào từ khóa tìm kiếm tin tức" type="text" class="iptser" value="{{$_GET['q'] ?? ''}}" name="q" />
                 <input type="submit" value="Tìm Kiếm" class="btn_search"/>
             </form>
 

@@ -34,7 +34,7 @@ class SearchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function advance(Request $request, $method = -1, $province_id = -1, $district_id = -1, $ward_id = -1, $street_id = -1, $area = -1, $price = -1, $bed_room = -1, $toilet = -1, $ddlHomeDirection = -1, $title_article = '') {
+    public function advance(Request $request, $method = -1, $type = -1, $province_id = -1, $district_id = -1, $ward_id = -1, $street_id = -1, $area = -1, $price = -1, $bed_room = -1, $toilet = -1, $ddlHomeDirection = -1, $title_article = '') {
         session_start();
         $titleArticle = TypeModel::where('url', $method)->first();
         if(!$titleArticle)
@@ -52,6 +52,9 @@ class SearchController extends Controller
         }elseif($method == 'nha-dat-can-thue') {
             $article = ArticleForBuyModel::where('status', PUBLISHED_ARTICLE);
             $article = $article->where('method_article', 'Nhà đất cần thuê');
+        }
+        if($type > 0) {
+            $article = $article->where('type_article', $type);
         }
         if($district_id > 0) {
             $article = $article->where('district_id', $district_id);

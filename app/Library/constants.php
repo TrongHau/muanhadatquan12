@@ -19,7 +19,7 @@ define('PAGING_LIST_ARTICLE', 5);
 define('PAGING_LIST_ARTICLE_HOME', 15);
 define('PAGING_LIST_ARTICLE_CATALOG', 20);
 define('HOME_SUBSTRING', 75);
-define('LIMIT_SHORT_CONTENT', 500);
+define('LIMIT_SHORT_CONTENT', 180);
 define('ARTICLE_LEASE', 'LEASE');
 define('ARTICLE_BUY', 'BUY');
 define('SOURCE_DATA_TEMP', 'temp/');

@@ -98,6 +98,8 @@ Route::get('/chinh-sach-bao-mat-thong-tin', 'DetailController@aboutDetail');
 
 
 // catalog bán nhà đất
+Route::get('/du-an-quan-12', 'CatalogController@ArticleForLease_ban_dat');
+
 Route::get('/nha-dat-ban/{key?}', 'CatalogController@ArticleForLease_ban_dat');
 Route::get('/ban-can-ho-chung-cu', 'CatalogController@ArticleForLease_ban_dat');
 Route::get('/ban-nha-rieng', 'CatalogController@ArticleForLease_ban_dat');
@@ -107,6 +109,7 @@ Route::get('/ban-dat-nen-du-an', 'CatalogController@ArticleForLease_ban_dat');
 Route::get('/ban-dat', 'CatalogController@ArticleForLease_ban_dat');
 Route::get('/ban-trang-trai-khu-nghi-duong', 'CatalogController@ArticleForLease_ban_dat');
 Route::get('/ban-kho-nha-xuong', 'CatalogController@ArticleForLease_ban_dat');
+Route::get('/ban-du-an-quan-12', 'CatalogController@ArticleForLease_ban_dat');
 Route::get('/ban-loai-bat-dong-san-khac', 'CatalogController@ArticleForLease_ban_dat');
 
 // catalog nhà đất cho thuê
@@ -118,6 +121,7 @@ Route::get('/cho-thue-nha-tro-phong-tro', 'CatalogController@ArticleForLease_ban
 Route::get('/cho-thue-van-phong', 'CatalogController@ArticleForLease_ban_dat');
 Route::get('/cho-thue-cua-hang-ki-ot', 'CatalogController@ArticleForLease_ban_dat');
 Route::get('/cho-thue-kho-nha-xuong-dat', 'CatalogController@ArticleForLease_ban_dat');
+Route::get('/cho-thue-du-quan-12', 'CatalogController@ArticleForLease_ban_dat');
 Route::get('/cho-thue-loai-bat-dong-san-khac', 'CatalogController@ArticleForLease_ban_dat');
 
 
@@ -132,6 +136,7 @@ Route::get('/mua-dat-nen-du-an', 'CatalogController@ArticleForBuy_cho_thue');
 Route::get('/mua-dat', 'CatalogController@ArticleForBuy_cho_thue');
 Route::get('/mua-trang-trai-khu-nghi-duong', 'CatalogController@ArticleForBuy_cho_thue');
 Route::get('/mua-kho-nha-xuong', 'CatalogController@ArticleForBuy_cho_thue');
+Route::get('/mua-du-an-quan-12', 'CatalogController@ArticleForBuy_cho_thue');
 Route::get('/mua-cac-loai-bat-dong-san-khac', 'CatalogController@ArticleForBuy_cho_thue');
 
 
@@ -146,7 +151,9 @@ Route::get('/can-thue-nha-tro-phong-tro', 'CatalogController@ArticleForBuy_cho_t
 Route::get('/can-thue-van-phong', 'CatalogController@ArticleForBuy_cho_thue');
 Route::get('/can-thue-cua-hang-ki-ot', 'CatalogController@ArticleForBuy_cho_thue');
 Route::get('/can-thue-kho-nha-xuong-dat', 'CatalogController@ArticleForBuy_cho_thue');
+Route::get('/can-thue-du-an-quan-12', 'CatalogController@ArticleForBuy_cho_thue');
 Route::get('/can-thue-loai-bat-dong-san-khac', 'CatalogController@ArticleForBuy_cho_thue');
+
 
 
 /////////
@@ -206,7 +213,7 @@ Route::get('/can-thue-du-an-quan-12-{position}/{title}bds-{id}', 'DetailControll
 Route::get('/can-thue-loai-bat-dong-san-khac-{position}/{title}bds-{id}', 'DetailController@articleForBuyDetail');
 
 // tim kiem nang cao
-Route::get('/tim-kiem-nang-cao/{method}/{province_d}/{district_id}/{ward_id}/{street_id}/{area}/{price}/{bed_room}/{toilet}/{ddlHomeDirection}/{title_article?}', 'SearchController@advance');
+Route::get('/tim-kiem-nang-cao/{method}/{type}/{province_d}/{district_id}/{ward_id}/{street_id}/{area}/{price}/{bed_room}/{toilet}/{ddlHomeDirection}/{title_article?}', 'SearchController@advance');
 
 
 // tin tuc

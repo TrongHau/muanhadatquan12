@@ -51,10 +51,10 @@ $Agent = new Agent();
                                         </li>
                                         <li>DT:{{($item->area_from != null && $item->area_to != null) ? ($item->area_from. ' - ' .$item->area_to.' m²') : ($item->area ? $item->area.' m²' : 'Chưa xác định')}} | Giá:<span class="camcam">{{($item->price_from != null && $item->price_to != null) ? ($item->price_from. ' - ' .$item->price_to.' '.$item->ddlPriceType) : ($item->price_real == 0 ? 'Thỏa thuận' : $item->price.' '.$item->ddlPriceType)}}</span></li>
                                         <li><a class="link_blue"
-                                               href="/tim-kiem-nang-cao/nha-dat-ban/-1/{{$item->district_id}}/-1/-1/-1/-1/-1/-1/-1"
+                                               href="/tim-kiem-nang-cao/nha-dat-ban/-1/-1/{{$item->district_id}}/-1/-1/-1/-1/-1/-1/-1"
                                                title="Bán nhà riêng tại {{$item->district}}">{{$item->district}}</a>, <a
                                                     class="link_blue"
-                                                    href="/tim-kiem-nang-cao/nha-dat-ban/{{$item->province_id}}/-1/-1/-1/-1/-1/-1/-1/-1"
+                                                    href="/tim-kiem-nang-cao/nha-dat-ban/-1/{{$item->province_id}}/-1/-1/-1/-1/-1/-1/-1/-1"
                                                     title="Bán nhà riêng tại {{$item->province}}">{{$item->province}}</a></li>
                                     </ul>
                                 </div>
@@ -97,10 +97,10 @@ $Agent = new Agent();
                                         </li>
                                         <li>DT:{{($item->area_from != null && $item->area_to != null) ? ($item->area_from. ' - ' .$item->area_to.' m²') : ($item->area ? $item->area.' m²' : 'Chưa xác định')}} | Giá:<span class="camcam">{{($item->price_from != null && $item->price_to != null) ? ($item->price_from. ' - ' .$item->price_to.' '.$item->ddlPriceType) : ($item->price_real == 0 ? 'Thỏa thuận' : $item->price.' '.$item->ddlPriceType)}}</span></li>
                                         <li><a class="link_blue"
-                                               href="/tim-kiem-nang-cao/nha-dat-cho-thue/-1/{{$item->district_id}}/-1/-1/-1/-1/-1/-1/-1"
+                                               href="/tim-kiem-nang-cao/nha-dat-cho-thue/-1/-1/{{$item->district_id}}/-1/-1/-1/-1/-1/-1/-1"
                                                title="Bán nhà riêng tại {{$item->district}}">{{$item->district}}</a>, <a
                                                     class="link_blue"
-                                                    href="/tim-kiem-nang-cao/nha-dat-cho-thue/{{$item->province_id}}/-1/-1/-1/-1/-1/-1/-1/-1"
+                                                    href="/tim-kiem-nang-cao/nha-dat-cho-thue/-1/{{$item->province_id}}/-1/-1/-1/-1/-1/-1/-1/-1"
                                                     title="Bán nhà riêng tại {{$item->province}}">{{$item->province}}</a></li>
                                     </ul>
                                 </div>
@@ -133,7 +133,7 @@ $Agent = new Agent();
                         @foreach($articleForBuy_lease as $key => $item)
                             <div class="box_NDnoibat" style="height: 115px;">
                                 <div class="img_NDnoibat">
-                                    <a href="/{{$item->prefix_url.'-bds-'.$item->id}}"><img alt="{{$item['title']}}" src="{{$item['gallery_image'] ? Helpers::file_path($item['id'], PUBLIC_ARTICLE_LEASE, true).THUMBNAIL_PATH.json_decode($item['gallery_image'])[0] : THUMBNAIL_DEFAULT }}"></a>
+                                    <a href="/{{$item->prefix_url.'-bds-'.$item->id}}"><img alt="{{$item['title']}}" src="{{$item['gallery_image'] ? Helpers::file_path($item['id'], PUBLIC_ARTICLE_BUY, true).THUMBNAIL_PATH.json_decode($item['gallery_image'])[0] : THUMBNAIL_DEFAULT }}"></a>
                                     <span class="iconHot"></span>
                                     <span class="theloai">{{$item['type_article']}}</span>
                                 </div>
@@ -144,10 +144,10 @@ $Agent = new Agent();
                                         </li>
                                         <li>DT:{{($item->area_from != null && $item->area_to != null) ? ($item->area_from. ' - ' .$item->area_to.' m²') : ($item->area ? $item->area.' m²' : 'Chưa xác định')}} | Giá:<span class="camcam">{{($item->price_from != null && $item->price_to != null) ? ($item->price_from. ' - ' .$item->price_to.' '.$item->ddlPriceType) : ($item->price_real == 0 ? 'Thỏa thuận' : $item->price.' '.$item->ddlPriceType)}}</span></li>
                                         <li><a class="link_blue"
-                                               href="/tim-kiem-nang-cao/nha-dat-can-mua/-1/{{$item->district_id}}/-1/-1/-1/-1/-1/-1/-1"
+                                               href="/tim-kiem-nang-cao/nha-dat-can-mua/-1/-1/{{$item->district_id}}/-1/-1/-1/-1/-1/-1/-1"
                                                title="Bán nhà riêng tại {{$item->district}}">{{$item->district}}</a>, <a
                                                     class="link_blue"
-                                                    href="/tim-kiem-nang-cao/nha-dat-can-mua/{{$item->province_id}}/-1/-1/-1/-1/-1/-1/-1/-1"
+                                                    href="/tim-kiem-nang-cao/nha-dat-can-mua/-1/{{$item->province_id}}/-1/-1/-1/-1/-1/-1/-1/-1"
                                                     title="Bán nhà riêng tại {{$item->province}}">{{$item->province}}</a></li>
                                     </ul>
                                 </div>
@@ -181,7 +181,7 @@ $Agent = new Agent();
                         @foreach($articleForBuy_buy as $key => $item)
                             <div class="box_NDnoibat" style="height: 115px;">
                                 <div class="img_NDnoibat">
-                                    <a href="/{{$item->prefix_url.'-bds-'.$item->id}}"><img alt="{{$item['title']}}" src="{{$item['gallery_image'] ? Helpers::file_path($item['id'], PUBLIC_ARTICLE_LEASE, true).THUMBNAIL_PATH.json_decode($item['gallery_image'])[0] : THUMBNAIL_DEFAULT }}"></a>
+                                    <a href="/{{$item->prefix_url.'-bds-'.$item->id}}"><img alt="{{$item['title']}}" src="{{$item['gallery_image'] ? Helpers::file_path($item['id'], PUBLIC_ARTICLE_BUY, true).THUMBNAIL_PATH.json_decode($item['gallery_image'])[0] : THUMBNAIL_DEFAULT }}"></a>
                                     <span class="iconHot"></span>
                                     <span class="theloai">{{$item['type_article']}}</span>
                                 </div>
@@ -192,10 +192,10 @@ $Agent = new Agent();
                                         </li>
                                         <li>DT:{{($item->area_from != null && $item->area_to != null) ? ($item->area_from. ' - ' .$item->area_to.' m²') : ($item->area ? $item->area.' m²' : 'Chưa xác định')}} | Giá:<span class="camcam">{{($item->price_from != null && $item->price_to != null) ? ($item->price_from. ' - ' .$item->price_to.' '.$item->ddlPriceType) : ($item->price_real == 0 ? 'Thỏa thuận' : $item->price.' '.$item->ddlPriceType)}}</span></li>
                                         <li><a class="link_blue"
-                                               href="/tim-kiem-nang-cao/nha-dat-can-thue/-1/{{$item->district_id}}/-1/-1/-1/-1/-1/-1/-1"
+                                               href="/tim-kiem-nang-cao/nha-dat-can-thue/-1/-1/{{$item->district_id}}/-1/-1/-1/-1/-1/-1/-1"
                                                title="Bán nhà riêng tại {{$item->district}}">{{$item->district}}</a>, <a
                                                     class="link_blue"
-                                                    href="/tim-kiem-nang-cao/nha-dat-can-thue/{{$item->province_id}}/-1/-1/-1/-1/-1/-1/-1/-1"
+                                                    href="/tim-kiem-nang-cao/nha-dat-can-thue/-1/{{$item->province_id}}/-1/-1/-1/-1/-1/-1/-1/-1"
                                                     title="Bán nhà riêng tại {{$item->province}}">{{$item->province}}</a></li>
                                     </ul>
                                 </div>
