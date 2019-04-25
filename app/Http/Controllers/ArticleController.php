@@ -22,6 +22,7 @@ use  App\User;
 use App\Models\ArticleForLeaseModel;
 use App\Models\ArticleForBuyModel;
 use File;
+use Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -319,6 +320,16 @@ class ArticleController extends Controller
                 }
             }
             $result = ArticleForLeaseModel::create($article);
+            $data = [
+                'article' => $result,
+                'prefix_admin_edit' => 'article_for_lease',
+            ];
+            Mail::send('emails.new_article_lease_buy', $data, function($message) use ($result)
+            {
+                $message->from(env('MAIL_USERNAME'), env('MAIL_FROM_NAME'));
+                //env('MAIL_USERNAME_NEW_ARTICLE')
+                $message->to(env('MAIL_USERNAME_NEW_ARTICLE'), env('MAIL_USERNAME'))->subject('Tin rao này cần được kiểm duyệt');
+            });
         }
         if($request->remove_imgs) {
             $arrImg = explode('|', $request->remove_imgs);
@@ -449,6 +460,15 @@ class ArticleController extends Controller
                 }
             }
             $result = ArticleForBuyModel::create($article);
+            $data = [
+                'article' => $result,
+                'prefix_admin_edit' => 'article_for_buy',
+            ];
+            Mail::send('emails.new_article_lease_buy', $data, function($message) use ($result)
+            {
+                $message->from(env('MAIL_USERNAME'), env('MAIL_FROM_NAME'));
+                $message->to(env('MAIL_USERNAME_NEW_ARTICLE'), env('MAIL_USERNAME'))->subject('Tin rao cần được kiểm duyệt');
+            });
         }
         if($request->remove_imgs) {
             $arrImg = explode('|', $request->remove_imgs);
