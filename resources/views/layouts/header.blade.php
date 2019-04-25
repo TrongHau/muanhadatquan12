@@ -24,7 +24,7 @@
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/jquery.jcarousel.min.js"></script>
     <script src="/js/plugins.js"></script>
-    <script src="/js/jcarousel.responsive.js"></script>
+    {{--<script src="/js/jcarousel.responsive.js"></script>--}}
     <script src="/js/holder.js"></script>
 
     {{--<script src="/js/thosannhadat.js"></script>--}}
