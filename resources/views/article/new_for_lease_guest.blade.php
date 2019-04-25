@@ -245,7 +245,7 @@ global $province;
                                                         </div>
                                                         <div class="base4">
                                                             <div style="float: left;">
-                                                                <input name="area" type="number" step="any" value="{{old('area') ?? $article->area ?? ''}}" id="area" class="text-field" max="999" style="width: 110px;">
+                                                                <input name="area" type="text" step="any" value="{{old('area') ?? $article->area ?? ''}}" id="area" class="text-field ver_number" max="999" style="width: 110px;">
                                                                 @if ($errors->has('area'))
                                                                     <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('area', 'diện tích', $errors->first('area')) }}</p></div>
                                                                 @endif
@@ -258,7 +258,7 @@ global $province;
                                                             Giá
                                                         </div>
                                                         <div class="base2">
-                                                            <input name="price" style="width: 215px;" type="number" step="any" id="price" value="{{old('price') ?? $article->price ?? ''}}" class="text-field" numberonly="2" maxlength="6">
+                                                            <input name="price" style="width: 215px;" type="text" step="any" id="price" value="{{old('price') ?? $article->price ?? ''}}" class="text-field ver_number" numberonly="2" maxlength="6">
                                                             @if ($errors->has('price'))
                                                                 <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('price', 'thành tiền', $errors->first('price')) }}</p></div>
                                                             @endif
@@ -417,7 +417,7 @@ global $province;
                                                                 Số phòng ngủ
                                                             </div>
                                                             <div class="base2">
-                                                                <input name="bed_room" type="number" id="txtRoomNumber" style="width: 215px;" value="{{old('bed_room') ?? $article->bed_room ?? ''}}" class="text-field " maxlength="3" numberonly="1">
+                                                                <input name="bed_room" type="text" id="txtRoomNumber" style="width: 215px;" value="{{old('bed_room') ?? $article->bed_room ?? ''}}" class="text-field ver_number" maxlength="3" numberonly="1">
                                                                 @if ($errors->has('bed_room'))
                                                                     <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('bed_room', 'số phòng ngủ', $errors->first('bed_room')) }}</p></div>
                                                                 @endif
@@ -428,7 +428,7 @@ global $province;
                                                                 Số toilet
                                                             </div>
                                                             <div class="base2">
-                                                                <input name="toilet" type="number" style="width: 215px;" value="{{old('toilet') ?? $article->toilet ?? ''}}" id="txtToiletNumber" class="text-field " maxlength="3" numberonly="1">
+                                                                <input name="toilet" type="text" style="width: 215px;" value="{{old('toilet') ?? $article->toilet ?? ''}}" id="txtToiletNumber" class="text-field ver_number" maxlength="3" numberonly="1">
                                                                 @if ($errors->has('toilet'))
                                                                     <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('toilet', 'số toilet', $errors->first('toilet')) }}</p></div>
                                                                 @endif
@@ -918,7 +918,7 @@ global $province;
                 {% if (file.error) { %}
                     <div><span class="label label-danger">Error</span> {%=file.error%}</div>
                 {% } else { %}
-                    <input hidden type="text" name="upload_images[]" value="{%=file.name%}" />
+                    <input type="hidden" name="upload_images[]" value="{%=file.name%}" />
                 {% } %}
             </td>
             <td>

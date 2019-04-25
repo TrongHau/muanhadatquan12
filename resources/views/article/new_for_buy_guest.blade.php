@@ -245,9 +245,9 @@ global $province;
                                                 </div>
                                                 <div class="base4">
                                                     <div style="float: left;">
-                                                        <input name="area_from" type="number" min="1" step="any" value="{{old('area_from') ?? $article->area_from ?? ''}}" placeholder=" từ" id="area_from" class="text-field" numberonly="2" maxlength="7" style="width: 60px;">
+                                                        <input name="area_from" type="text" min="1" step="any" value="{{old('area_from') ?? $article->area_from ?? ''}}" placeholder=" từ" id="area_from" class="text-field ver_number" numberonly="2" maxlength="7" style="width: 60px;">
                                                          -
-                                                        <input name="area_to" type="number" min="1" step="any" value="{{old('area_to') ?? $article->area_to ?? ''}}" placeholder=" đến" id="area_to" class="text-field" numberonly="2" maxlength="7" style="width: 60px;">
+                                                        <input name="area_to" type="text" min="1" step="any" value="{{old('area_to') ?? $article->area_to ?? ''}}" placeholder=" đến" id="area_to" class="text-field ver_number" numberonly="2" maxlength="7" style="width: 60px;">
                                                     </div>
                                                     <span>m²</span>
                                                 </div>
@@ -258,7 +258,7 @@ global $province;
                                                 </div>
                                                 <div class="base4">
                                                     <div style="float: left;">
-                                                        <input name="price_from" type="number" min="1" step="any" placeholder=" từ" id="price_from" style="width: 60px;" value="{{old('price_from') ?? $article->price_from ?? ''}}" class="text-field" numberonly="2" maxlength="6">
+                                                        <input name="price_from" type="text" min="1" step="any" placeholder=" từ" id="price_from" style="width: 60px;" value="{{old('price_from') ?? $article->price_from ?? ''}}" class="text-field ver_number" numberonly="2" maxlength="6">
                                                         -
                                                         <input name="price_to" type="number" min="1" step="any" placeholder=" đến" id="price_to" style="width: 60px;" value="{{old('price_to') ?? $article->price_to ?? ''}}" class="text-field" numberonly="2" maxlength="6">
                                                         @if ($errors->has('price'))
@@ -357,7 +357,7 @@ global $province;
                                                                        title="{{$item}}"
                                                                        download="{{$item}}" data-gallery="">{{$item}}</a>
                                                                 </p>
-                                                                <input hidden="" type="text" name="upload_images[]" value="{{$item}}">
+                                                                <input type="hidden" name="upload_images[]" value="{{$item}}">
                                                             </td>
                                                             <td>
                                                                 <button onclick="remove_exists_img('{{$item}}')" class="btn btn-danger delete">
@@ -764,7 +764,7 @@ global $province;
                 {% if (file.error) { %}
                     <div><span class="label label-danger">Error</span> {%=file.error%}</div>
                 {% } else { %}
-                    <input hidden type="text" name="upload_images[]" value="{%=file.name%}" />
+                    <input type="hidden" name="upload_images[]" value="{%=file.name%}" />
                 {% } %}
             </td>
             <td>

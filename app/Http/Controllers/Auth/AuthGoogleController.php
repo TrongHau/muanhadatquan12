@@ -35,7 +35,7 @@ class AuthGoogleController extends Controller
         // Get github's user infomation
         $user = Socialite::driver('google')->user();
         // Create user
-        $email = ($user->getEmail() ? $user->getEmail() : $user->getId() . '@batdongsan_company.com');
+        $email = ($user->getEmail() ? $user->getEmail() : $user->getId() . '@nhadatquan12.com.vn');
         $existUser = User::where('app_google', '=', $user->getId())->orWhere('email', '=', $email)->first();
         if(!$existUser) {
             $existUser = User::create([

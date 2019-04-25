@@ -132,14 +132,14 @@ global $province;
                         <div class="row_ad clearfix">
                             <div class="row25"><label>Tên dự án:</label></div>
                             <div class="row25">
-                                <input size="47" maxlength="255" class="ver_number ipt1" name="project" value="{{old('project') ?? $article->project ?? ''}}" id="Property_area" type="text">
+                                <input size="47" maxlength="255" class="ipt1" name="project" value="{{old('project') ?? $article->project ?? ''}}" type="text">
                                 @if ($errors->has('project'))
                                     <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('project', 'dự án', $errors->first('project')) }}</p></div>
                                 @endif
                             </div>
                             <div class="row25"><label>Diện tích:</label></div>
                             <div class="row25">
-                                <input size="47" maxlength="255" type="number" class="ver_number ipt1" name="area" value="{{old('area') ?? $article->area ?? ''}}" id="Property_area" style="width: 88%;"><span>m²</span>
+                                <input size="47" maxlength="255" type="text" class="ver_number ipt1 ver_number" name="area" value="{{old('area') ?? $article->area ?? ''}}"style="width: 88%;"><span>m²</span>
                                 @if ($errors->has('area'))
                                     <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('area', 'diện tích', $errors->first('area')) }}</p></div>
                                 @endif
@@ -148,7 +148,7 @@ global $province;
                         <div class="row_ad clearfix">
                             <div class="row25"><label>Giá:</label></div>
                             <div class="row25">
-                                <input name="price" type="number" id="price" value="{{old('price') ?? $article->price ?? ''}}" class="text-field ipt1" numberonly="2" maxlength="6">
+                                <input name="price" type="text" id="price" value="{{old('price') ?? $article->price ?? ''}}" class="text-field ipt1 ver_number" numberonly="2" maxlength="6">
                                 @if ($errors->has('price'))
                                     <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('price', 'thành tiền', $errors->first('price')) }}</p></div>
                                 @endif
@@ -184,7 +184,7 @@ global $province;
                                 <textarea name="content_article" id="content_article" style="height: 170px; width: 100%;" class="text-field countTypeLength required mt10" rows="50" cols="100" minlength="30" maxlength="3000">{{old('content_article') ?? $article->content_article ?? ''}}</textarea>
                                 @if ($errors->has('content_article'))
                                     <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('content article', 'nội dung', $errors->first('content_article')) }}</p></div>
-                                @endif</div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -231,7 +231,7 @@ global $province;
                                                                title="{{$item}}"
                                                                download="{{$item}}" data-gallery="">{{$item}}</a>
                                                         </p>
-                                                        <input hidden="" type="text" name="upload_images[]" value="{{$item}}">
+                                                        <input type="hidden" name="upload_images[]" value="{{$item}}">
                                                     </td>
                                                     <td>
                                                         <button onclick="remove_exists_img('{{$item}}')" class="btn btn-danger delete">
@@ -242,7 +242,7 @@ global $province;
                                                 </tr>
                                             @endforeach
                                         @endif
-                                        </tbody></table>
+                                    </tbody></table>
                                 </div>
                             </div>
                         </div>
@@ -256,13 +256,13 @@ global $province;
                         <div class="row_ad clearfix">
                             <div class="row25"><label>Mặt tiền (m):</label></div>
                             <div class="row25">
-                                <input name="facade" type="text" value="{{old('facade') ?? $article->facade ?? ''}}" id="txtWidth" maxlength="6" numberonly="2" class="text-field ipt1">
+                                <input name="facade" type="text" value="{{old('facade') ?? $article->facade ?? ''}}" id="txtWidth" maxlength="6" numberonly="2" class="text-field ipt1 ver_number">
                                 @if ($errors->has('facade'))
                                     <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('facade', 'mặt tiền', $errors->first('facade')) }}</p></div>
                                 @endif                                          </div>
                             <div class="row25"><label>Đường vào (m):</label></div>
                             <div class="row25">
-                                <input name="land_width" value="{{old('land_width') ?? $article->land_width ?? ''}}" type="text" id="txtLandWidth" maxlength="6" numberonly="2" class="text-field ipt1">
+                                <input name="land_width" value="{{old('land_width') ?? $article->land_width ?? ''}}" type="text" id="txtLandWidth" maxlength="6" numberonly="2" class="text-field ipt1 ver_number">
                                 @if ($errors->has('way_in'))
                                     <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('land width', 'đường vào', $errors->first('land_width')) }}</p></div>
                                 @endif
@@ -306,14 +306,14 @@ global $province;
                         <div class="row_ad clearfix">
                             <div class="row25"><label>Số tầng:</label></div>
                             <div class="row25">
-                                <input name="floor" type="text" id="txtFloorNumbers" value="{{old('floor') ?? $article->floor ?? ''}}" class="text-field ipt1" maxlength="3" numberonly="1">
+                                <input name="floor" type="text" id="txtFloorNumbers" value="{{old('floor') ?? $article->floor ?? ''}}" class="text-field ipt1 ver_number" maxlength="3" numberonly="1">
                                 @if ($errors->has('floor'))
                                     <div class="errorMessage" style="display: block;">{{ str_replace('floor', 'số tầng', $errors->first('floor')) }}</div>
                                 @endif
                             </div>
                             <div class="row25"><label>Số phòng ngủ:</label></div>
                             <div class="row25">
-                                <input name="bed_room" type="number" id="txtRoomNumber" value="{{old('bed_room') ?? $article->bed_room ?? ''}}" class="text-field ipt1" maxlength="3" numberonly="1">
+                                <input name="bed_room" type="text" id="txtRoomNumber" value="{{old('bed_room') ?? $article->bed_room ?? ''}}" class="text-field ipt1 ver_number" maxlength="3" numberonly="1">
                                 @if ($errors->has('bed_room'))
                                     <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('bed_room', 'số phòng ngủ', $errors->first('bed_room')) }}</p></div>
                                 @endif
@@ -322,7 +322,7 @@ global $province;
                         <div class="row_ad clearfix">
                             <div class="row25"><label>Số toilet:</label></div>
                             <div class="row25">
-                                <input name="toilet" type="number" value="{{old('toilet') ?? $article->toilet ?? ''}}" id="txtToiletNumber" class="text-field ipt1" maxlength="3" numberonly="1">
+                                <input name="toilet" type="text" value="{{old('toilet') ?? $article->toilet ?? ''}}" id="txtToiletNumber" class="text-field ipt1 ver_number" maxlength="3" numberonly="1">
                                 @if ($errors->has('toilet'))
                                     <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('toilet', 'số toilet', $errors->first('toilet')) }}</p></div>
                                 @endif
@@ -394,6 +394,7 @@ global $province;
                                 <input type="hidden" name="id" value="{{ $article->id }}">
                                 <input type="hidden" name="remove_imgs" id="remove_imgs" value="">
                                 @if($article->status == PUBLISHED_ARTICLE)
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <input type="submit" name="ctl00$MainContent$_userPage$ctl00$btnSave" value="Lưu tin" id="btnSave" class="bluebotton bt_cam bt_sb" style="width:80px;">
                                 @else
                                     <input type="submit" name="ctl00$MainContent$_userPage$ctl00$btnSave" value="Đăng tin" id="btnSave" class="bluebotton bt_cam bt_sb" style="width:80px;">
@@ -510,7 +511,7 @@ global $province;
         $('#price').keyup(function() {
             let valPrice = this.value;
             if(valPrice && $('#ddlPriceType').val() != 'Thỏa thuận'){
-                $('#_totalPrice').html(valPrice + ' ' + $('#ddlPriceType').val());
+                $('#_totalPrice').html(formatNumber(valPrice) + ' ' + $('#ddlPriceType').val());
             }else{
                 $('#_totalPrice').html('Thỏa thuận');
             }
@@ -521,7 +522,7 @@ global $province;
         function reloadTotalPrice() {
             let valPrice = $('#price').val();
             if(valPrice && $('#ddlPriceType').val() != 'Thỏa thuận'){
-                $('#_totalPrice').html(valPrice + ' ' + $('#ddlPriceType').val());
+                $('#_totalPrice').html(formatNumber(valPrice) + ' ' + $('#ddlPriceType').val());
             }else{
                 $('#_totalPrice').html('Thỏa thuận');
             }
@@ -607,7 +608,7 @@ global $province;
                 {% if (file.error) { %}
                     <div><span class="label label-danger">Error</span> {%=file.error%}</div>
                 {% } else { %}
-                    <input hidden type="text" name="upload_images[]" value="{%=file.name%}" />
+                    <input type="hidden" name="upload_images[]" value="{%=file.name%}" />
                 {% } %}
             </td>
             <td>

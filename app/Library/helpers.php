@@ -93,7 +93,7 @@ class Helpers
         $SecretKey = env('SMS_SECRET_KEY');
         // $YourPhone="0901472486";
         $YourPhone = $sendPhone;
-//        $Content = "Mã xác thực số điện thoại của bạn tại Batdongsan.company là: 123456";
+//        $Content = "Mã xác thực số điện thoại của bạn tại nhadatquan12.com.vn là: 123456";
         $Content = $content;
 
         $SendContent = urlencode($Content);

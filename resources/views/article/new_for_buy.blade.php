@@ -135,23 +135,25 @@ global $province;
                         <div class="row_ad clearfix">
                             <div class="row25"><label>Tên dự án:</label></div>
                             <div class="row25">
-                                <input size="47" maxlength="255" class="ver_number ipt1" name="project" value="{{old('project') ?? $article->project ?? ''}}" id="Property_area" type="text">
+                                <input size="47" maxlength="255" class="ipt1" name="project" value="{{old('project') ?? $article->project ?? ''}}" type="text">
                                 @if ($errors->has('project'))
                                     <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('project', 'dự án', $errors->first('project')) }}</p></div>
                                 @endif
                             </div>
                             <div class="row25"><label>Diện tích:</label></div>
                             <div class="row25">
-                                <input size="47" maxlength="255" type="number" class="ver_number ipt1" name="area" value="{{old('area') ?? $article->area ?? ''}}" id="Property_area" style="width: 88%;"><span>m²</span>
-                                @if ($errors->has('area'))
-                                    <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('area', 'diện tích', $errors->first('area')) }}</p></div>
-                                @endif
+                                <input name="area_from" type="text" min="1" step="any" value="{{old('area_from') ?? $article->area_from ?? ''}}" placeholder=" từ" id="area_from" class="ipt1 ver_number" numberonly="2" maxlength="7" style="width: 67px;">
+                                -
+                                <input name="area_to" type="text" min="1" step="any" value="{{old('area_to') ?? $article->area_to ?? ''}}" placeholder=" đến" id="area_to" class="ipt1 ver_number" numberonly="2" maxlength="7" style="width: 67px;">
+                                <span>m²</span>
                             </div>
                         </div>
                         <div class="row_ad clearfix">
                             <div class="row25"><label>Giá:</label></div>
                             <div class="row25">
-                                <input name="price" type="number" id="price" value="{{old('price') ?? $article->price ?? ''}}" class="text-field ipt1" numberonly="2" maxlength="6">
+                                <input name="price_from" type="text" min="1" step="any" placeholder=" từ" id="price_from" style="width: 76px;" value="{{old('price_from') ?? $article->price_from ?? ''}}" class="text-field ipt1 ver_number" numberonly="2" maxlength="6">
+                                -
+                                <input name="price_to" type="text" min="1" step="any" placeholder=" đến" id="price_to" style="width: 76px;" value="{{old('price_to') ?? $article->price_to ?? ''}}" class="text-field ipt1 ver_number" numberonly="2" maxlength="6">
                                 @if ($errors->has('price'))
                                     <div class="errorMessage" style="display: block;"><p style="color: red">{{ str_replace('price', 'thành tiền', $errors->first('price')) }}</p></div>
                                 @endif
@@ -166,7 +168,6 @@ global $province;
                                 @endif
                             </div>
                         </div>
-                        <div class="camcam" id="_totalPrice">Không chỉnh giá nếu muốn để giá thỏa thuận</div>
                         <div class="row_ad clearfix">
                             <div class="row25"><label>Địa chỉ (<span class="camcam">*</span>):</label></div>
                             <div class="row75">
@@ -231,7 +232,7 @@ global $province;
                                                                title="{{$item}}"
                                                                download="{{$item}}" data-gallery="">{{$item}}</a>
                                                         </p>
-                                                        <input hidden="" type="text" name="upload_images[]" value="{{$item}}">
+                                                        <input type="hidden" name="upload_images[]" value="{{$item}}">
                                                     </td>
                                                     <td>
                                                         <button onclick="remove_exists_img('{{$item}}')" class="btn btn-danger delete">
@@ -505,7 +506,7 @@ global $province;
                 {% if (file.error) { %}
                     <div><span class="label label-danger">Error</span> {%=file.error%}</div>
                 {% } else { %}
-                    <input hidden type="text" name="upload_images[]" value="{%=file.name%}" />
+                    <input type="hidden" name="upload_images[]" value="{%=file.name%}" />
                 {% } %}
             </td>
             <td>

@@ -170,7 +170,7 @@ class UserController extends Controller
             ]);
         }
         $otp = mt_rand(1000, 9999);
-        $Content = "Ma xac thuc Batdongsan.company cua ban la: " . $otp;
+        $Content = "Ma xac thuc nhadatquan12.com.vn cua ban la: " . $otp;
         Helpers::sendSMS($request->phone, $Content);
         $newOtp = VerifySMSModel::create([
             'user_id' => Auth::user()->id ? Auth::user()->id : session()->getId(),

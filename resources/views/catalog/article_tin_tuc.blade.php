@@ -26,7 +26,7 @@ $Agent = new Agent();
                         ?>
                         <ul class="clearfix">
                             @foreach($article['data'] as $key => $item)
-                                <div class="box_nhadatban  vipdb clearfix">
+                                <div class="box_nhadatban clearfix">
                                     <div class="tit_nhadatban">
                                         <h4><a href="/{{$category->slug}}/{{$item['slug']}}" title="{{$item['title']}}">
                                                 <span style="color: #266fb5">{{$item['title']}}</span>		</a></h4>
@@ -34,7 +34,7 @@ $Agent = new Agent();
                                     <div class="detail_nhadatban">
                                         <div class="img_nhadatban">
                                             <a href="/{{$category->slug}}/{{$item['slug']}}">
-                                                <img alt="" src="{{$item['image'] ? '/'.$item['image'] : PATH_LOGO_DEFAULT}}">
+                                                <img alt="{{$item['title']}}" style="width: 152px" src="{{$item['image'] ? '/'.$item['image'] : PATH_LOGO_DEFAULT}}">
                                             </a>
                                         </div>
                                         <div class="description_tin-tuc"><?php echo $item['short_content'] ?></div>

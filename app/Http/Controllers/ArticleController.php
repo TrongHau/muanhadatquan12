@@ -288,20 +288,21 @@ class ArticleController extends Controller
             if(!$result)
                 return view('errors.404');
             $olDataImgs = (array)json_decode($result->gallery_image);
-            if($article['status'] != DRAFT_ARTICLE) {
-                $user = Auth::user();
-                if($user->point_current < POINT_NEW_ARTICLE_FOR_LEASE) {
-                    $mes = 'Số điểm hiện tại không đủ để đăng tin, tin của bạn sẽ được lưu vào tin nháp. Vui lòng liên hệ bộ phận hotro@batdongsan.company để tiếp tục đăng tin, cảm ơn';
-                    $article['status'] = DRAFT_ARTICLE;
-                }else {
-                    if($result->point < 0) {
-                        $user->aritcle_lease_total = $user->aritcle_lease_total + 1;
-                        $user->point_current = $user->point_current - POINT_NEW_ARTICLE_FOR_LEASE;
-                        $article['point'] = POINT_NEW_ARTICLE_FOR_LEASE;
-                        $user->save();
-                    }
-                }
-            }
+//            if($article['status'] != DRAFT_ARTICLE) {
+//                $user = Auth::user();
+//                if($user->point_current < POINT_NEW_ARTICLE_FOR_LEASE) {
+//                    $mes = 'Số điểm hiện tại không đủ để đăng tin, tin của bạn sẽ được lưu vào tin nháp. Vui lòng liên hệ bộ phận hotro@nhadatquan12.com.vn để tiếp tục đăng tin, cảm ơn';
+//                    $article['status'] = DRAFT_ARTICLE;
+//                }else {
+//                    if($result->point < 0) {
+//                        $user->aritcle_lease_total = $user->aritcle_lease_total + 1;
+//                        $user->point_current = $user->point_current - POINT_NEW_ARTICLE_FOR_LEASE;
+//                        $article['point'] = POINT_NEW_ARTICLE_FOR_LEASE;
+//                        $user->save();
+//                    }
+//                }
+//            }
+            $article['point'] = POINT_NEW_ARTICLE_FOR_LEASE;
             $result->update($article);
         }else {
             $article['user_id'] = Auth::user()->id ? Auth::user()->id : 0;
@@ -309,15 +310,15 @@ class ArticleController extends Controller
             $article['start_news'] = time();
             if($article['status'] != DRAFT_ARTICLE && Auth::check()) {
                 $user = Auth::user();
-                if($user->point_current < POINT_NEW_ARTICLE_FOR_LEASE) {
-                    $mes = 'Số điểm hiện tại không đủ để đăng tin, tin của bạn sẽ được lưu vào tin nháp. Vui lòng liên hệ bộ phận hotro@batdongsan.company để tiếp tục đăng tin, cảm ơn';
-                    $article['status'] = DRAFT_ARTICLE;
-                }else {
-                    $user->aritcle_lease_total = $user->aritcle_lease_total + 1;
-                    $user->point_current = $user->point_current - POINT_NEW_ARTICLE_FOR_LEASE;
-                    $article['point'] = POINT_NEW_ARTICLE_FOR_LEASE;
-                    $user->save();
-                }
+//                if($user->point_current < POINT_NEW_ARTICLE_FOR_LEASE) {
+//                    $mes = 'Số điểm hiện tại không đủ để đăng tin, tin của bạn sẽ được lưu vào tin nháp. Vui lòng liên hệ bộ phận hotro@nhadatquan12.com.vn để tiếp tục đăng tin, cảm ơn';
+//                    $article['status'] = DRAFT_ARTICLE;
+//                }else {
+//                    $user->point_current = $user->point_current - POINT_NEW_ARTICLE_FOR_LEASE;
+//                }
+                $article['point'] = POINT_NEW_ARTICLE_FOR_LEASE;
+                $user->aritcle_lease_total = $user->aritcle_lease_total + 1;
+                $user->save();
             }
             $result = ArticleForLeaseModel::create($article);
             $data = [
@@ -430,17 +431,17 @@ class ArticleController extends Controller
             $olDataImgs = (array)json_decode($result->gallery_image);
             if($article['status'] != DRAFT_ARTICLE) {
                 $user = Auth::user();
-                if($user->point_current < POINT_NEW_ARTICLE_FOR_LEASE) {
-                    $mes = 'Số điểm hiện tại không đủ để đăng tin, tin của bạn sẽ được lưu vào tin nháp. Vui lòng liên hệ bộ phận hotro@batdongsan.company để tiếp tục đăng tin, cảm ơn';
-                    $article['status'] = DRAFT_ARTICLE;
-                }else {
-                    if($result->point < 0) {
-                        $user->aritcle_buy_total = $user->aritcle_buy_total + 1;
-                        $user->point_current = $user->point_current - POINT_NEW_ARTICLE_FOR_BUY;
-                        $article['point'] = POINT_NEW_ARTICLE_FOR_BUY;
-                        $user->save();
-                    }
-                }
+//                if($user->point_current < POINT_NEW_ARTICLE_FOR_LEASE) {
+//                    $mes = 'Số điểm hiện tại không đủ để đăng tin, tin của bạn sẽ được lưu vào tin nháp. Vui lòng liên hệ bộ phận hotro@nhadatquan12.com.vn để tiếp tục đăng tin, cảm ơn';
+//                    $article['status'] = DRAFT_ARTICLE;
+//                }else {
+//                    if($result->point < 0) {
+//                        $user->aritcle_buy_total = $user->aritcle_buy_total + 1;
+//                        $user->point_current = $user->point_current - POINT_NEW_ARTICLE_FOR_BUY;
+//                    }
+//                }
+                $article['point'] = POINT_NEW_ARTICLE_FOR_BUY;
+                $user->save();
             }
             $result->update($article);
         }else {
@@ -449,15 +450,15 @@ class ArticleController extends Controller
             $article['start_news'] = time();
             if($article['status'] != DRAFT_ARTICLE && Auth::check()) {
                 $user = Auth::user();
-                if($user->point_current < POINT_NEW_ARTICLE_FOR_BUY) {
-                    $mes = 'Số điểm hiện tại không đủ để đăng tin, tin của bạn sẽ được lưu vào tin nháp. Vui lòng liên hệ bộ phận hotro@batdongsan.company để tiếp tục đăng tin, cảm ơn';
-                    $article['status'] = DRAFT_ARTICLE;
-                }else {
-                    $user->aritcle_buy_total = $user->aritcle_buy_total + 1;
-                    $user->point_current = $user->point_current - POINT_NEW_ARTICLE_FOR_BUY;
-                    $article['point'] = POINT_NEW_ARTICLE_FOR_BUY;
-                    $user->save();
-                }
+//                if($user->point_current < POINT_NEW_ARTICLE_FOR_BUY) {
+//                    $mes = 'Số điểm hiện tại không đủ để đăng tin, tin của bạn sẽ được lưu vào tin nháp. Vui lòng liên hệ bộ phận hotro@nhadatquan12.com.vn để tiếp tục đăng tin, cảm ơn';
+//                    $article['status'] = DRAFT_ARTICLE;
+//                }else {
+//                    $user->point_current = $user->point_current - POINT_NEW_ARTICLE_FOR_BUY;
+//                }
+                $user->aritcle_buy_total = $user->aritcle_buy_total + 1;
+                $article['point'] = POINT_NEW_ARTICLE_FOR_BUY;
+                $user->save();
             }
             $result = ArticleForBuyModel::create($article);
             $data = [
