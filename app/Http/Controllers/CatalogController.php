@@ -51,7 +51,8 @@ class CatalogController extends Controller
             if($titleArticle->url == 'du-an-quan-12'){
                 $article = $article->where(function($q) {
                     $q->where('type_article', 'ban-du-an-quan-12')
-                        ->orWhere('type_article', 'cho-thue-du-quan-12');
+                        ->orWhere('type_article', 'cho-thue-du-quan-12')
+                        ->orWhere('district', 'Quận 12');
                 });
             }else{
                 $article = $article->where('type_article', $titleArticle->name);
