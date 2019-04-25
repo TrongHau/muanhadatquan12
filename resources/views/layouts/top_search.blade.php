@@ -8,7 +8,7 @@ use App\Library\Helpers;
         </div>
 
         <div class="navtop">
-            <a target="_blank" href="http://muabandatbinhduong.vn/">
+            <a target="_blank" href="/du-an-quan-12">
                 <img width="100%" height="90px" src="upload/cms/41/1459744704_41_1452844766_41_binh_duong-1437106739.gif" alt="Top" />
             </a>
         </div>

@@ -16,7 +16,7 @@
     <link href="/css/thosannhadat.css" rel="stylesheet" media="screen" />
     <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css" media="all" />
 
-    <link rel="shortcut icon" type="image/ico" href="themes/thosannhadat/favicon.ico" />
+    <link rel="shortcut icon" type="image/ico" href="/imgs/favicon.ico" />
     <link rel="apple-touch-icon" href="favicon.html" />
     <script src="/js/modernizr-2.6.2.min.js"></script>
 
