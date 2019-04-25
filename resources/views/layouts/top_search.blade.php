@@ -4,7 +4,7 @@ use App\Library\Helpers;
 <header>
     <div class="container">
         <div class="logo">
-            <a href="index.html"><img src="themes/thosannhadat/imgs/logo.png" alt=""/></a>
+            <a href="index.html"><img style="height: 75px;margin-top: 7px;" src="/imgs/logo.png" alt="nhà đất quận 12"/></a>
         </div>
 
         <div class="navtop">

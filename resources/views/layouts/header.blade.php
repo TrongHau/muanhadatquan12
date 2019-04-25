@@ -27,13 +27,14 @@
     <script src="/js/jcarousel.responsive.js"></script>
     <script src="/js/holder.js"></script>
 
-    <script src="/js/thosannhadat.js"></script>
+    {{--<script src="/js/thosannhadat.js"></script>--}}
 
     <script src="/js/jquery.nestable.js"></script>
     <script src="/js/jquery.multiple.select.js"></script>
     <script type="text/javascript" src="/js/ckeditor.js"></script>
     <script type="text/javascript" src="/js/jquery-ui-timepicker-addon.js"></script>
     <script type="text/javascript" src="/js/gii.js"></script>
+    <script src="/js/jcarousellite.js"></script>
     {{--<link href="/css/fixie8.css" rel="stylesheet" media="screen" />--}}
     <script type="text/javascript">
         $('.ui-datepicker-trigger').click(function(){
