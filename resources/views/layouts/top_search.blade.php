@@ -9,7 +9,7 @@ use App\Library\Helpers;
 
         <div class="navtop">
             <a target="_blank" href="/du-an-quan-12">
-                <img width="100%" height="90px" src="upload/cms/41/1459744704_41_1452844766_41_binh_duong-1437106739.gif" alt="Top" />
+                <img width="100%" height="90px" src="/upload/cms/41/1459744704_41_1452844766_41_binh_duong-1437106739.gif" alt="Top" />
             </a>
         </div>
     </div>
@@ -47,7 +47,7 @@ use App\Library\Helpers;
                                 <li class="lv1"><a href="/ban-loai-bat-dong-san-khac" class="haslink ">Bán loại bất động sản khác</a></li>
                             </ul>
                         </li>
-                        <li class=''><a href='du-an-quan-12' target='_self'><span>DỰ ÁN QUẬN 12</span></a></li>
+                        <li class=''><a href='/du-an-quan-12' target='_self'><span>DỰ ÁN QUẬN 12</span></a></li>
                         <li class="lv0"><a href="/nha-dat-cho-thue" class="haslink ">Cho thuê</a>
                             <ul>
                                 <li class="lv1"><a href="/cho-thue-can-ho-chung-cu" class="haslink ">Cho thuê căn hộ chung cư</a></li>
