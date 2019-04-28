@@ -20,7 +20,7 @@
                                             <tr>
                                                 <td align="center" style="min-width:169px;width:169px">
                                                     <a href="{{env('APP_URL')}}" style="text-decoration:none;color:#fff" target="_blank">
-                                                        <img alt="Batdongsan.com.vn" src="https://batdongsan.company/imgs/thumbnail_default.png" style="width:169px;vertical-align:top;height:88px;min-width:169px" class="CToWUd"> </a></td>
+                                                        <img alt="Batdongsan.com.vn" src="nhadatquan12.com.vn/imgs/thumbnail_default.png" style="width:169px;vertical-align:top;height:88px;min-width:169px" class="CToWUd"> </a></td>
                                                 <td style="min-width:400px;width:400px;padding-left:30px;font-size:16px;font-family:Arial;color:#055699" valign="middle">
                                                     THÔNG BÁO TỪ<br>
                                                     <strong>BAN QUẢN TRỊ <a href="{{env('APP_URL')}}" style="text-decoration:none;color:#055699" target="_blank" >{{env('APP_PAGE_URL')}}</a></strong></td>
@@ -57,8 +57,9 @@
                                     <td align="right" style="font-family:Arial;font-size:15px;color:#555555;padding:20px 65px 20px 65px">
                                         Trân trọng,<br>
                                         Phòng Dịch Vụ Khách Hàng<br>
-                                        <a href="{{env('APP_URL')}}" target="_blank" >batdongsan.company</a><br>
-                                        <a href="hotro@batdongsan.company" style="color:#055699" target="_blank">{{env('HO_TRO')}}</a>
+                                        <a href="{{env('APP_URL')}}" target="_blank" >{{env('APP_PAGE_URL')}}</a><br>
+                                        <a href="hotro@nhadatquan12.vn" style="color:#055699" target="_blank">hotro@nhadatquan12.vn</a>
+                                        <a href="cskh@nhadatquan12.vn" style="color:#055699" target="_blank">cskh@nhadatquan12.vn</a>
                                     </td>
                                 </tr>
                                 </tbody>

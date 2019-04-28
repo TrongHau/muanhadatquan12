@@ -17,12 +17,20 @@
 <footer>
     <div class="container clearfix">
         <div class="box-footer3">
-            <p><strong>Tel</strong>: <strong>{{ENV('PHONE_CONTACT')}}</strong><br />
+            <strong>TRUNG TÂM GIAO DỊCH BẤT ĐỘNG SẢN QUẬN 12</strong><br />
+        </div>
+        <div class="box-footer3">
+            <p><strong>Địa chỉ</strong>: {{ENV('ADDRESS_CONTACT')}}<strong></strong><br />
+        </div>
+        <div class="box-footer3">
+            <p><strong>Điện thoại</strong>: {{ENV('PHONE_CONTACT')}}<br />
+        </div>
+        <div class="box-footer3">
+            <p><strong>Email</strong>: {{ENV('HO_TRO')}}<br />
         </div>
     </div>
-
     <div class="copyright">
-        <p class="container">Copyright &copy; 2012. All Rights Reserved.</p>
+        <p class="container">Copyright &copy; 2019. All Rights Reserved.</p>
     </div>
 </footer>
 <script type="text/javascript" src="/js/jquery.yiilistview.js"></script>

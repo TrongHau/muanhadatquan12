@@ -6,7 +6,7 @@
         <div class="box1-left">
             <div class="tit_C cachtren2">
                 <span class="icon_star_xanh"></span>Điền đầy đủ thông tin đăng ký dưới đây.</div>
-            <form id="LoginForm" action="{{ route('login') }}" method="post">
+            <form id="LoginForm" action="{{ route('register') }}" method="post">
                 {{ csrf_field() }}
                 <div class="detail_R">
                     <div class="row_ad">
@@ -51,7 +51,7 @@
                         <div class="row_ad">
                             <label>&nbsp;</label>
                             <div class="row50">
-                                <p><input id="chkSavePass" name="remember" type="checkbox" {{ old('remember') ? 'checked' : '' }}><span>Lưu tài khoản đăng nhập</span></p>
+                                <p><input id="chkSavePass" name="remember" type="checkbox" {{ old('remember') ? 'checked' : '' }}><label for="chkSavePass" style=" width: 100%; display: block; ">Lưu tài khoản đăng nhập</label></p>
                                 <input id="register" type="submit" class="bt_sb" value="Đăng ký">
                                 <input id="login" onclick="window.location.href='/login'" type="button" class="bt_sb" value="Đăng nhập">
                             </div>
