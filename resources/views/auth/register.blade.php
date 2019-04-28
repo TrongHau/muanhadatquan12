@@ -12,7 +12,7 @@
                     <div class="row_ad">
                         <label for="LoginForm_email" class="required">Tên hiển thị: </label>
                         <div class="row50 success">
-                            <input class="ipt1" size="40" name="email" value="{{ old('name') }}" id="name" type="text">
+                            <input class="ipt1" size="40" name="name" value="{{ old('name') }}" id="name" type="text">
                         </div>
                         @if ($errors->has('name'))
                             <div style="padding-left: 135px;" class="errorMessage" id="LoginForm_email_em_">{{ $errors->first('name') }}</div>
