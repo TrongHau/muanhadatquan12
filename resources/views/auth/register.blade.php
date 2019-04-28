@@ -52,8 +52,8 @@
                             <label>&nbsp;</label>
                             <div class="row50">
                                 <p><input id="chkSavePass" name="remember" type="checkbox" {{ old('remember') ? 'checked' : '' }}><span>Lưu tài khoản đăng nhập</span></p>
-                                <input id="login" type="submit" class="bt_sb" value="Đăng nhập">
-                                <input id="register" onclick="window.location.href='/register'" type="button" class="bt_sb" value="Đăng ký">
+                                <input id="register" type="submit" class="bt_sb" value="Đăng ký">
+                                <input id="login" onclick="window.location.href='/login'" type="button" class="bt_sb" value="Đăng ký">
                             </div>
                         </div>
                         <label>&nbsp;</label>
