@@ -16,6 +16,7 @@ use  App\User;
 use App\Models\ArticleForLeaseModel;
 use App\Models\ArticleForBuyModel;
 use App\Models\TypeModel;
+use App\Models\ProjectModel;
 use Backpack\NewsCRUD\app\Models\Article;
 use Backpack\NewsCRUD\app\Models\Category;
 use Storage;
@@ -78,6 +79,25 @@ if ( !ENV(\'IN_PHPBB\') )
 }
 global $noibat;
 $noibat = ' . var_export($noibat, true) . ';
+?>');
+
+        return response(['Ok']);
+    }
+    public function ProjectWard12() {
+
+        // tin nỗi bật
+        $noibat = [];
+        $project = ProjectModel::select('id', '_name')->where('_province_id', 1)->where('_district_id', 13)->orderBy('_name', 'asc')->get()->toArray();
+
+        file_put_contents(resource_path().'/views/cache/project_ward_12.blade.php',
+            '<?php 
+if ( !ENV(\'IN_PHPBB\') )
+{
+    die(\'Hacking attempt\');
+    exit;
+}
+global $projectWard12;
+$projectWard12 = ' . var_export($project, true) . ';
 ?>');
 
         return response(['Ok']);

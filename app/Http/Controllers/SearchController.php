@@ -34,7 +34,7 @@ class SearchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function advance(Request $request, $method = -1, $type = -1, $province_id = -1, $district_id = -1, $ward_id = -1, $street_id = -1, $area = -1, $price = -1, $bed_room = -1, $toilet = -1, $ddlHomeDirection = -1, $title_article = '') {
+    public function advance(Request $request, $method = -1, $type = -1, $province_id = -1, $district_id = -1, $ward_id = -1, $street_id = -1, $project_id = -1, $area = -1, $price = -1, $bed_room = -1, $toilet = -1, $ddlHomeDirection = -1, $title_article = '') {
         session_start();
         $titleArticle = TypeModel::where('url', $method)->first();
         if(!$titleArticle)
@@ -53,6 +53,7 @@ class SearchController extends Controller
             $article = ArticleForBuyModel::where('status', PUBLISHED_ARTICLE);
             $article = $article->where('method_article', 'Nhà đất cần thuê');
         }
+
         if($type > 0) {
             $article = $article->where('type_article', $type);
         }
@@ -70,6 +71,7 @@ class SearchController extends Controller
                 return view('errors.404');
             $local = $province->_name;
         }
+
         if($ward_id > 0) {
             $article = $article->where('ward_id', $ward_id);
         }
@@ -78,6 +80,9 @@ class SearchController extends Controller
         }
         if($street_id > 0) {
             $article = $article->where('street_id', $street_id);
+        }
+        if($project_id > 0) {
+            $article = $article->where('project', $project_id);
         }
         if($area >= 0) {
             if($area == 0) {
@@ -183,6 +188,6 @@ class SearchController extends Controller
         }
         $article = $article->paginate(PAGING_LIST_ARTICLE_CATALOG);
         $key = '';
-        return view('catalog.article_for_lease_ban_dat', compact('titleArticle', 'article', 'key', 'method', 'province_id', 'district_id', 'ward_id', 'street_id', 'area', 'price', 'bed_room', 'toilet', 'ddlHomeDirection', 'local'));
+        return view('catalog.article_for_lease_ban_dat', compact('titleArticle', 'article', 'key', 'method', 'province_id', 'district_id', 'ward_id', 'street_id', 'project_id', 'area', 'price', 'bed_room', 'toilet', 'ddlHomeDirection', 'local'));
     }
 }

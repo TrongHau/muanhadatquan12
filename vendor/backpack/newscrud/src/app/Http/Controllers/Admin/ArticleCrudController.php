@@ -7,6 +7,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\NewsCRUD\app\Http\Requests\ArticleRequest as StoreRequest;
 use Backpack\NewsCRUD\app\Http\Requests\ArticleRequest as UpdateRequest;
 use Artisan;
+use App\Http\Controllers\SyncController;
 use App\Models\CategoryModel;
 
 class ArticleCrudController extends CrudController
@@ -193,7 +194,8 @@ class ArticleCrudController extends CrudController
 
         // save the redirect choice for next time
         $this->setSaveAction();
-        Artisan::call('schedule:run');
+        $sync = new SyncController();
+        $sync->homeTinTuc();
         return $this->performSaveAction($item->getKey());
     }
 
@@ -202,7 +204,8 @@ class ArticleCrudController extends CrudController
         $this->crud->hasAccessOrFail('delete');
 
         // get entry ID from Request (makes sure its the last ID for nested resources)
-        Artisan::call('schedule:run');
+        $sync = new SyncController();
+        $sync->homeTinTuc();
         $id = $this->crud->getCurrentEntryId() ?? $id;
         return $this->crud->delete($id);
     }
@@ -233,7 +236,8 @@ class ArticleCrudController extends CrudController
 
         // save the redirect choice for next time
         $this->setSaveAction();
-        Artisan::call('schedule:run');
+        $sync = new SyncController();
+        $sync->homeTinTuc();
         return $this->performSaveAction($item->getKey());
     }
 }
