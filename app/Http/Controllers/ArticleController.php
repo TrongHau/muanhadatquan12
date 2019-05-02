@@ -213,14 +213,7 @@ class ArticleController extends Controller
     public function storeArticleForLease(Request $request)
     {
         $mes = '';
-        $typeAuthGuest = '';
         session_start();
-        if(!Auth::check() && $_SESSION['verify_phone'] && !$request->id) {
-            Input::merge(['contact_phone' => $_SESSION['verify_phone']]);
-            $typeAuthGuest = 'guest.';
-        }else{
-            Input::merge(['contact_phone' => Auth::user()->phone]);
-        }
         $this->validate($request, [
             'title' => 'required|max:99',
             'method_article' => 'required',
@@ -308,6 +301,7 @@ class ArticleController extends Controller
             $article['user_id'] = Auth::user()->id ? Auth::user()->id : 0;
             $article['aprroval'] = APPROVAL_ARTICLE_DEFAULT;
             $article['start_news'] = time();
+            $article['end_news'] = strtotime(TIME_EXPIRED_NEW);
             if($article['status'] != DRAFT_ARTICLE && Auth::check()) {
                 $user = Auth::user();
 //                if($user->point_current < POINT_NEW_ARTICLE_FOR_LEASE) {
@@ -355,21 +349,14 @@ class ArticleController extends Controller
             $result->save();
         }
         if($request->id) {
-            return redirect()->route($typeAuthGuest.'article.getArticleLease', $request->id)->with('success', $mes ? $mes : 'Sửa tin thành công');
+            return redirect()->route('article.getArticleLease', $request->id)->with('success', $mes ? $mes : 'Sửa tin thành công');
         }else{
-            return redirect()->route($typeAuthGuest.'article.getArticleLease')->with('success', $mes ? $mes : 'Đăng tin thành công');
+            return redirect()->route('article.getArticleLease')->with('success', $mes ? $mes : 'Đăng tin thành công');
         }
     }
     public function storeArticleForBuy(Request $request)
     {
         session_start();
-        $typeAuthGuest = '';
-        if(!Auth::check() && $_SESSION['verify_phone'] && !$request->id) {
-            Input::merge(['contact_phone' => $_SESSION['verify_phone']]);
-            $typeAuthGuest = 'guest.';
-        }else{
-            Input::merge(['contact_phone' => Auth::user()->phone]);
-        }
         $this->validate($request, [
             'title' => 'required|max:99',
             'method_article' => 'required',
@@ -448,6 +435,7 @@ class ArticleController extends Controller
             $article['user_id'] = Auth::user()->id ? Auth::user()->id : 0;
             $article['aprroval'] = APPROVAL_ARTICLE_DEFAULT;
             $article['start_news'] = time();
+            $article['end_news'] = strtotime(TIME_EXPIRED_NEW);
             if($article['status'] != DRAFT_ARTICLE && Auth::check()) {
                 $user = Auth::user();
 //                if($user->point_current < POINT_NEW_ARTICLE_FOR_BUY) {
@@ -494,9 +482,9 @@ class ArticleController extends Controller
             $result->save();
         }
         if($request->id) {
-            return redirect()->route($typeAuthGuest.'article.getArticleBuy', $request->id)->with('success', $mes ? $mes : 'Sửa tin thành công');
+            return redirect()->route('article.getArticleBuy', $request->id)->with('success', $mes ? $mes : 'Sửa tin thành công');
         }else{
-            return redirect()->route($typeAuthGuest.'article.getArticleBuy')->with('success', $mes ? $mes : 'Đăng tin thành công');
+            return redirect()->route('article.getArticleBuy')->with('success', $mes ? $mes : 'Đăng tin thành công');
         }
     }
     public function loadImage(Request $request)

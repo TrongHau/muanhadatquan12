@@ -159,7 +159,7 @@ global $projectWard12;
                         <div class="row_ad clearfix">
                             <div class="row25"><label>Giá:</label></div>
                             <div class="row25">
-                                <input name="price_from" type="text" min="1" step="any" placeholder=" từ" id="price_from" style="width: 76px;" value="{{old('price_from') ?? $article->price_from ?? ''}}" class="text-field ipt1 ver_number" numberonly="2" maxlength="6">
+                                <input name="price_from" type="text" min="1" step="any" placeholder=" từ" id="price_from" style="width: 76px;" value="{{old('price_from') ??đ $article->price_from ?? ''}}" class="text-field ipt1 ver_number" numberonly="2" maxlength="6">
                                 -
                                 <input name="price_to" type="text" min="1" step="any" placeholder=" đến" id="price_to" style="width: 76px;" value="{{old('price_to') ?? $article->price_to ?? ''}}" class="text-field ipt1 ver_number" numberonly="2" maxlength="6">
                                 @if ($errors->has('price'))
