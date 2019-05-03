@@ -3,10 +3,12 @@ use App\Library\Helpers;
 global $province;
 global $noibat;
 global $projectWard12;
+global $wardSlideBar;
 ?>
 @include('cache.province')
 @include('cache.tin_noi_bat')
 @include('cache.project_ward_12')
+@include('cache.ward_slide_bar')
 <div class="main-r">
         <div class="boxsearch-right box1-right">
             <div class="tit_C cachtren2">
@@ -234,17 +236,24 @@ global $projectWard12;
         </script>
         <div class="box2-adv-right">
 
-        <div class="banner_R">
-
-            <a target="_blank" href="http://muabandatbinhduong.vn/">
-                <img src="/upload/cms/28/1460347680_28_dat_binh_duong.gif" alt="Bottom" />
-            </a>
+    </div>
+    <div class="box1-right">
+        <div class="tit_C">
+            <span class="icon_star_xanh"></span>
+            Nhà đất bán tại quận 12
         </div>
-        <div class="banner_R">
-
-            <a target="_blank" href="http://www.datmyphuocgiare.com/">
-                <img src="/upload/cms/29/1460348718_29_dat-binh-duong-gia-re.png" alt="Bottom" />
-            </a>
+        <div class="detail_R">
+            <ul class="slide-bar-du-an">
+            @foreach($wardSlideBar as $item)
+                @if($item['total'] > 0)
+                <li>
+                    <a href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13/{{$item['ward_id']}}/-1/-1/-1/-1/-1/-1/-1">
+                        <h3>{{$item['ward']}} ({{$item['total']}})</h3>
+                    </a>
+                </li>
+                @endif
+            @endforeach
+            </ul>
         </div>
     </div>
     <div class="box1-right">

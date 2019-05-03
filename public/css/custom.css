@@ -996,3 +996,9 @@ button:disabled {
 .main-r a.selected {
     color: #E47313;
 }
+.slide-bar-du-an {
+    padding-left: 15px;
+}
+.slide-bar-du-an li {
+    list-style: disc!important;
+}

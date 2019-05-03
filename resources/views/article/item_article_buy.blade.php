@@ -23,21 +23,25 @@ $list = $article->toArray();
                                     <li>Giá: <strong class="camcam">500 Triệu/m2</strong> | Lượt xem: <span class="saleboldtext">{{number_format($item['views'])}}</span></li>
                                     <li>
                                         Ngày đăng:
-                                        <span class="datetime">
-                         <span class="camcam">{{date_format(date_create($item['updated_at']), "d-m-Y")}}</span>
-                    </span>
+                                        <span class="datetime"> <span class="camcam">{{date_format(date_create($item['updated_at']), "d-m-Y")}}</span></span>
                                     </li>
+                                    @if($item['end_news'])
+                                    <li>
+                                        Ngày hết hạn:
+                                        <span class="datetime"> <span class="camcam">{{date("d-m-Y", $item['end_news'])}} </span><?php echo $item['end_news'] < time() ? '<strong class="camcam">Đã hết hạn</strong>  <a class="delete-property" onclick="resetExpireArticle(\''.$item['id'].'\')" data-property-id="994" href="javascript:void(0)">Gia hạn tin</a>' : '' ?></span>
+                                    </li>
+                                    @endif
                                     <li>
                                         Danh mục: <span class="saleboldtext">{{$item['type_article']}}</span>
                                         -
                                         Mã Số Tin:<span class="saleboldtext">{{$item['id']}}</span>
                                     </li>
                                     <li>
-                                        Tình trạng: <span class="saleboldtext">
+                                        Tình trạng: <span class="datetime">
                                         @if($item['aprroval'] == 0)
                                                 Chưa duyệt
                                             @elseif($item['aprroval'] == 1)
-                                                <span class="camcam">Đã duyệt - {{date_format(date_create($item['updated_at']), "d-m-Y")}}</span>
+                                                <span class="camcam"><strong>Đã duyệt</strong> - {{date_format(date_create($item['updated_at']), "d-m-Y")}}</span>
                                             @endif
                                     </span>
                                     </li>

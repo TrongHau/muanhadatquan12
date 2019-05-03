@@ -43,7 +43,7 @@ class CatalogController extends Controller
         $titleArticle = TypeModel::where('url', $key ? explode('/', $request->path())[0] : $request->path())->first();
         if(!$titleArticle)
             return view('errors.404');
-        $article = ArticleForLeaseModel::where([['status', PUBLISHED_ARTICLE], ['aprroval', APPROVAL_ARTICLE_PUBLIC]]);
+        $article = ArticleForLeaseModel::where([['status', PUBLISHED_ARTICLE], ['aprroval', APPROVAL_ARTICLE_PUBLIC], ['end_news', '>=', time()]]);
         // hiển thị tất cả
         if($titleArticle->url == 'nha-dat-ban' || $titleArticle->url == 'nha-dat-cho-thue') {
             $article = $article->where('method_article', $titleArticle->name);
@@ -57,7 +57,6 @@ class CatalogController extends Controller
             }else{
                 $article = $article->where('type_article', $titleArticle->name);
             }
-
         }
         // search
         if($key)
@@ -87,7 +86,7 @@ class CatalogController extends Controller
         $titleArticle = TypeModel::where('url', $key ? explode('/', $request->path())[0] : $request->path())->first();
         if(!$titleArticle)
             return view('errors.404');
-        $article = ArticleForBuyModel::where([['status', PUBLISHED_ARTICLE], ['aprroval', APPROVAL_ARTICLE_PUBLIC]]);
+        $article = ArticleForBuyModel::where([['status', PUBLISHED_ARTICLE], ['aprroval', APPROVAL_ARTICLE_PUBLIC], ['end_news', '>=', time()]]);
         // hiển thị tất cả
         if($titleArticle->url == 'nha-dat-can-mua' || $titleArticle->url == 'nha-dat-can-thue') {
             $article = $article->where('method_article', $titleArticle->name);

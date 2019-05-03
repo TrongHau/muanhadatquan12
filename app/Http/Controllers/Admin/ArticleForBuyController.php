@@ -227,7 +227,9 @@ class ArticleForBuyController extends CrudController
         // update the row in the db
         $dataArticle = ArticleForBuyModel::where('id', $request->id)->first();
 
-        if($dataArticle->aprroval == 0 && $request->aprroval) {
+        if(!$dataArticle->end_news && $request->aprroval) {
+            $dataArticle->end_news = strtotime(TIME_EXPIRED_NEW);
+            $dataArticle->save();
             $data = [
                 'article' => $dataArticle,
                 'prefix_admin_edit' => 'article_for_lease',

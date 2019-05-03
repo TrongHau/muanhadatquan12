@@ -7,7 +7,7 @@ use App\Library\Helpers;
 @section('content')
     <div class="main-l">
         <div class="box1-left">
-            <div class="tit_C cachtren2">
+            <div class="tit_C cachtren2" style="margin-bottom: 10px">
                 <span class="icon_star_xanh"></span> {{$titleArticle->name}} tại {{$local ?? 'Việt Nam'}}</div>
             <div class="child_C" style="display: contents; display: contents;">
                 Có <span class="camcam"><strong>{{number_format($article->total())}}</strong></span> bất động sản.
@@ -53,8 +53,26 @@ use App\Library\Helpers;
                                                 <ul>
                                                     <li><span class="datetime">Tin <span class="timecolor">{{date('h:iA | d/m/Y', strtotime($item['created_at']))}}</span></span></li>
                                                     <li>Diện tích: <span class="saleboldtext">{{($item['area_from'] && $item['area_to']) ? number_format($item['area_from']) .' - '. number_format($item['area_to']) .' m²' : 'Chưa xác định'}}</span></li>
-                                                    <li>Khu vực: <span class="saleboldtext"><a href="/tim-kiem-nang-cao/nha-dat-can-mua/-1/-1/{{$item['district_id']}}/-1/-1/-1/-1/-1/-1/-1">{{$item['district']}}</a>,
-                                                                <a href="/tim-kiem-nang-cao/nha-dat-can-mua/-1/{{$item['province_id']}}/-1/-1/-1/-1/-1/-1/-1/-1">{{$item['province']}}</a></span></li>
+                                                    <li>Khu vực:  @if($item['ward_id'])
+                                                            <span class="saleboldtext">
+                                                            @if($item['street_id'] && $item['ward_id'])
+                                                                    <a class="link_blue"
+                                                                       href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13/{{$item['ward_id']}}/{{$item['street_id']}}"
+                                                                       title="Bán nhà riêng tại đường {{$item['street']}}">Đường {{$item['street']}}</a>,
+                                                                @endif
+                                                                <a class="link_blue"
+                                                                   href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13/{{$item['ward_id']}}"
+                                                                   title="Bán nhà riêng tại {{$item['ward']}}">{{$item['ward']}}</a>
+                                                        </span>
+                                                        @else
+                                                            <span class="saleboldtext"><a class="link_blue"
+                                                                                          href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13"
+                                                                                          title="Bán nhà riêng tại {{$item['district']}}">{{$item['district']}}</a>
+                                                            , <a class="link_blue"
+                                                                 href="/tim-kiem-nang-cao/nha-dat-ban/-1/1"
+                                                                 title="Bán nhà riêng tại {{$item['province']}}">{{$item['province']}}</a>
+                                                        </span>
+                                                        @endif</li>
                                                 </ul>
                                             </div>
                                             <div class="contact_nhadatban">

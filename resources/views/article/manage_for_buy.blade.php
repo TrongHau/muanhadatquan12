@@ -35,6 +35,7 @@ $mySelf = Auth::user();
                                     <option selected="selected" value="-1">Tất cả</option>
                                     <option value="{{APPROVAL_ARTICLE_PUBLIC}}">Đã duyệt</option>
                                     <option value="{{APPROVAL_ARTICLE_PENĐING}}">Chưa duyệt</option>
+                                    <option value="{{APPROVAL_ARTICLE_EXPIRED}}">Hết hạn</option>
                                     <option value="{{APPROVAL_ARTICLE_DELETE}}">Đã bị xóa</option>
                                 </select>
                             </div>
@@ -66,6 +67,31 @@ $mySelf = Auth::user();
                     type: "POST",
                     dataType: "json",
                     data: {code: code, type: 2},
+                    beforeSend: function () {
+                        if(loaded) return false;
+                        loaded = true;
+                    },
+                    success: function(data) {
+                        if(data.success) {
+                            loaded = false;
+                            getList(pageUrl);
+                            successModal(data.message);
+                            // $('#item-'+code).remove();
+                        }else {
+                            alertModal(data.message);
+                        }
+                    }
+                });
+            }
+        }
+        function resetExpireArticle(code) {
+            var r = confirm("Gia hạn tin sẽ đồng bộ lại các dữ liệu thành tin mới đăng?");
+            if (r == true) {
+                $.ajax({
+                    url: "/thong-tin-ca-nhan/gia-han",
+                    type: "POST",
+                    dataType: "json",
+                    data: {code: code, type: 1},
                     beforeSend: function () {
                         if(loaded) return false;
                         loaded = true;

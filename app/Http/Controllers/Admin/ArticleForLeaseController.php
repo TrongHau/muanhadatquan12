@@ -6,6 +6,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 // VALIDATION: change the requests to match your own file names if you need form validation
 use Backpack\CRUD\app\Http\Requests\CrudRequest as StoreRequest;
 use Backpack\CRUD\app\Http\Requests\CrudRequest as UpdateRequest;
+use App\Http\Controllers\SyncController;
 use App\User;
 use App\Models\ArticleForLeaseModel;
 use App\Models\ArticleForBuyModel;
@@ -221,7 +222,9 @@ class ArticleForLeaseController extends CrudController
         // update the row in the db
         $dataArticle = ArticleForLeaseModel::where('id', $request->id)->first();
 
-        if($dataArticle->aprroval == 0 && $request->aprroval) {
+        if(!$dataArticle->end_news && $request->aprroval) {
+            $dataArticle->end_news = strtotime(TIME_EXPIRED_NEW);
+            $dataArticle->save();
             $data = [
                 'article' => $dataArticle,
                 'prefix_admin_edit' => 'article_for_lease',
@@ -260,7 +263,8 @@ class ArticleForLeaseController extends CrudController
         $this->data['fields'] = $this->crud->getUpdateFields($id);
         $this->data['title'] = trans('backpack::crud.edit').' '.$this->crud->entity_name;
         $this->data['id'] = $id;
-
+        $sync = new SyncController();
+        $sync->updateProjectSlideBar();
         return view('vendor.backpack.article.edit_for_lease', $this->data);
     }
     public function destroy($id)

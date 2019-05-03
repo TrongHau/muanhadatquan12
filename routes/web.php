@@ -24,7 +24,7 @@ Route::post('get-district', ['as' => 'get.district', 'uses' => 'HomeController@g
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::post('/get_district', ['as' => 'get.district', 'uses' => 'HomeController@getDistrict']);
 Route::post('/get_ward', ['as' => 'get.ward', 'uses' => 'HomeController@getWard']);
-Route::get('/demo', ['as' => 'get.ward1', 'uses' => 'SyncController@homeTinTuc']);
+Route::get('/demo', ['as' => 'get.ward1', 'uses' => 'SyncController@updateProjectSlideBar']);
 
 Auth::routes();
 
@@ -61,6 +61,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::prefix('thong-tin-ca-nhan/')->group(function () {
         Route::get('/', ['as' => 'list.ArticleLease', 'uses' => 'ArticleController@listArticleForLease']);
         Route::get('quan-ly-mua-can-thue', ['as' => 'list.ArticleLease', 'uses' => 'ArticleController@listArticleForBuy']);
+        Route::get('quan-ly-het-han', ['as' => 'list.ArticleLease', 'uses' => 'ArticleController@listExpiredArticle']);
         Route::get('tin-nhap', ['as' => 'list.ArticleDraf', 'uses' => 'ArticleController@listDrafArticle']);
         Route::get('thay-doi-ca-nhan', ['as' => 'user.changeProfile', 'uses' => 'UserController@changeProfile']);
         Route::post('thay-doi-ca-nhan', ['as' => 'user.storeProfile', 'uses' => 'UserController@storeProfile']);
@@ -69,6 +70,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::post('thay-doi-mat-khau', ['as' => 'user.storePassword', 'uses' => 'UserController@storePassword']);
         Route::get('dang-tin', ['as' => 'user.dangtin', 'uses' => 'UserController@newArticle']);
         Route::post('xoa-tin', ['as' => 'article.xoaTin', 'uses' => 'ArticleController@deleteArticle']);
+        Route::post('gia-han', ['as' => 'article.expired', 'uses' => 'ArticleController@resetExpiredArticle']);
     });
     // quan ly tin
 
@@ -77,6 +79,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::post('tin-cho-thue', ['as' => 'article.getArticleLease', 'uses' => 'ArticleController@getListArticleForLease']);
         Route::post('tin-can-thue', ['as' => 'article.getArticleBuy', 'uses' => 'ArticleController@getListArticleForBuy']);
         Route::post('tin-nhap', ['as' => 'article.getArticleBuy', 'uses' => 'ArticleController@getListArticleForDraf']);
+        Route::post('tin-het-han', ['as' => 'article.getArticleExpired', 'uses' => 'ArticleController@getListArticleForExpired']);
         Route::get('dang-tin-ban-cho-thue/{id?}', ['as' => 'article.getArticleLease', 'uses' => 'ArticleController@newArticleForLease']);
         Route::post('dang-tin-ban-cho-thue', ['as' => 'article.StoreArticleLease', 'uses' => 'ArticleController@storeArticleForLease']);
         Route::get('dang-tin-can-mua-can-thue/{id?}', ['as' => 'article.getArticleBuy', 'uses' => 'ArticleController@newArticleForBuy']);
@@ -213,7 +216,7 @@ Route::get('/can-thue-du-an-quan-12-{position}/{title}bds-{id}', 'DetailControll
 Route::get('/can-thue-loai-bat-dong-san-khac-{position}/{title}bds-{id}', 'DetailController@articleForBuyDetail');
 
 // tim kiem nang cao
-Route::get('/tim-kiem-nang-cao/{method}/{type}/{province_d}/{district_id}/{ward_id}/{street_id}/{project_id}/{area}/{price}/{bed_room}/{toilet}/{ddlHomeDirection}/{title_article?}', 'SearchController@advance');
+Route::get('/tim-kiem-nang-cao/{method}/{type?}/{province_id?}/{district_id?}/{ward_id?}/{street_id?}/{project_id?}/{area?}/{price?}/{bed_room?}/{toilet?}/{ddlHomeDirection?}/{title_article?}', 'SearchController@advance');
 
 
 // tin tuc

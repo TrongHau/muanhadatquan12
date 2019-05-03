@@ -24,6 +24,7 @@ use App\Library\Helpers;
                 <li class="icon_cactin_danghienthi"><a href="/quan-ly-tin/dang-tin-ban-cho-thue">Đăng tin rao bán/cho thuê</a></li>
                 <li class="icon_cactin_danghienthi"><a href="/thong-tin-ca-nhan/quan-ly-mua-can-thue">Quản lý tin cần mua/cần thuê</a></li>
                 <li class="icon_cactin_danghienthi"><a href="/quan-ly-tin/dang-tin-can-mua-can-thue">Đăng tin cần mua/cần thuê</a></li>
+                <li class="icon_cactin_danghienthi"><a href="/thong-tin-ca-nhan/quan-ly-het-han">Quản lý tin hết hạn</a></li>
                 <li class="icon_cactin_danghienthi"><a href="/thong-tin-ca-nhan/tin-nhap">Quản lý tin nháp</a></li>
             </ul>
         </div>

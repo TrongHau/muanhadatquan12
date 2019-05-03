@@ -62,7 +62,7 @@ $list = $article->toArray();
         </div>
     @endforeach
     <div class="pager" style="float: right">
-        <?php echo str_replace('?page', 'quan-ly-tin/tin-nhap?page', $paging) ?>
+        <?php echo str_replace('?page', 'quan-ly-tin/tin-het-han?page', $paging) ?>
     </div>
 @else
     Hiện tại bạn vẫn chưa có bài tin đăng nào.

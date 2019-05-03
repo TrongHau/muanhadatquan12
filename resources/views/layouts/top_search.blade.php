@@ -28,7 +28,7 @@ use App\Library\Helpers;
                 <div class="menu">
                     <ul>
                         <li class='home'><a href="/"><img src="/imgs/icon_home.png" alt=""/></a></li>
-                        <li class="lv0"><a href="/nha-dat-ban" class="haslink ">Đất bán</a>
+                        <li class="lv0"><a href="/nha-dat-ban" class="haslink ">Nhà đất bán</a>
                             <ul>
                                 <li class="lv1"><a href="/ban-can-ho-chung-cu" class="haslink ">Bán
                                         căn hộ chung cư</a></li>
@@ -47,8 +47,7 @@ use App\Library\Helpers;
                                 <li class="lv1"><a href="/ban-loai-bat-dong-san-khac" class="haslink ">Bán loại bất động sản khác</a></li>
                             </ul>
                         </li>
-                        <li class=''><a href='/du-an-quan-12' target='_self'><span>DỰ ÁN QUẬN 12</span></a></li>
-                        <li class="lv0"><a href="/nha-dat-cho-thue" class="haslink ">Cho thuê</a>
+                        <li class="lv0"><a href="/nha-dat-cho-thue" class="haslink ">Nhà đất cho thuê</a>
                             <ul>
                                 <li class="lv1"><a href="/cho-thue-can-ho-chung-cu" class="haslink ">Cho thuê căn hộ chung cư</a></li>
                                 <li class="lv1"><a href="/cho-thue-nha-rieng" class="haslink ">Cho
@@ -65,7 +64,7 @@ use App\Library\Helpers;
                             </ul>
                         </li>
 
-                        <li class="lv0"><a href="/nha-dat-can-mua" class="haslink">Cần mua</a>
+                        <li class="lv0"><a href="/nha-dat-can-mua" class="haslink">Nhà dất cần mua</a>
                             <ul>
                                 <li class="lv1"><a href="/mua-can-ho-chung-cu" class="haslink ">Mua căn hộ chung cư</a></li>
                                 <li class="lv1"><a href="/mua-nha-rieng" class="haslink ">Mua
@@ -81,7 +80,7 @@ use App\Library\Helpers;
                                 <li class="lv1"><a href="/mua-cac-loai-bat-dong-san-khac" class="haslink ">Mua loại bất động sản khác</a></li>
                             </ul>
                         </li>
-                        <li class="lv0"><a href="/nha-dat-can-thue" class="haslink">Cần thuê</a>
+                        <li class="lv0"><a href="/nha-dat-can-thue" class="haslink">Nhà dất Cần thuê</a>
                             <ul>
                                 <li class="lv1"><a href="/can-thue-can-ho-chung-cu" class="haslink ">Cần thuê căn hộ chung cư</a></li>
                                 <li class="lv1"><a href="/can-thue-nha-rieng" class="haslink ">Cần thuê nhà riêng</a></li>
@@ -94,9 +93,10 @@ use App\Library\Helpers;
                                 <li class="lv1"><a href="/can-thue-loai-bat-dong-san-khac" class="haslink ">Cần thuê loại bất động sản khác</a></li>
                             </ul>
                         </li>
-                        <li class="lv0"><a href="/tin-tuc-nha-dat" class="haslink ">Tin tức nhà đất</a></li>
-                        <li class="lv0"><a href="/kien-thuc-nha-dat" class="haslink ">Kiến thức nhà đất</a></li>
-                        <li class="lv0"><a href="/ho-tro" class="haslink ">Hỗ trợ</a></li>
+                        <li class=''><a href='/du-an-quan-12' target='_self'><span>DỰ ÁN</span></a></li>
+                        <li class="lv0"><a href="/tin-tuc-nha-dat" class="haslink ">Tin tức</a></li>
+                        <li class="lv0"><a href="/quan-ly-tin/dang-tin-ban-cho-thue" class="haslink ">Đăng tin</a></li>
+                        <li class="lv0"><a href="/lien-he" class="haslink ">Liên hệ</a></li>
                     </ul>
                 </div>
             </div>
@@ -115,11 +115,10 @@ use App\Library\Helpers;
         </div>
         @if(Auth::check())
             <div class="box-search-right">
-                <ul class="timkiem_dangtin">
-
-                    <li class="icon_dangtinban"><a href="/quan-ly-tin/dang-tin-ban-cho-thue">Đăng tin Bán - Cho thuê</a></li>
-                    <li class="icon_canmua"><a href="/quan-ly-tin/dang-tin-can-mua-can-thue">Cần mua - Cần thuê</a></li>
-                </ul>
+                {{--<ul class="timkiem_dangtin">--}}
+                    {{--<li class="icon_dangtinban"><a href="/quan-ly-tin/dang-tin-ban-cho-thue">Đăng tin Bán - Cho thuê</a></li>--}}
+                    {{--<li class="icon_canmua"><a href="/quan-ly-tin/dang-tin-can-mua-can-thue">Cần mua - Cần thuê</a></li>--}}
+                {{--</ul>--}}
                 <ul class="login_logout">
                     <li class="profile"><a href="/thong-tin-ca-nhan">
                             <img src="{{Auth::user()->avatar ? Helpers::file_path(Auth::user()->id, AVATAR_PATH, true).Auth::user()->avatar.'?t='.time() : '/imgs/default-user-avatar.png'}}" alt="avatar của bạn">

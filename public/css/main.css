@@ -94,7 +94,7 @@ ul.timkiem_dangtin li.icon_canmua {  background: url(../imgs/icon_canmua.png) le
 .login_logout li{ display:inline-block;  line-height: 37px;  padding-left: 0px;}
 .login_logout li a{  color: #444; font-weight:bold;  font-size: 13px;}
 .box-search-right a:hover{ color:#266fb5}
-.tit_C {  background: #5EAB1F;  color: #FFF;  text-transform: uppercase;  font-weight: 700;  font-size: 11px;  padding: 3px 5px;  width: 80%;  margin-bottom: 10px;}
+.tit_C {  background: #5EAB1F;  color: #FFF;  text-transform: uppercase;  font-weight: 700;  font-size: 11px;  padding: 3px 5px;  width: 80%;}
 span.icon_star_xanh {  background: url(../imgs/icon_star_xanh.png) no-repeat center;  width: 22px;  height: 23px;  margin: -5px 10px 0px 0px;  float: left;}
 .box_NDnoibat {  width: 48%;  background: #FFF;  border: 1px solid #D8D5CB;  float: left;  margin: 0px 10px 10px 0px;  padding: 7px;}
 .img_NDnoibat {  float: left;  margin-right: 5px;  width: 125px;  background: #EEEDEB;  padding: 1px;  position: relative; max-height: 100px}

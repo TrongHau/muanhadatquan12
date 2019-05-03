@@ -20,6 +20,7 @@ use App\Models\ProjectModel;
 use Backpack\NewsCRUD\app\Models\Article;
 use Backpack\NewsCRUD\app\Models\Category;
 use Storage;
+use DB;
 use Illuminate\Filesystem\Filesystem;
 
 class SyncController extends Controller
@@ -109,5 +110,26 @@ $projectWard12 = ' . var_export($project, true) . ';
                 Storage::delete($item);
             }
         }
+    }
+    public function updateProjectSlideBar() {
+        $articleForLease = ArticleForLeaseModel::select('ward', 'ward_id', DB::raw('count(*) as total'))
+            ->where('method_article', 'Nhà đất bán')
+            ->where('end_news', '>=', time())
+            ->where('aprroval', APPROVAL_ARTICLE_PUBLIC)
+            ->where('ward', '!=', '')
+            ->orderBy('created_at', 'desc')
+            ->groupBy('ward', 'ward_id')->get();
+        file_put_contents(resource_path().'/views/cache/ward_slide_bar.blade.php',
+            '<?php 
+if ( !ENV(\'IN_PHPBB\') )
+{
+    die(\'Hacking attempt\');
+    exit;
+}
+global $wardSlideBar;
+$wardSlideBar = ' . var_export($articleForLease->toArray(), true) . ';
+?>');
+
+        return response(['Ok']);
     }
 }

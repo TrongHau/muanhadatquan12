@@ -49,13 +49,27 @@ $Agent = new Agent();
                                         <li>
                                             <h3><a href="/{{$item->prefix_url.'-bds-'.$item->id}}" title="{{$item['title']}}">{{ mb_substr($item['title'],0 , HOME_SUBSTRING, "utf-8")}}...</a></h3>
                                         </li>
-                                        <li>DT:{{($item->area_from != null && $item->area_to != null) ? ($item->area_from. ' - ' .$item->area_to.' m²') : ($item->area ? $item->area.' m²' : 'Chưa xác định')}} | Giá:<span class="camcam">{{($item->price_from != null && $item->price_to != null) ? ($item->price_from. ' - ' .$item->price_to.' '.$item->ddlPriceType) : ($item->price_real == 0 ? 'Thỏa thuận' : $item->price.' '.$item->ddlPriceType)}}</span></li>
-                                        <li><a class="link_blue"
-                                               href="/tim-kiem-nang-cao/nha-dat-ban/-1/-1/{{$item->district_id}}/-1/-1/-1/-1/-1/-1/-1"
-                                               title="Bán nhà riêng tại {{$item->district}}">{{$item->district}}</a>, <a
-                                                    class="link_blue"
-                                                    href="/tim-kiem-nang-cao/nha-dat-ban/-1/{{$item->province_id}}/-1/-1/-1/-1/-1/-1/-1/-1"
-                                                    title="Bán nhà riêng tại {{$item->province}}">{{$item->province}}</a></li>
+                                        <li>DT: {{($item->area_from != null && $item->area_to != null) ? ($item->area_from. ' - ' .$item->area_to.' m²') : ($item->area ? $item->area.' m²' : '- ')}} | Giá:<span class="camcam">{{($item->price_from != null && $item->price_to != null) ? ($item->price_from. ' - ' .$item->price_to.' '.$item->ddlPriceType) : ($item->price_real == 0 ? 'Thỏa thuận' : $item->price.' '.$item->ddlPriceType)}}</span></li>
+                                        @if($item->ward_id)
+                                        <li>
+                                            @if($item->street_id && $item->ward_id)
+                                            <a class="link_blue"
+                                               href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13/{{$item->ward_id}}/{{$item->street_id}}"
+                                               title="Bán nhà riêng tại đường {{$item->street}}">Đường {{$item->street}}</a>,
+                                            @endif
+                                           <a class="link_blue"
+                                                 href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13/{{$item->ward_id}}"
+                                                 title="Bán nhà riêng tại {{$item->ward}}">{{$item->ward}}</a>
+                                        </li>
+                                        @else
+                                            <li><a class="link_blue"
+                                                   href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13"
+                                                   title="Bán nhà riêng tại {{$item->district}}">{{$item->district}}</a>
+                                                    , <a class="link_blue"
+                                                         href="/tim-kiem-nang-cao/nha-dat-ban/-1/1"
+                                                         title="Bán nhà riêng tại {{$item->province}}">{{$item->province}}</a>
+                                            </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
@@ -95,13 +109,27 @@ $Agent = new Agent();
                                         <li>
                                             <h3><a href="/{{$item->prefix_url.'-bds-'.$item->id}}" title="{{$item['title']}}">{{ mb_substr($item['title'],0 , HOME_SUBSTRING, "utf-8")}}...</a></h3>
                                         </li>
-                                        <li>DT:{{($item->area_from != null && $item->area_to != null) ? ($item->area_from. ' - ' .$item->area_to.' m²') : ($item->area ? $item->area.' m²' : 'Chưa xác định')}} | Giá:<span class="camcam">{{($item->price_from != null && $item->price_to != null) ? ($item->price_from. ' - ' .$item->price_to.' '.$item->ddlPriceType) : ($item->price_real == 0 ? 'Thỏa thuận' : $item->price.' '.$item->ddlPriceType)}}</span></li>
-                                        <li><a class="link_blue"
-                                               href="/tim-kiem-nang-cao/nha-dat-cho-thue/-1/-1/{{$item->district_id}}/-1/-1/-1/-1/-1/-1/-1"
-                                               title="Bán nhà riêng tại {{$item->district}}">{{$item->district}}</a>, <a
-                                                    class="link_blue"
-                                                    href="/tim-kiem-nang-cao/nha-dat-cho-thue/-1/{{$item->province_id}}/-1/-1/-1/-1/-1/-1/-1/-1"
-                                                    title="Bán nhà riêng tại {{$item->province}}">{{$item->province}}</a></li>
+                                        <li>DT: {{($item->area_from != null && $item->area_to != null) ? ($item->area_from. ' - ' .$item->area_to.' m²') : ($item->area ? $item->area.' m²' : '- ')}} | Giá:<span class="camcam">{{($item->price_from != null && $item->price_to != null) ? ($item->price_from. ' - ' .$item->price_to.' '.$item->ddlPriceType) : ($item->price_real == 0 ? 'Thỏa thuận' : $item->price.' '.$item->ddlPriceType)}}</span></li>
+                                        @if($item->ward_id)
+                                            <li>
+                                                @if($item->street_id && $item->ward_id)
+                                                    <a class="link_blue"
+                                                       href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13/{{$item->ward_id}}/{{$item->street_id}}"
+                                                       title="Bán nhà riêng tại đường {{$item->street}}">Đường {{$item->street}}</a>,
+                                                @endif
+                                                <a class="link_blue"
+                                                   href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13/{{$item->ward_id}}"
+                                                   title="Bán nhà riêng tại {{$item->ward}}">{{$item->ward}}</a>
+                                            </li>
+                                        @else
+                                            <li><a class="link_blue"
+                                                   href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13"
+                                                   title="Bán nhà riêng tại {{$item->district}}">{{$item->district}}</a>
+                                                , <a class="link_blue"
+                                                     href="/tim-kiem-nang-cao/nha-dat-ban/-1/1"
+                                                     title="Bán nhà riêng tại {{$item->province}}">{{$item->province}}</a>
+                                            </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
@@ -142,13 +170,27 @@ $Agent = new Agent();
                                         <li>
                                             <h3><a href="/{{$item->prefix_url.'-bds-'.$item->id}}" title="{{$item['title']}}">{{ mb_substr($item['title'],0 , HOME_SUBSTRING, "utf-8")}}...</a></h3>
                                         </li>
-                                        <li>DT:{{($item->area_from != null && $item->area_to != null) ? ($item->area_from. ' - ' .$item->area_to.' m²') : ($item->area ? $item->area.' m²' : 'Chưa xác định')}} | Giá:<span class="camcam">{{($item->price_from != null && $item->price_to != null) ? ($item->price_from. ' - ' .$item->price_to.' '.$item->ddlPriceType) : ($item->price_real == 0 ? 'Thỏa thuận' : $item->price.' '.$item->ddlPriceType)}}</span></li>
-                                        <li><a class="link_blue"
-                                               href="/tim-kiem-nang-cao/nha-dat-can-mua/-1/-1/{{$item->district_id}}/-1/-1/-1/-1/-1/-1/-1"
-                                               title="Bán nhà riêng tại {{$item->district}}">{{$item->district}}</a>, <a
-                                                    class="link_blue"
-                                                    href="/tim-kiem-nang-cao/nha-dat-can-mua/-1/{{$item->province_id}}/-1/-1/-1/-1/-1/-1/-1/-1"
-                                                    title="Bán nhà riêng tại {{$item->province}}">{{$item->province}}</a></li>
+                                        <li>DT: {{($item->area_from != null && $item->area_to != null) ? ($item->area_from. ' - ' .$item->area_to.' m²') : ($item->area ? $item->area.' m²' : '- ')}} | Giá:<span class="camcam">{{($item->price_from != null && $item->price_to != null) ? ($item->price_from. ' - ' .$item->price_to.' '.$item->ddlPriceType) : ($item->price_real == 0 ? 'Thỏa thuận' : $item->price.' '.$item->ddlPriceType)}}</span></li>
+                                        @if($item->ward_id)
+                                            <li>
+                                                @if($item->street_id && $item->ward_id)
+                                                    <a class="link_blue"
+                                                       href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13/{{$item->ward_id}}/{{$item->street_id}}"
+                                                       title="Bán nhà riêng tại đường {{$item->street}}">Đường {{$item->street}}</a>,
+                                                @endif
+                                                <a class="link_blue"
+                                                   href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13/{{$item->ward_id}}"
+                                                   title="Bán nhà riêng tại {{$item->ward}}">{{$item->ward}}</a>
+                                            </li>
+                                        @else
+                                            <li><a class="link_blue"
+                                                   href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13"
+                                                   title="Bán nhà riêng tại {{$item->district}}">{{$item->district}}</a>
+                                                , <a class="link_blue"
+                                                     href="/tim-kiem-nang-cao/nha-dat-ban/-1/1"
+                                                     title="Bán nhà riêng tại {{$item->province}}">{{$item->province}}</a>
+                                            </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
@@ -190,13 +232,27 @@ $Agent = new Agent();
                                         <li>
                                             <h3><a href="/{{$item->prefix_url.'-bds-'.$item->id}}" title="{{$item['title']}}">{{ mb_substr($item['title'],0 , HOME_SUBSTRING, "utf-8")}}...</a></h3>
                                         </li>
-                                        <li>DT:{{($item->area_from != null && $item->area_to != null) ? ($item->area_from. ' - ' .$item->area_to.' m²') : ($item->area ? $item->area.' m²' : 'Chưa xác định')}} | Giá:<span class="camcam">{{($item->price_from != null && $item->price_to != null) ? ($item->price_from. ' - ' .$item->price_to.' '.$item->ddlPriceType) : ($item->price_real == 0 ? 'Thỏa thuận' : $item->price.' '.$item->ddlPriceType)}}</span></li>
-                                        <li><a class="link_blue"
-                                               href="/tim-kiem-nang-cao/nha-dat-can-thue/-1/-1/{{$item->district_id}}/-1/-1/-1/-1/-1/-1/-1"
-                                               title="Bán nhà riêng tại {{$item->district}}">{{$item->district}}</a>, <a
-                                                    class="link_blue"
-                                                    href="/tim-kiem-nang-cao/nha-dat-can-thue/-1/{{$item->province_id}}/-1/-1/-1/-1/-1/-1/-1/-1"
-                                                    title="Bán nhà riêng tại {{$item->province}}">{{$item->province}}</a></li>
+                                        <li>DT: {{($item->area_from != null && $item->area_to != null) ? ($item->area_from. ' - ' .$item->area_to.' m²') : ($item->area ? $item->area.' m²' : '- ')}} | Giá:<span class="camcam">{{($item->price_from != null && $item->price_to != null) ? ($item->price_from. ' - ' .$item->price_to.' '.$item->ddlPriceType) : ($item->price_real == 0 ? 'Thỏa thuận' : $item->price.' '.$item->ddlPriceType)}}</span></li>
+                                        @if($item->ward_id)
+                                            <li>
+                                                @if($item->street_id && $item->ward_id)
+                                                    <a class="link_blue"
+                                                       href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13/{{$item->ward_id}}/{{$item->street_id}}"
+                                                       title="Bán nhà riêng tại đường {{$item->street}}">Đường {{$item->street}}</a>,
+                                                @endif
+                                                <a class="link_blue"
+                                                   href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13/{{$item->ward_id}}"
+                                                   title="Bán nhà riêng tại {{$item->ward}}">{{$item->ward}}</a>
+                                            </li>
+                                        @else
+                                            <li><a class="link_blue"
+                                                   href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13"
+                                                   title="Bán nhà riêng tại {{$item->district}}">{{$item->district}}</a>
+                                                , <a class="link_blue"
+                                                     href="/tim-kiem-nang-cao/nha-dat-ban/-1/1"
+                                                     title="Bán nhà riêng tại {{$item->province}}">{{$item->province}}</a>
+                                            </li>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
@@ -217,18 +273,6 @@ $Agent = new Agent();
                 margin-bottom: 20px;
             }
         </style>
-        <div class="muatin_noibat">
-            <!-- <a href="#" data-toggle="modal" data-target="#myModal">Mua tin nổi bật ngay tại đây</a> -->
-        </div>
-        <div class="box1-left">
-            <div class="tit_C cachtren2">
-                <span class="icon_star_xanh"></span>
-                CÓ THỂ BẠN CHƯA BIẾT
-            </div>
-            <div class="child_C">
-                <p><span style="color:#008000;"><em>Nơi đăng tin mua b&aacute;n tất cả c&aacute;c loại đất nền, nh&agrave; phố, căn hộ, biệt thự hay cho thu&ecirc; tốt nhất. Đặc biệt l&agrave; nơi chuy&ecirc;n ph&acirc;n phối mua b&aacute;n đất nền quận 12 Tp HCM v&agrave; <a href="http://muabandatbinhduong.vn/39/can-mua-dat-my-phuoc-3-binh-duong">mua đất Mỹ Phước</a> B&igrave;nh Dương.<strong> Li&ecirc;n hệ: 0985.678.311 Mr T&acirc;n</strong></em></span></p>
-            </div>
-        </div>
     </div>
     @include('layouts.slider_bar_right')
 @endsection

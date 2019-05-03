@@ -53,7 +53,6 @@ class SearchController extends Controller
             $article = ArticleForBuyModel::where('status', PUBLISHED_ARTICLE);
             $article = $article->where('method_article', 'Nhà đất cần thuê');
         }
-
         if($type > 0) {
             $article = $article->where('type_article', $type);
         }
@@ -84,6 +83,7 @@ class SearchController extends Controller
         if($project_id > 0) {
             $article = $article->where('project', $project_id);
         }
+
         if($area >= 0) {
             if($area == 0) {
                 $article = $article->where('area', 0);
@@ -186,7 +186,7 @@ class SearchController extends Controller
         }else{
             $article = $article->orderBy('created_at', 'desc');
         }
-        $article = $article->paginate(PAGING_LIST_ARTICLE_CATALOG);
+        $article = $article->where('end_news', '>=', time())->paginate(PAGING_LIST_ARTICLE_CATALOG);
         $key = '';
         return view('catalog.article_for_lease_ban_dat', compact('titleArticle', 'article', 'key', 'method', 'province_id', 'district_id', 'ward_id', 'street_id', 'project_id', 'area', 'price', 'bed_room', 'toilet', 'ddlHomeDirection', 'local'));
     }

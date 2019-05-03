@@ -47,9 +47,10 @@ class ArticleController extends Controller
     }
     public function listArticleForLease(Request $request)
     {
-        $article = ArticleForLeaseModel::select(['id', 'title', 'views', 'created_at', 'status', 'aprroval', 'gallery_image', 'note', 'updated_at', 'type_article', 'prefix_url'])
+        $article = ArticleForLeaseModel::select(['id', 'title', 'end_news', 'start_news', 'views', 'created_at', 'status', 'aprroval', 'gallery_image', 'note', 'updated_at', 'type_article', 'prefix_url'])
             ->where('status', PUBLISHED_ARTICLE)
             ->where('created_at', '>=', date('Y-m-d', strtotime('-2 months')))
+            ->where('end_news', '>=', time())
             ->where('user_id', Auth::user()->id)
 //            ->where('status', PUBLISHED_ARTICLE)
             ->orderBy('created_at', 'desc')->paginate(PAGING_LIST_ARTICLE);
@@ -58,9 +59,10 @@ class ArticleController extends Controller
     }
     public function listArticleForBuy(Request $request)
     {
-        $article = ArticleForBuyModel::select(['id', 'title', 'views', 'created_at', 'status', 'aprroval', 'gallery_image', 'note', 'updated_at', 'type_article', 'prefix_url'])
+        $article = ArticleForBuyModel::select(['id', 'title', 'end_news', 'start_news', 'views', 'created_at', 'status', 'aprroval', 'gallery_image', 'note', 'updated_at', 'type_article', 'prefix_url'])
             ->where('status', PUBLISHED_ARTICLE)
             ->where('created_at', '>=', date('Y-m-d', strtotime('-2 months')))
+            ->where('end_news', '>=', time())
             ->where('user_id', Auth::user()->id)
 //            ->where('status', PUBLISHED_ARTICLE)
             ->orderBy('created_at', 'desc')->paginate(PAGING_LIST_ARTICLE);
@@ -70,24 +72,46 @@ class ArticleController extends Controller
     public function listDrafArticle(Request $request)
     {
         $page = $request->page ? $request->page : 1;
-        $articleForLease = ArticleForLeaseModel::selectRaw('id, method_article, type_article,prefix_url, title, views, created_at, status, aprroval, gallery_image, note, updated_at, project, province_id, province, district_id, district, address, ddlPriceType, price_real, price, area, null as price_from, null as price_to, null as area_from, null as area_to, \'lease\' as typeOf')
+        $articleForLease = ArticleForLeaseModel::selectRaw('id, method_article, end_news, type_article,prefix_url, title, views, created_at, status, aprroval, gallery_image, note, updated_at, project, province_id, province, district_id, district, address, ddlPriceType, price_real, price, area, null as price_from, null as price_to, null as area_from, null as area_to, \'lease\' as typeOf')
             ->where('status', DRAFT_ARTICLE)
             ->where('created_at', '>=', date('Y-m-d', strtotime('-2 months')))
+            ->where('end_news', '>=', time())
             ->where('user_id', Auth::user()->id);
-        $articleForBuy = ArticleForBuyModel::selectRaw('id, method_article, type_article, prefix_url, title, views, created_at, status, aprroval, gallery_image, note, updated_at, project, province_id, province, district_id, district, address, ddlPriceType, price_real, null as price, null as area, price_from, price_to, area_from, area_to, \'buy\' as typeOf')
+        $articleForBuy = ArticleForBuyModel::selectRaw('id, method_article, end_news, type_article, prefix_url, title, views, created_at, status, aprroval, gallery_image, note, updated_at, project, province_id, province, district_id, district, address, ddlPriceType, price_real, null as price, null as area, price_from, price_to, area_from, area_to, \'buy\' as typeOf')
             ->where('status', DRAFT_ARTICLE)
+            ->where('end_news', '>=', time())
             ->where('created_at', '>=', date('Y-m-d', strtotime('-2 months')))
             ->where('user_id', Auth::user()->id);
-        $article = $articleForLease->union($articleForBuy)->orderBy('updated_at', 'desc')->get();
+        $article = $articleForLease->union($articleForBuy)->orderBy('created_at', 'desc')->get();
         $slice = array_slice($article->toArray(), PAGING_LIST_ARTICLE * ($page - 1), PAGING_LIST_ARTICLE + 1);
         $article = new \Illuminate\Pagination\Paginator($slice, PAGING_LIST_ARTICLE);
 
         $list = view('article.item_article_draf', compact('article'));
         return view('article.manage_for_draf', compact('list'));
     }
+    public function listExpiredArticle(Request $request)
+    {
+        $page = $request->page ? $request->page : 1;
+        $articleForLease = ArticleForLeaseModel::selectRaw('id, method_article, end_news, type_article,prefix_url, title, views, created_at, status, aprroval, gallery_image, note, updated_at, project, province_id, province, district_id, district, address, ddlPriceType, price_real, price, area, null as price_from, null as price_to, null as area_from, null as area_to, \'lease\' as typeOf')
+            ->where('status', PUBLISHED_ARTICLE)
+            ->where('created_at', '>=', date('Y-m-d', strtotime('-2 months')))
+            ->where('end_news', '<=', time())
+            ->where('user_id', Auth::user()->id);
+        $articleForBuy = ArticleForBuyModel::selectRaw('id, method_article, end_news, type_article, prefix_url, title, views, created_at, status, aprroval, gallery_image, note, updated_at, project, province_id, province, district_id, district, address, ddlPriceType, price_real, null as price, null as area, price_from, price_to, area_from, area_to, \'buy\' as typeOf')
+            ->where('status', PUBLISHED_ARTICLE)
+            ->where('created_at', '>=', date('Y-m-d', strtotime('-2 months')))
+            ->where('end_news', '<=', time())
+            ->where('user_id', Auth::user()->id);
+        $article = $articleForLease->union($articleForBuy)->orderBy('created_at', 'desc')->get();
+        $slice = array_slice($article->toArray(), PAGING_LIST_ARTICLE * ($page - 1), PAGING_LIST_ARTICLE + 1);
+        $article = new \Illuminate\Pagination\Paginator($slice, PAGING_LIST_ARTICLE);
+
+        $list = view('article.item_article_expired', compact('article'));
+        return view('article.manage_for_expired', compact('list'));
+    }
 
     public function getListArticleForLease(Request $request) {
-        $article = ArticleForLeaseModel::select(['id', 'title', 'views', 'created_at', 'status', 'aprroval', 'gallery_image', 'note', 'updated_at', 'type_article', 'prefix_url'])
+        $article = ArticleForLeaseModel::select(['id', 'title', 'end_news', 'start_news', 'views', 'created_at', 'status', 'aprroval', 'gallery_image', 'note', 'updated_at', 'type_article', 'prefix_url'])
             ->where('user_id', Auth::user()->id);
         if($request->date_from) {
             $article = $article->where('created_at', '>=', date_format(date_create($request->date_from), "Y-m-d"));
@@ -99,13 +123,19 @@ class ArticleController extends Controller
             $article = $article->where('id', 'like', $request->code);
         }
         if($request->aprroval != -1) {
-            $article =  $article->where('aprroval', '=', $request->aprroval);
+            if($request->aprroval == 3) {
+                $article =  $article->where('end_news', '<=', time());
+            }else{
+                $article =  $article->where('aprroval', '=', $request->aprroval)->where('end_news', '>=', time());
+            }
+        }else{
+            $article =  $article->where('end_news', '>=', time());
         }
         $article = $article->where('status', PUBLISHED_ARTICLE)->orderBy('created_at', 'desc')->paginate(PAGING_LIST_ARTICLE);
         return view('article.item_article_lease', compact('article'));
     }
     public function getListArticleForBuy(Request $request) {
-        $article = ArticleForBuyModel::select(['id', 'title', 'views', 'created_at', 'status', 'aprroval', 'gallery_image', 'note', 'updated_at', 'type_article', 'prefix_url'])
+        $article = ArticleForBuyModel::select(['id', 'title', 'end_news', 'start_news', 'views', 'created_at', 'status', 'aprroval', 'gallery_image', 'note', 'updated_at', 'type_article', 'prefix_url'])
             ->where('user_id', Auth::user()->id);
         if($request->date_from) {
             $article = $article->where('created_at', '>=', date_format(date_create($request->date_from), "Y-m-d"));
@@ -117,18 +147,66 @@ class ArticleController extends Controller
             $article = $article->where('id', 'like', $request->code);
         }
         if($request->aprroval != -1) {
-            $article =  $article->where('aprroval', '=', $request->aprroval);
+            if($request->aprroval == 3) {
+                $article =  $article->where('end_news', '>=', time());
+            }else{
+                $article =  $article->where('aprroval', '=', $request->aprroval)->where('end_news', '>=', time());
+            }
+        }else{
+            $article =  $article->where('end_news', '>=', time());
         }
         $article = $article->where('status', PUBLISHED_ARTICLE)->orderBy('created_at', 'desc')->paginate(PAGING_LIST_ARTICLE);
         return view('article.item_article_buy', compact('article'));
     }
     public function getListArticleForDraf(Request $request) {
         $page = $request->page ? $request->page: 1;
-        $articleForLease = ArticleForLeaseModel::selectRaw('id, method_article, type_article,prefix_url, title, views, created_at, status, aprroval, gallery_image, note, updated_at, project, province_id, province, district_id, district, address, ddlPriceType, price_real, price, area, null as price_from, null as price_to, null as area_from, null as area_to, \'lease\' as typeOf')
+        $articleForLease = ArticleForLeaseModel::selectRaw('id, end_news, start_news, method_article, type_article,prefix_url, title, views, created_at, status, aprroval, gallery_image, note, updated_at, project, province_id, province, district_id, district, address, ddlPriceType, price_real, price, area, null as price_from, null as price_to, null as area_from, null as area_to, \'lease\' as typeOf')
             ->where('status', DRAFT_ARTICLE)
+            ->where('end_news', '>=', time())
             ->where('user_id', Auth::user()->id);
-        $articleForBuy = ArticleForBuyModel::selectRaw('id, method_article, type_article, prefix_url, title, views, created_at, status, aprroval, gallery_image, note, updated_at, project, province_id, province, district_id, district, address, ddlPriceType, price_real, null as price, null as area, price_from, price_to, area_from, area_to, \'buy\' as typeOf')
+        $articleForBuy = ArticleForBuyModel::selectRaw('id, end_news, start_news, method_article, type_article, prefix_url, title, views, created_at, status, aprroval, gallery_image, note, updated_at, project, province_id, province, district_id, district, address, ddlPriceType, price_real, null as price, null as area, price_from, price_to, area_from, area_to, \'buy\' as typeOf')
             ->where('status', DRAFT_ARTICLE)
+            ->where('end_news', '>=', time())
+            ->where('user_id', Auth::user()->id);
+
+        if($request->date_from) {
+            $articleForLease = $articleForLease->where('created_at', '>=', date_format(date_create($request->date_from), "Y-m-d"));
+            $articleForBuy = $articleForBuy->where('created_at', '>=', date_format(date_create($request->date_from), "Y-m-d"));
+        }
+        if($request->date_to) {
+            $articleForLease = $articleForLease->where('created_at', '<=', date_format(date_create($request->date_to), "Y-m-d").' 23:59:59');
+            $articleForBuy = $articleForBuy->where('created_at', '<=', date_format(date_create($request->date_to), "Y-m-d").' 23:59:59');
+        }
+        if($request->code) {
+            $articleForLease = $articleForLease->where('id', 'like', $request->code);
+            $articleForBuy = $articleForBuy->where('id', 'like', $request->code);
+        }
+        if($request->aprroval != -1) {
+            if($request->aprroval == 3) {
+                $articleForLease =  $articleForLease->where('end_news', '<=', time());
+                $articleForBuy =  $articleForBuy->where('end_news', '<=', time());
+            }else{
+                $articleForLease =  $articleForLease->where('aprroval', '=', $request->aprroval)->where('end_news', '>=', time());
+                $articleForBuy =  $articleForBuy->where('aprroval', '=', $request->aprroval)->where('end_news', '>=', time());
+            }
+        }else{
+            $articleForLease =  $articleForLease->where('end_news', '>=', time());
+            $articleForBuy =  $articleForBuy->where('end_news', '>=', time());
+        }
+        $article = $articleForLease->union($articleForBuy)->orderBy('updated_at', 'desc')->get();
+        $slice = array_slice($article->toArray(), PAGING_LIST_ARTICLE * ($page - 1), PAGING_LIST_ARTICLE + 1);
+        $article = new \Illuminate\Pagination\Paginator($slice, PAGING_LIST_ARTICLE);
+        return view('article.item_article_draf', compact('article'));
+    }
+    public function getListArticleForExpired(Request $request) {
+        $page = $request->page ? $request->page: 1;
+        $articleForLease = ArticleForLeaseModel::selectRaw('id, end_news, start_news, method_article, type_article,prefix_url, title, views, created_at, status, aprroval, gallery_image, note, updated_at, project, province_id, province, district_id, district, address, ddlPriceType, price_real, price, area, null as price_from, null as price_to, null as area_from, null as area_to, \'lease\' as typeOf')
+            ->where('status', PUBLISHED_ARTICLE)
+            ->where('end_news', '<=', time())
+            ->where('user_id', Auth::user()->id);
+        $articleForBuy = ArticleForBuyModel::selectRaw('id, end_news, start_news, method_article, type_article, prefix_url, title, views, created_at, status, aprroval, gallery_image, note, updated_at, project, province_id, province, district_id, district, address, ddlPriceType, price_real, null as price, null as area, price_from, price_to, area_from, area_to, \'buy\' as typeOf')
+            ->where('status', PUBLISHED_ARTICLE)
+            ->where('end_news', '<=', time())
             ->where('user_id', Auth::user()->id);
 
         if($request->date_from) {
@@ -150,7 +228,7 @@ class ArticleController extends Controller
         $article = $articleForLease->union($articleForBuy)->orderBy('updated_at', 'desc')->get();
         $slice = array_slice($article->toArray(), PAGING_LIST_ARTICLE * ($page - 1), PAGING_LIST_ARTICLE + 1);
         $article = new \Illuminate\Pagination\Paginator($slice, PAGING_LIST_ARTICLE);
-        return view('article.item_article_draf', compact('article'));
+        return view('article.item_article_expired', compact('article'));
     }
     public function deleteArticle(Request $request) {
         if($request->type == 1) {
@@ -170,6 +248,16 @@ class ArticleController extends Controller
             $result = $result->delete();
         }
         Helpers::ajaxResult($result ? true : false, $result ? 'Xóa tin thành công' : 'Xóa tin thất bại', null);
+    }
+    public function resetExpiredArticle(Request $request) {
+        if($request->type == 1) {
+            // delete for lease
+            $result = ArticleForLeaseModel::where('id', $request->code)->where('user_id', Auth::user()->id)->update(['end_news' => strtotime(TIME_EXPIRED_NEW)]);
+        }else{
+            // delete for buy
+            $result = ArticleForBuyModel::where('id', $request->code)->where('user_id', Auth::user()->id)->update(['end_news' => strtotime(TIME_EXPIRED_NEW)]);
+        }
+        Helpers::ajaxResult($result ? true : false, $result ? 'Gia hạn tin thành công' : 'Gia hạn tin thất bại', null);
     }
 
     public function newArticleForLease(Request $request, $id = null)
@@ -301,7 +389,7 @@ class ArticleController extends Controller
             $article['user_id'] = Auth::user()->id ? Auth::user()->id : 0;
             $article['aprroval'] = APPROVAL_ARTICLE_DEFAULT;
             $article['start_news'] = time();
-            $article['end_news'] = strtotime(TIME_EXPIRED_NEW);
+//            $article['end_news'] = strtotime(TIME_EXPIRED_NEW);
             if($article['status'] != DRAFT_ARTICLE && Auth::check()) {
                 $user = Auth::user();
 //                if($user->point_current < POINT_NEW_ARTICLE_FOR_LEASE) {
@@ -435,7 +523,7 @@ class ArticleController extends Controller
             $article['user_id'] = Auth::user()->id ? Auth::user()->id : 0;
             $article['aprroval'] = APPROVAL_ARTICLE_DEFAULT;
             $article['start_news'] = time();
-            $article['end_news'] = strtotime(TIME_EXPIRED_NEW);
+//            $article['end_news'] = strtotime(TIME_EXPIRED_NEW);
             if($article['status'] != DRAFT_ARTICLE && Auth::check()) {
                 $user = Auth::user();
 //                if($user->point_current < POINT_NEW_ARTICLE_FOR_BUY) {

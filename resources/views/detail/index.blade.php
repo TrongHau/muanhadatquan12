@@ -46,10 +46,26 @@ if($article->method_article == 'Nhà đất cần mua') {
                 <ul class="info_no2">
                     <li>
                         <label>Khu vực:</label>
-                        <span>
-                            <a href="/tim-kiem-nang-cao/{{$searchMethod}}/-1/-1/{{$article->district_id}}/-1/-1/-1/-1/-1/-1/-1">{{$article->district}}</a>,
-                            <a href="/tim-kiem-nang-cao/{{$searchMethod}}/-1/{{$article->province_id}}/-1/-1/-1/-1/-1/-1/-1/-1">{{$article->province}}</a>
-                        </span>
+                        @if($article->ward_id)
+                            <span>
+                                @if($article->street_id && $article->ward_id)
+                                    <a class="link_blue"
+                                       href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13/{{$article->ward_id}}/{{$article->street_id}}"
+                                       title="Bán nhà riêng tại đường {{$article->street}}">Đường {{$article->street}}</a>,
+                                @endif
+                                <a class="link_blue"
+                                   href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13/{{$article->ward_id}}"
+                                   title="Bán nhà riêng tại {{$article->ward}}">{{$article->ward}}</a>
+                            </span>
+                        @else
+                            <span><a class="link_blue"
+                                   href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13"
+                                   title="Bán nhà riêng tại {{$article->district}}">{{$article->district}}</a>
+                                , <a class="link_blue"
+                                     href="/tim-kiem-nang-cao/nha-dat-ban/-1/1"
+                                     title="Bán nhà riêng tại {{$article->province}}">{{$article->province}}</a>
+                            </span>
+                        @endif
                     </li>
                 </ul>
                 <ul class="info_no1 clearfix">
@@ -188,7 +204,7 @@ if($article->method_article == 'Nhà đất cần mua') {
             @if(count($relateArticle))
             <div class="tit_C" id="tinrao_lienquan">
                 <span class="icon_star_xanh"></span>
-                Các tin rao {{$article->method_article}} tại {{$article->district}}
+                Các tin rao {{$article->method_article}} tại {{$article->ward}}
             </div>
             <div id="media" class="list-view">
                 <ul class="clearfix">
@@ -209,7 +225,26 @@ if($article->method_article == 'Nhà đất cần mua') {
                                         <ul>
                                             <li><span class="datetime">Tin <span class="timecolor">{{date('h:iA | d/m/Y', strtotime($item['created_at']))}}</span></span></li>
                                             <li>Diện tích: <span class="saleboldtext">{{$item['area'] ? $item['area'].' m²' : 'Chưa xác định'}}</span></li>
-                                            <li>Khu vực: <span class="saleboldtext">{{$item['province']}}, {{$item['district']}}</span></li>
+                                            <li>Khu vực:  @if($item['ward_id'])
+                                                    <span class="saleboldtext">
+                                                            @if($item['street_id'] && $item['ward_id'])
+                                                            <a class="link_blue"
+                                                               href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13/{{$item['ward_id']}}/{{$item['street_id']}}"
+                                                               title="Bán nhà riêng tại đường {{$item['street']}}">Đường {{$item['street']}}</a>,
+                                                        @endif
+                                                        <a class="link_blue"
+                                                           href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13/{{$item['ward_id']}}"
+                                                           title="Bán nhà riêng tại {{$item['ward']}}">{{$item['ward']}}</a>
+                                                        </span>
+                                                @else
+                                                    <span class="saleboldtext"><a class="link_blue"
+                                                                                  href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13"
+                                                                                  title="Bán nhà riêng tại {{$item['district']}}">{{$item['district']}}</a>
+                                                            , <a class="link_blue"
+                                                                 href="/tim-kiem-nang-cao/nha-dat-ban/-1/1"
+                                                                 title="Bán nhà riêng tại {{$item['province']}}">{{$item['province']}}</a>
+                                                        </span>
+                                                @endif</li>
                                         </ul>
                                     </div>
                                     <div class="contact_nhadatban">

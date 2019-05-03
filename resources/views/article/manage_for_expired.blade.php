@@ -35,7 +35,6 @@ $mySelf = Auth::user();
                                     <option selected="selected" value="-1">Tất cả</option>
                                     <option value="{{APPROVAL_ARTICLE_PUBLIC}}">Đã duyệt</option>
                                     <option value="{{APPROVAL_ARTICLE_PENĐING}}">Chưa duyệt</option>
-                                    <option value="{{APPROVAL_ARTICLE_EXPIRED}}">Hết hạn</option>
                                     <option value="{{APPROVAL_ARTICLE_DELETE}}">Đã bị xóa</option>
                                 </select>
                             </div>
@@ -55,9 +54,9 @@ $mySelf = Auth::user();
 @endsection
 @section('contentJS')
     <script>
-        var pageUrl = '/quan-ly-tin/tin-nhap';
+        var pageUrl = '/quan-ly-tin/tin-het-han';
         function doReadySearch() {
-            getList('/quan-ly-tin/tin-nhap');
+            getList('/quan-ly-tin/tin-het-han');
         }
         function deleteArticle(code, type) {
             var r = confirm("Bạn có chắc muốn xóa tin này không?");
@@ -128,6 +127,7 @@ $mySelf = Auth::user();
                     date_to: $('#date_to').val(),
                     code: $('#code').val(),
                     aprroval: $('#aprroval').val(),
+                    expired: true
                 },
                 beforeSend: function () {
                     if(loaded) return false;

@@ -159,7 +159,7 @@ global $projectWard12;
                         <div class="row_ad clearfix">
                             <div class="row25"><label>Giá:</label></div>
                             <div class="row25">
-                                <input name="price_from" type="text" min="1" step="any" placeholder=" từ" id="price_from" style="width: 76px;" value="{{old('price_from') ??đ $article->price_from ?? ''}}" class="text-field ipt1 ver_number" numberonly="2" maxlength="6">
+                                <input name="price_from" type="text" min="1" step="any" placeholder=" từ" id="price_from" style="width: 76px;" value="{{old('price_from') ?? $article->price_from ?? ''}}" class="text-field ipt1 ver_number" numberonly="2" maxlength="6">
                                 -
                                 <input name="price_to" type="text" min="1" step="any" placeholder=" đến" id="price_to" style="width: 76px;" value="{{old('price_to') ?? $article->price_to ?? ''}}" class="text-field ipt1 ver_number" numberonly="2" maxlength="6">
                                 @if ($errors->has('price'))
@@ -352,7 +352,6 @@ global $projectWard12;
         ?>
         $(document).ready(function() {
             document.getElementById('select-province').value = '<?php echo old('province_id') ?? $article->province_id ?? '' ?>';
-            getDistrict('<?php echo old('province_id') ?? $article->province_id ?? '' ?>', '<?php echo old('district_id') ?? $article->district_id ?? '' ?>', '<?php echo old('ward_id') ?? $article->ward_id ?? '' ?>', '<?php echo old('street_id') ?? $article->street_id ?? '' ?>');
             <?php
             if(old('district_id') ?? $article->district_id ?? false) {
             ?>
@@ -448,12 +447,6 @@ global $projectWard12;
             let old = $('#remove_imgs').val();
             $('#remove_imgs').val((old ? (old + '|') : '') + img);
         }
-        $('.select-province').change(function() {
-            $('#txtAddress').val('');
-        });
-        $('.select-district').change(function() {
-            $('#txtAddress').val($('.select-district option:selected').text() + ', ' + $('.select-province option:selected').text());
-        });
         $('.select-ward').change(function() {
             var ward = $('.select-ward option:selected').val() ? 'Phường ' + $('.select-ward option:selected').text() + ', ' : '';
             var street = $('.select-street option:selected').val() ?  ('Đường ' + $('.select-street option:selected').text() + ', ') : '';
