@@ -78,7 +78,6 @@
         <li class='' ><a href='/bao-gia-ho-tro' target='_self'>Báo giá &amp; hỗ trợ</a></li>
         <li class='' ><a href='/nhung-cau-hoi-thuong-gap' target='_self'>Những câu hỏi thường gặp</a></li>
         <li class='' ><a href='/quy-dinh-dang-tin' target='_self'>Quy định đăng tin</a></li>
-        <li class='' ><a href='/lien-he' target='_self'>Liên hệ</a></li>
         <li class='' ><a href='/ho-tro' target='_self'>Hỗ trợ</a></li>
     </ul>
 </div>
