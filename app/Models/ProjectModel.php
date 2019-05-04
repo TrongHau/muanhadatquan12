@@ -12,5 +12,5 @@ class ProjectModel extends Model
     public $timestamps = false;
     protected $table = 'project';
     protected $primaryKey = 'id';
-    protected $fillable = ['_name', '_province_id', '_district_id', '_lat', '_lng'];
+    protected $fillable = ['_name', '_province_id', '_district_id', '_lat', '_lng', 'gallery_image', 'content'];
 }

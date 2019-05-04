@@ -65,8 +65,30 @@ class ProjectController extends CrudController
             'type' => 'text',
             'placeholder' => 'Nhập tên dự quận 12',
         ]);
+        $this->crud->addField([    // WYSIWYG
+            'name' => 'content',
+            'label' => 'Nội dung',
+            'type' => 'ckeditor',
+            'placeholder' => 'Your textarea text here',
+        ]);
     }
+    public function edit($id, $template = false)
+    {
+        $this->crud->hasAccessOrFail('update');
 
+        // get entry ID from Request (makes sure its the last ID for nested resources)
+        $id = $this->crud->getCurrentEntryId() ?? $id;
+
+        // get the info for that entry
+        $this->data['entry'] = $this->crud->getEntry($id);
+        $this->data['crud'] = $this->crud;
+        $this->data['saveAction'] = $this->getSaveAction();
+        $this->data['fields'] = $this->crud->getUpdateFields($id);
+        $this->data['title'] = trans('backpack::crud.edit').' '.$this->crud->entity_name;
+        $this->data['id'] = $id;
+
+        return view('vendor.backpack.project.edit', $this->data);
+    }
     public function store(StoreRequest $request)
     {
         $this->crud->hasAccessOrFail('create');

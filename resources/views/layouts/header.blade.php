@@ -87,6 +87,4 @@
     <!--[if lt IE 9]>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <![endif]-->
-    <meta name="google-site-verification"
-          content="<meta name="google-site-verification" content="If_Ov9U0hBU-XuLDf819n7w0Pb2bf9sHE1Cib1LpG3Q" />" />
 </head>
