@@ -162,7 +162,18 @@
             location.hash = e.target.hash.replace("#tab_", "#");
         });
     </script>
-
+    <script>
+        var csrfToken = "{{csrf_token()}}";
+        var loaded = false;
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            }
+        });
+        $( document ).ajaxStop(function() {
+            loaded = false;
+        });
+    </script>
     @include('backpack::inc.alerts')
 
     @yield('after_scripts')

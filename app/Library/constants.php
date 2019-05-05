@@ -19,6 +19,7 @@ define('APPROVAL_ARTICLE_DEFAULT', 0);
 define('PAGING_LIST_ARTICLE', 5);
 define('PAGING_LIST_ARTICLE_HOME', 15);
 define('PAGING_LIST_ARTICLE_CATALOG', 20);
+define('PAGING_LIST_PROJECT_CATALOG', 10);
 define('HOME_SUBSTRING', 65);
 define('LIMIT_SHORT_CONTENT', 180);
 define('ARTICLE_LEASE', 'LEASE');
@@ -34,8 +35,10 @@ define('SOURCE_DATA_ARTICLE_LEASE_THUMBNAIL', 'article_lease/thumbnail/');
 define('PUBLIC_ARTICLE_LEASE', '/storage/article_lease/');
 // article for buy
 define('SOURCE_DATA_ARTICLE_BUY', 'article_buy/');
+define('SOURCE_DATA_PROJECT', 'project/');
 define('SOURCE_DATA_ARTICLE_BUY_THUMBNAIL', 'article_buy/thumbnail/');
 define('PUBLIC_ARTICLE_BUY', '/storage/article_buy/');
+define('PUBLIC_PROJECT', '/storage/project/');
 define('IMAGE_DEFAULT', '/imgs/image_default.png');
 define('THUMBNAIL_DEFAULT', '/imgs/thumbnail_default.png');
 define('DEFAULT_ROLE_NAME_EMPTY', 'user');
@@ -46,4 +49,5 @@ define('POINT_NEW_ARTICLE_FOR_LEASE', 10);
 define('POINT_NEW_ARTICLE_FOR_BUY', 3);
 define('TIME_EXPIRED_OTP', '+5 minutes'); // hạn otp 5 phút
 define('TIME_EXPIRED_NEW', '+30 days'); // hạn tin 30 ngày
+define('TIME_EXPIRY_ADD_ARTICLE', '+1 hour'); // hạn tin 30 ngày
 

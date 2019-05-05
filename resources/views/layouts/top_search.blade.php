@@ -93,7 +93,7 @@ use App\Library\Helpers;
                                 <li class="lv1"><a href="/can-thue-loai-bat-dong-san-khac" class="haslink ">Cần thuê loại bất động sản khác</a></li>
                             </ul>
                         </li>
-                        <li class=''><a href='/du-an-quan-12' target='_self'><span>DỰ ÁN</span></a></li>
+                        <li class=''><a href='/du-an' target='_self'><span>DỰ ÁN</span></a></li>
                         <li class="lv0"><a href="/tin-tuc-nha-dat" class="haslink ">Tin tức</a></li>
                         <li class="lv0"><a href="/quan-ly-tin/dang-tin-ban-cho-thue" class="haslink ">Đăng tin</a></li>
                         <li class="lv0"><a href="/lien-he" class="haslink ">Liên hệ</a></li>

@@ -137,7 +137,7 @@ class Helpers
             if(isset($listen[$idMusic])) {
                 if($listen[$idMusic]['time_expiry'] <= time()) {
                     $listen[$idMusic] = [
-                        'time_expiry' => strtotime(TIME_EXPIRY_ADD_LISTEN_MUSIC)
+                        'time_expiry' => strtotime(TIME_EXPIRY_ADD_ARTICLE)
                     ];
                     $_SESSION[$type] = $listen;
                     return true;

@@ -1,18 +1,15 @@
-<?php
-use App\Library\Helpers;
-?>
 @extends('backpack::layout')
 
 @section('header')
     <section class="content-header">
         <h1>
             <span class="text-capitalize">{{ $crud->entity_name_plural }}</span>
-            <small>{{ trans('backpack::crud.edit').' '.$crud->entity_name }}.</small>
+            <small>{{ trans('backpack::crud.add').' '.$crud->entity_name }}.</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="{{ url(config('backpack.base.route_prefix'),'dashboard') }}">{{ trans('backpack::crud.admin') }}</a></li>
+            <li><a href="{{ url(config('backpack.base.route_prefix'), 'dashboard') }}">{{ trans('backpack::crud.admin') }}</a></li>
             <li><a href="{{ url($crud->route) }}" class="text-capitalize">{{ $crud->entity_name_plural }}</a></li>
-            <li class="active">{{ trans('backpack::crud.edit') }}</li>
+            <li class="active">{{ trans('backpack::crud.add') }}</li>
         </ol>
     </section>
 @endsection
@@ -28,38 +25,23 @@ use App\Library\Helpers;
             @include('crud::inc.grouped_errors')
 
             <form method="post"
-                  action="{{ url($crud->route.'/'.$entry->getKey()) }}"
-                  @if ($crud->hasUploadFields('update', $entry->getKey()))
+                  action="{{ url($crud->route) }}"
+                  @if ($crud->hasUploadFields('create'))
                   enctype="multipart/form-data"
                     @endif
             >
                 {!! csrf_field() !!}
-                {!! method_field('PUT') !!}
                 <div class="box">
+
                     <div class="box-header with-border">
-                    @if ($crud->model->translationEnabled())
-                        <!-- Single button -->
-                            <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{trans('backpack::crud.language')}}: {{ $crud->model->getAvailableLocales()[$crud->request->input('locale')?$crud->request->input('locale'):App::getLocale()] }} <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    @foreach ($crud->model->getAvailableLocales() as $key => $locale)
-                                        <li><a href="{{ url($crud->route.'/'.$entry->getKey().'/edit') }}?locale={{ $key }}">{{ $locale }}</a></li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            <h3 class="box-title" style="line-height: 30px;">{{ trans('backpack::crud.edit') }}</h3>
-                        @else
-                            <h3 class="box-title">{{ trans('backpack::crud.edit') }}</h3>
-                        @endif
+                        <h3 class="box-title">{{ trans('backpack::crud.add_a_new') }} {{ $crud->entity_name }}</h3>
                     </div>
-                    <div class="box-body row display-flex-wrap" style="display: flex;flex-wrap: wrap;">
+                    <div class="box-body row display-flex-wrap" style="display: flex; flex-wrap: wrap;">
                         <!-- load the view from the application if it exists, otherwise load the one in the package -->
                         @if(view()->exists('vendor.backpack.crud.form_content'))
-                            @include('vendor.backpack.crud.form_content', ['fields' => $fields, 'action' => 'edit'])
+                            @include('vendor.backpack.crud.form_content', [ 'fields' => $crud->getFields('create'), 'action' => 'create' ])
                         @else
-                            @include('crud::form_content', ['fields' => $fields, 'action' => 'edit'])
+                            @include('crud::form_content', [ 'fields' => $crud->getFields('create'), 'action' => 'create' ])
                         @endif
                         <div class="form-group col-xs-12">
                             <label>Hình ảnh dự án</label>
@@ -87,20 +69,19 @@ use App\Library\Helpers;
                                     <!-- The table listing the files available for upload/download -->
                                     <table role="presentation" class="table table-striped">
                                         <tbody class="files">
-                                        @if($fields['gallery_image']['value'])
-                                            @foreach(json_decode($fields['gallery_image']['value']) as $item)
-
+                                        @if(isset($article->gallery_image) && $article->gallery_image)
+                                            @foreach(json_decode($article->gallery_image) as $item)
                                                 <tr class="template-download fade in">
                                                     <td>
                                                             <span class="preview">
-                                                                    <a href="{{ Helpers::file_path($fields['id']['value'], PUBLIC_PROJECT, true).$item}}"
+                                                                    <a href="{{ Helpers::file_path($article->id, PUBLIC_PROJECT, true).$item}}"
                                                                        title="{{$item}}" download="{{$item}}" data-gallery=""><img width="120"
-                                                                                                                                   src="{{ Helpers::file_path($fields['id']['value'], PUBLIC_PROJECT, true).THUMBNAIL_PATH.$item}}"></a>
+                                                                                                                                   src="{{ Helpers::file_path($article->id, PUBLIC_PROJECT, true).THUMBNAIL_PATH.$item}}"></a>
                                                             </span>
                                                     </td>
                                                     <td>
                                                         <p class="name">
-                                                            <a href="{{ Helpers::file_path($fields['id']['value'], PUBLIC_PROJECT, true).$item}}"
+                                                            <a href="{{ Helpers::file_path($article->id, PUBLIC_PROJECT, true).$item}}"
                                                                title="{{$item}}"
                                                                download="{{$item}}" data-gallery="">{{$item}}</a>
                                                         </p>
@@ -121,12 +102,12 @@ use App\Library\Helpers;
                             </div>
                         </div>
                     </div><!-- /.box-body -->
-
                     <div class="box-footer">
 
                         @include('crud::inc.form_save_buttons')
 
                     </div><!-- /.box-footer-->
+
                 </div><!-- /.box -->
             </form>
         </div>
@@ -134,13 +115,6 @@ use App\Library\Helpers;
 
 @endsection
 @push('after_scripts')
-    <script>
-        function remove_exists_img(img) {
-            let old = $('#remove_imgs').val();
-            $('#remove_imgs').val((old ? (old + '|') : '') + img);
-        }
-
-    </script>
     <script id="template-upload" type="text/x-tmpl">
     {% for (var i=0, file; file=o.files[i]; i++) { %}
         <tr class="template-upload fade">

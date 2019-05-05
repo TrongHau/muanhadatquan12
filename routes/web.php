@@ -52,6 +52,7 @@ Route::prefix('guest/')->group(function () {
 });
 Route::get('upload/image', ['as' => 'upload.getImage', 'uses' => 'ArticleController@loadImage']);
 Route::post('upload/image', ['as' => 'upload.getImage', 'uses' => 'ArticleController@loadImage']);
+Route::put('upload/image', ['as' => 'upload.getImage', 'uses' => 'ArticleController@loadImage']);
 Route::delete('upload/image', ['as' => 'upload.getImage', 'uses' => 'ArticleController@loadImage']);
 Route::get('thong-tin-ca-nhan/xac-nhan-so-dien-thoai-moi', ['as' => 'uses.get.mobile', 'uses' => 'UserController@getVerifyMobile']);
 Route::post('thong-tin-ca-nhan/xac-nhan-so-dien-thoai-moi', ['as' => 'uses.verify.mobile', 'uses' => 'UserController@setVerifyMobile']);
@@ -224,6 +225,11 @@ Route::get('/tim-kiem-nang-cao/{method}/{type?}/{province_id?}/{district_id?}/{w
 Route::get('/tin-tuc-nha-dat/{prefix?}', 'CatalogController@Article');
 Route::get('/kien-thuc-nha-dat/{prefix?}', 'CatalogController@Article');
 Route::get('/ho-tro/{prefix?}', 'CatalogController@Article');
+
+
+
+Route::get('/du-an', 'CatalogController@Project');
+Route::get('/du-an/{slug?}', 'CatalogController@Project');
 
 
 

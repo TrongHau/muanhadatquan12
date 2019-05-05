@@ -72,4 +72,7 @@ class DetailController extends Controller
             return view('errors.404');
         return view('detail.page', compact('page'));
     }
+    public function Project() {
+
+    }
 }

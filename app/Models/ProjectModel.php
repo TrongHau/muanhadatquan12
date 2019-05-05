@@ -2,15 +2,34 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Backpack\CRUD\CrudTrait;
 use DB;
+use Backpack\CRUD\CrudTrait;
+use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 
 class ProjectModel extends Model
 {
     use CrudTrait;
-    public $timestamps = false;
+    use Sluggable, SluggableScopeHelpers;
     protected $table = 'project';
     protected $primaryKey = 'id';
-    protected $fillable = ['_name', '_province_id', '_district_id', '_lat', '_lng', 'gallery_image', 'content'];
+    protected $fillable = ['_name', '_province_id', '_district_id', '_lat', '_lng', 'gallery_image', 'content', 'slug', 'address', 'area', 'status', 'price_from', 'owner', 'views'];
+    // The slug is created automatically from the "title" field if no slug exists.
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'slug_or_name',
+            ],
+        ];
+    }
+    public function getSlugOrNameAttribute()
+    {
+        if ($this->slug != '') {
+            return $this->slug;
+        }
+
+        return $this->_name;
+    }
 }

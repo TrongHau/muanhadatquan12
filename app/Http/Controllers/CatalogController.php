@@ -18,6 +18,7 @@ use App\Models\ArticleForLeaseModel;
 use App\Models\ArticleForBuyModel;
 use App\Models\TypeModel;
 use App\Models\ArticleModel;
+use App\Models\ProjectModel;
 use Backpack\NewsCRUD\app\Models\Article;
 use App\Models\ArticleTagModel;
 
@@ -73,10 +74,10 @@ class CatalogController extends Controller
             }elseif ($_SESSION['order_page_lease'] == 'area_desc') {
                 $article = $article->orderBy('area', 'desc');
             }else{
-                $article = $article->orderBy('created_at', 'desc');
+                $article = $article->orderBy('start_news', 'desc');
             }
         }else{
-            $article = $article->orderBy('created_at', 'desc');
+            $article = $article->orderBy('start_news', 'desc');
         }
         $article = $article->paginate(PAGING_LIST_ARTICLE_CATALOG);
         return view('catalog.article_for_lease_ban_dat', compact('titleArticle', 'article', 'key'));
@@ -108,10 +109,10 @@ class CatalogController extends Controller
             }elseif ($_SESSION['order_page_buy'] == 'area_desc') {
                 $article = $article->orderBy('area_from', 'desc');
             }else{
-                $article = $article->orderBy('created_at', 'desc');
+                $article = $article->orderBy('start_news', 'desc');
             }
         }else{
-            $article = $article->orderBy('created_at', 'desc');
+            $article = $article->orderBy('start_news', 'desc');
         }
         $article = $article->paginate(PAGING_LIST_ARTICLE_CATALOG);
         return view('catalog.article_for_lease_cho_thue', compact('titleArticle', 'article', 'key'));
@@ -140,7 +141,10 @@ class CatalogController extends Controller
                 }
                 $articleRelate = Article::whereIn('id', $arrArticleIds)->where('status', PUBLISHED_ARTICLE)->get();
             }
-            $article->where('id', $article->id)->increment('views');
+            // +1 view
+            if(Helpers::sessionCountTimes($article->id, 'article_tin_tuc')){
+                $article->where('id', $article->id)->increment('views');
+            }
             return view('detail.article_tin_tuc', compact('article', 'articleRelate', 'tagRelate'));
         } else {
             $category = CategoryModel::where('slug', $prefix ? $prefix : $request->path())->first();
@@ -155,15 +159,32 @@ class CatalogController extends Controller
             }else{
                 $arrCat[] = $category->id;
             }
-            $article = ArticleModel::select('title', 'slug', 'short_content', 'image', 'status', 'featured', 'views', 'created_at')->where('status', PUBLISHED_ARTICLE)->whereIn('category_id', $arrCat)->orderBy('created_at', 'desc')->paginate(PAGING_LIST_ARTICLE_CATALOG);
+            $article = ArticleModel::select('title', 'slug', 'short_content', 'image', 'status', 'featured', 'views', 'start_news')->where('status', PUBLISHED_ARTICLE)->whereIn('category_id', $arrCat)->orderBy('created_at', 'desc')->paginate(PAGING_LIST_ARTICLE_CATALOG);
             return view('catalog.article_tin_tuc', compact('category', 'article'));
         }
 
     }
     public function searchKey(Request $request)
     {
-        $article = ArticleModel::select('title', 'slug', 'short_content', 'image', 'status', 'featured', 'views', 'created_at')->where('status', PUBLISHED_ARTICLE)->where('title', 'like', '%'.$request->q.'%')->paginate(PAGING_LIST_ARTICLE_CATALOG);
+        $article = ArticleModel::select('title', 'slug', 'short_content', 'image', 'status', 'featured', 'views', 'start_news')->where('status', PUBLISHED_ARTICLE)->where('title', 'like', '%'.$request->q.'%')->paginate(PAGING_LIST_ARTICLE_CATALOG);
         $category = CategoryModel::where('id', 1)->first();
         return view('catalog.article_tin_tuc', compact('category', 'article'));
+    }
+    public function Project(Request $request, $prefix = null) {
+        if($prefix) {
+            $project = ProjectModel::where('slug', $prefix)->first();
+            if(!$project) {
+                return view('errors.404');
+            }
+            // +1 view
+            if(Helpers::sessionCountTimes($project->id, 'project')){
+                $project->where('id', $project->id)->increment('views');
+            }
+            $articleRelate = ArticleForLeaseModel::where('project', $project->id)->where([['status', PUBLISHED_ARTICLE], ['aprroval', APPROVAL_ARTICLE_PUBLIC], ['end_news', '>=', time()]])->orderBy('start_news', 'desc')->limit(5)->get();
+            return view('detail.project', compact('project', 'articleRelate'));
+        } else {
+            $project = ProjectModel::select('id', '_name', 'slug', 'gallery_image', 'address', 'status', 'area', 'price_from', 'owner', 'views')->where(['_province_id' => 1, '_district_id' => 13])->orderBy('updated_at', 'desc')->paginate(PAGING_LIST_PROJECT_CATALOG);
+            return view('catalog.project', compact('project'));
+        }
     }
 }

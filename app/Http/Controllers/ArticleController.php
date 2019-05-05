@@ -113,14 +113,16 @@ class ArticleController extends Controller
     public function getListArticleForLease(Request $request) {
         $article = ArticleForLeaseModel::select(['id', 'title', 'end_news', 'start_news', 'views', 'created_at', 'status', 'aprroval', 'gallery_image', 'note', 'updated_at', 'type_article', 'prefix_url'])
             ->where('user_id', Auth::user()->id);
-        if($request->date_from) {
-            $article = $article->where('created_at', '>=', date_format(date_create($request->date_from), "Y-m-d"));
-        }
-        if($request->date_to) {
-            $article = $article->where('created_at', '<=', date_format(date_create($request->date_to), "Y-m-d").' 23:59:59');
-        }
+
         if($request->code) {
             $article = $article->where('id', 'like', $request->code);
+        }else{
+            if($request->date_from) {
+                $article = $article->where('created_at', '>=', date_format(date_create($request->date_from), "Y-m-d"));
+            }
+            if($request->date_to) {
+                $article = $article->where('created_at', '<=', date_format(date_create($request->date_to), "Y-m-d").' 23:59:59');
+            }
         }
         if($request->aprroval != -1) {
             if($request->aprroval == 3) {
@@ -137,14 +139,15 @@ class ArticleController extends Controller
     public function getListArticleForBuy(Request $request) {
         $article = ArticleForBuyModel::select(['id', 'title', 'end_news', 'start_news', 'views', 'created_at', 'status', 'aprroval', 'gallery_image', 'note', 'updated_at', 'type_article', 'prefix_url'])
             ->where('user_id', Auth::user()->id);
-        if($request->date_from) {
-            $article = $article->where('created_at', '>=', date_format(date_create($request->date_from), "Y-m-d"));
-        }
-        if($request->date_to) {
-            $article = $article->where('created_at', '<=', date_format(date_create($request->date_to), "Y-m-d").' 23:59:59');
-        }
         if($request->code) {
             $article = $article->where('id', 'like', $request->code);
+        }else{
+            if($request->date_from) {
+                $article = $article->where('created_at', '>=', date_format(date_create($request->date_from), "Y-m-d"));
+            }
+            if($request->date_to) {
+                $article = $article->where('created_at', '<=', date_format(date_create($request->date_to), "Y-m-d").' 23:59:59');
+            }
         }
         if($request->aprroval != -1) {
             if($request->aprroval == 3) {
@@ -168,18 +171,18 @@ class ArticleController extends Controller
             ->where('status', DRAFT_ARTICLE)
             ->where('end_news', '>=', time())
             ->where('user_id', Auth::user()->id);
-
-        if($request->date_from) {
-            $articleForLease = $articleForLease->where('created_at', '>=', date_format(date_create($request->date_from), "Y-m-d"));
-            $articleForBuy = $articleForBuy->where('created_at', '>=', date_format(date_create($request->date_from), "Y-m-d"));
-        }
-        if($request->date_to) {
-            $articleForLease = $articleForLease->where('created_at', '<=', date_format(date_create($request->date_to), "Y-m-d").' 23:59:59');
-            $articleForBuy = $articleForBuy->where('created_at', '<=', date_format(date_create($request->date_to), "Y-m-d").' 23:59:59');
-        }
         if($request->code) {
             $articleForLease = $articleForLease->where('id', 'like', $request->code);
             $articleForBuy = $articleForBuy->where('id', 'like', $request->code);
+        }else{
+            if($request->date_from) {
+                $articleForLease = $articleForLease->where('created_at', '>=', date_format(date_create($request->date_from), "Y-m-d"));
+                $articleForBuy = $articleForBuy->where('created_at', '>=', date_format(date_create($request->date_from), "Y-m-d"));
+            }
+            if($request->date_to) {
+                $articleForLease = $articleForLease->where('created_at', '<=', date_format(date_create($request->date_to), "Y-m-d").' 23:59:59');
+                $articleForBuy = $articleForBuy->where('created_at', '<=', date_format(date_create($request->date_to), "Y-m-d").' 23:59:59');
+            }
         }
         if($request->aprroval != -1) {
             if($request->aprroval == 3) {
@@ -252,10 +255,10 @@ class ArticleController extends Controller
     public function resetExpiredArticle(Request $request) {
         if($request->type == 1) {
             // delete for lease
-            $result = ArticleForLeaseModel::where('id', $request->code)->where('user_id', Auth::user()->id)->update(['end_news' => strtotime(TIME_EXPIRED_NEW)]);
+            $result = ArticleForLeaseModel::where('id', $request->code)->where('user_id', Auth::user()->id)->update(['end_news' => strtotime(TIME_EXPIRED_NEW), 'start_news' => time()]);
         }else{
             // delete for buy
-            $result = ArticleForBuyModel::where('id', $request->code)->where('user_id', Auth::user()->id)->update(['end_news' => strtotime(TIME_EXPIRED_NEW)]);
+            $result = ArticleForBuyModel::where('id', $request->code)->where('user_id', Auth::user()->id)->update(['end_news' => strtotime(TIME_EXPIRED_NEW), 'start_news' => time()]);
         }
         Helpers::ajaxResult($result ? true : false, $result ? 'Gia hạn tin thành công' : 'Gia hạn tin thất bại', null);
     }

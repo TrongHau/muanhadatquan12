@@ -14,7 +14,8 @@ use Storage;
 use Illuminate\Support\Facades\Input;
 use App\Models\ProjectModel;
 use App\Library\Helpers;
-
+use Illuminate\Http\Request;
+use App\Http\Requests;
 
 class ProjectController extends CrudController
 {
@@ -33,7 +34,7 @@ class ProjectController extends CrudController
         $this->crud->setModel("App\Models\ProjectModel");
         $this->crud->setRoute(config('backpack.base.route_prefix', 'admin').'/project');
         $this->crud->setEntityNameStrings('Dự án', 'Thêm dự án quận 12');
-        $this->crud->orderBy('_name', 'desc');
+        $this->crud->orderBy('updated_at', 'desc');
 
         /*
         |--------------------------------------------------------------------------
@@ -65,29 +66,71 @@ class ProjectController extends CrudController
             'type' => 'text',
             'placeholder' => 'Nhập tên dự quận 12',
         ]);
+        $this->crud->addField([
+            'name' => 'slug',
+            'label' => 'Slug (URL)',
+            'type' => 'text',
+            'hint' => 'Sẽ được tạo tự động từ tiêu đề của bạn, nếu để trống.',
+            // 'disabled' => 'disabled'
+        ]);
+        $this->crud->addField([
+            'name' => 'area',
+            'label' => 'Diện tích',
+            'type' => 'text',
+            'hint' => 'Đơn vị sẽ được tính theo m2',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-4',
+            ],
+        ]);
+        $this->crud->addField([
+            'name' => 'price_from',
+            'label' => 'Giá từ',
+            'type' => 'text',
+            'hint' => 'Null: Hiển thị đang cập nhật',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-4',
+            ],
+        ]);
+        $this->crud->addField([
+            'label' => 'Tiến độ',
+            'type' => 'select_from_array',
+            'name' => 'status',
+            'options' => ['Đang cập nhật' => 'Đang cập nhật', 'Đang thi công' => 'Đang thi công', 'Đã hoàn thành' => 'Đã hoàn thành'],
+            'allows_null' => false,
+            'default' => 'Đang cập nhật',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-4',
+            ],
+        ]);
+        $this->crud->addField([
+            'name' => 'address',
+            'label' => 'Địa chỉ',
+            'type' => 'text',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6',
+            ],
+        ]);
+        $this->crud->addField([
+            'name' => 'owner',
+            'label' => 'Chủ đầu tư',
+            'type' => 'text',
+            'wrapperAttributes' => [
+                'class' => 'form-group col-md-6',
+            ],
+        ]);
+
         $this->crud->addField([    // WYSIWYG
             'name' => 'content',
             'label' => 'Nội dung',
             'type' => 'ckeditor',
             'placeholder' => 'Your textarea text here',
         ]);
-    }
-    public function edit($id, $template = false)
-    {
-        $this->crud->hasAccessOrFail('update');
-
-        // get entry ID from Request (makes sure its the last ID for nested resources)
-        $id = $this->crud->getCurrentEntryId() ?? $id;
-
-        // get the info for that entry
-        $this->data['entry'] = $this->crud->getEntry($id);
-        $this->data['crud'] = $this->crud;
-        $this->data['saveAction'] = $this->getSaveAction();
-        $this->data['fields'] = $this->crud->getUpdateFields($id);
-        $this->data['title'] = trans('backpack::crud.edit').' '.$this->crud->entity_name;
-        $this->data['id'] = $id;
-
-        return view('vendor.backpack.project.edit', $this->data);
+        $this->crud->addField([    // WYSIWYG
+            'name' => 'gallery_image',
+            'type' => 'hidden',
+        ]);
+        $this->crud->setCreateView('vendor.backpack.project.create');
+        $this->crud->setEditView('vendor.backpack.project.edit');
     }
     public function store(StoreRequest $request)
     {
@@ -108,6 +151,17 @@ class ProjectController extends CrudController
         $item = $this->crud->create($request->except(['save_action', '_token', '_method', 'current_tab']));
         $item->_province_id = 1;
         $item->_district_id = 13;
+        if($request->upload_images) {
+            $imgs = [];
+            foreach($request->upload_images as $item2) {
+                $fileName = $item->id.'-'.$item2;
+                Storage::disk('public')->move(SOURCE_DATA_TEMP.$item2, Helpers::file_path($item->id, SOURCE_DATA_PROJECT, true).$fileName);
+                Storage::disk('public')->move(SOURCE_DATA_THUMBNAIL.$item2, Helpers::file_path($item->id, SOURCE_DATA_PROJECT, true).THUMBNAIL_PATH.$fileName);
+                $imgs[] = $fileName;
+            }
+            $item->gallery_image = json_encode($imgs);
+        }
+
         $item->save();
         $this->data['entry'] = $this->crud->entry = $item;
 
@@ -147,10 +201,35 @@ class ProjectController extends CrudController
                 $request->request->set($key, null);
             }
         }
-
         // update the row in the db
         $item = $this->crud->update($request->get($this->crud->model->getKeyName()),
             $request->except('save_action', '_token', '_method', 'current_tab'));
+        $project = $item;
+        $olDataImgs = (array)json_decode($project->gallery_image);
+        if($request->remove_imgs) {
+            $arrImg = explode('|', $request->remove_imgs);
+            foreach ($arrImg as $item2) {
+                Storage::disk('public')->delete(Helpers::file_path($project->id, SOURCE_DATA_PROJECT, true).$item2);
+                Storage::disk('public')->delete(Helpers::file_path($project->id, SOURCE_DATA_PROJECT, true).THUMBNAIL_PATH.$item2);
+            }
+        }
+        if($request->upload_images) {
+            $imgs = [];
+            foreach($request->upload_images as $item2) {
+                if(!in_array($item2, $olDataImgs)) {
+                    $fileName = $project->id.'-'.$item2;
+                    Storage::disk('public')->move(SOURCE_DATA_TEMP.$item2, Helpers::file_path($project->id, SOURCE_DATA_PROJECT, true).$fileName);
+                    Storage::disk('public')->move(SOURCE_DATA_THUMBNAIL.$item2, Helpers::file_path($project->id, SOURCE_DATA_PROJECT, true).THUMBNAIL_PATH.$fileName);
+                }else{
+                    $fileName = $item2;
+                }
+                $imgs[] = $fileName;
+            }
+            $project->gallery_image = json_encode($imgs);
+            $project->save();
+        }
+
+
         $this->data['entry'] = $this->crud->entry = $item;
 
         // show a success message

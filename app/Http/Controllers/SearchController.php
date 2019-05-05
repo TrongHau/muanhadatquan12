@@ -75,7 +75,11 @@ class SearchController extends Controller
             $article = $article->where('ward_id', $ward_id);
         }
         if($title_article) {
-            $article = $article->where('title', 'like', '%'.$title_article.'%');
+            if(is_numeric($title_article)) {
+                $article = $article->where('id', $title_article);
+            }else{
+                $article = $article->where('title', 'like', '%'.$title_article.'%');
+            }
         }
         if($street_id > 0) {
             $article = $article->where('street_id', $street_id);

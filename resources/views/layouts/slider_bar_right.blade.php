@@ -243,11 +243,11 @@ global $wardSlideBar;
             Nhà đất bán tại quận 12
         </div>
         <div class="detail_R">
-            <ul class="slide-bar-du-an">
+            <ul class="slid e-bar-du-an">
             @foreach($wardSlideBar as $item)
                 @if($item['total'] > 0)
                 <li>
-                    <a href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13/{{$item['ward_id']}}/-1/-1/-1/-1/-1/-1/-1">
+                    <a href="/tim-kiem-nang-cao/nha-dat-ban/-1/1/13/{{$item['ward_id']}}">
                         <h3>{{$item['ward']}} ({{$item['total']}})</h3>
                     </a>
                 </li>
