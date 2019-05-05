@@ -35,6 +35,7 @@
     <script type="text/javascript" src="/js/jquery-ui-timepicker-addon.js"></script>
     <script type="text/javascript" src="/js/gii.js"></script>
     <script src="/js/jcarousellite.js"></script>
+    <script src="/js/functions.js"></script>
     {{--<link href="/css/fixie8.css" rel="stylesheet" media="screen" />--}}
     <script type="text/javascript">
         $('.ui-datepicker-trigger').click(function(){

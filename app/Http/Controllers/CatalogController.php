@@ -180,7 +180,7 @@ class CatalogController extends Controller
             if(Helpers::sessionCountTimes($project->id, 'project')){
                 $project->where('id', $project->id)->increment('views');
             }
-            $articleRelate = ArticleForLeaseModel::where('project', $project->id)->where([['status', PUBLISHED_ARTICLE], ['aprroval', APPROVAL_ARTICLE_PUBLIC], ['end_news', '>=', time()]])->orderBy('start_news', 'desc')->limit(5)->get();
+            $articleRelate = ArticleForLeaseModel::where('project', $project->id)->where([['status', PUBLISHED_ARTICLE], ['aprroval', APPROVAL_ARTICLE_PUBLIC], ['end_news', '>=', time()]])->orderBy('created_at', 'desc')->limit(5)->get();
             return view('detail.project', compact('project', 'articleRelate'));
         } else {
             $project = ProjectModel::select('id', '_name', 'slug', 'gallery_image', 'address', 'status', 'area', 'price_from', 'owner', 'views')->where(['_province_id' => 1, '_district_id' => 13])->orderBy('updated_at', 'desc')->paginate(PAGING_LIST_PROJECT_CATALOG);

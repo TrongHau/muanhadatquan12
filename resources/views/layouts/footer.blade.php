@@ -35,4 +35,3 @@
 </footer>
 <script type="text/javascript" src="/js/jquery.yiilistview.js"></script>
 @yield('contentJS')
-<script src="/js/functions.js"></script>
