@@ -32,8 +32,18 @@ $Agent = new Agent();
             {{$project->_name}} {{$project->address ?? 'Đang cập nhật'}}
         </div>
 
-        <div class="detail_R">
+        <div class="detail_R" style="padding-top: 0px">
             <div class="document">
+                <div class="info_nhadatban" style="width: 100%; margin-bottom: 10px">
+                    <ul>
+                        <li><span style="width: 125px;display: inline-block;"> <h3 style="margin: 5px 0px;"><strong>Địa chỉ:</strong></h3></span>{{$project->address ?? 'Địa chỉ đang cập nhật'}}</li>
+                        <li><span style="width: 125px;display: inline-block;"> <h3 style="margin: 5px 0px;"><strong>Giá từ:</strong></h3></span><span class="">{{$project->price_from ?? 'Đang cập nhật'}}</span></li>
+                        <li><span style="width: 125px;display: inline-block;"> <h3 style="margin: 5px 0px;"><strong>Chủ đầu tư: </strong></h3></span><span class="">{{$project->owner ?? 'Đang cập nhật'}}</span></li>
+                        <li><span style="width: 125px;display: inline-block;"> <h3 style="margin: 5px 0px;"><strong>Diện tích: </strong></h3></span><span class="">{{$project->area ?? 'Đang cập nhật'}}</span></li>
+                        <li><span style="width: 125px;display: inline-block;"> <h3 style="margin: 5px 0px;"><strong>Tiến độ: </strong></h3></span><span class="">{{$project->status ?? 'Đang cập nhật'}}</span></li>
+                    </ul>
+                </div>
+                <h3><strong>Thông tin dự án {{$project->_name}}</strong></h3>
                 <?php echo str_replace("\r\n", '<br/>', $project->content) ?>
                 @if($project->gallery_image)
                     <div class="pm-mota">
@@ -101,7 +111,7 @@ $Agent = new Agent();
         @if(count($articleRelate))
         <div class="tit_C" id="dacdiembds">
             <span class="icon_star_xanh"></span>
-            Tin rao bất động sản thuộc dự án {{$project->_name}}
+            Tin rao nhà đất bán, nhà đất cho thuê thuộc dự án {{$project->_name}}
         </div>
         <div class="boxfull clearfix">
             <div id="media" class="list-view">

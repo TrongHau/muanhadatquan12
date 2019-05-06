@@ -1170,7 +1170,7 @@ class UploadHandler
                     $file->error = $this->get_error_message('abort');
                 }
             }
-            $this->generate_watermark($file_path);
+//            $this->generate_watermark($file_path);
 //            $this->generate_watermark(str_replace('storage/temp', 'storage/temp/thumbnail', $file_path));
             $this->set_additional_file_properties($file);
         }

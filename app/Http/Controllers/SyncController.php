@@ -14,9 +14,9 @@ use  App\Models\WardModel;
 use Illuminate\Support\Facades\Hash;
 use  App\User;
 use App\Models\ArticleForLeaseModel;
+use App\Models\ProjectModel;
 use App\Models\ArticleForBuyModel;
 use App\Models\TypeModel;
-use App\Models\ProjectModel;
 use Backpack\NewsCRUD\app\Models\Article;
 use Backpack\NewsCRUD\app\Models\Category;
 use Storage;
@@ -80,6 +80,23 @@ if ( !ENV(\'IN_PHPBB\') )
 }
 global $noibat;
 $noibat = ' . var_export($noibat, true) . ';
+?>');
+
+        return response(['Ok']);
+    }
+    public function homSliderProject() {
+
+        $projectSlider = ProjectModel::select('id', '_name', 'slug', 'short_content', 'gallery_image')->where('gallery_image', '!=', '')->orderBy('updated_at', 'desc')->limit(8)->get()->toArray();
+
+        file_put_contents(resource_path().'/views/cache/project_slider.blade.php',
+            '<?php 
+if ( !ENV(\'IN_PHPBB\') )
+{
+    die(\'Hacking attempt\');
+    exit;
+}
+global $projectSlider;
+$projectSlider = ' . var_export($projectSlider, true) . ';
 ?>');
 
         return response(['Ok']);

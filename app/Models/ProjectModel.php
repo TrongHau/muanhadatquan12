@@ -14,7 +14,7 @@ class ProjectModel extends Model
     use Sluggable, SluggableScopeHelpers;
     protected $table = 'project';
     protected $primaryKey = 'id';
-    protected $fillable = ['_name', '_province_id', '_district_id', '_lat', '_lng', 'gallery_image', 'content', 'slug', 'address', 'area', 'status', 'price_from', 'owner', 'views'];
+    protected $fillable = ['_name', '_province_id', '_district_id', '_lat', '_lng', 'gallery_image', 'content', 'slug', 'address', 'area', 'status', 'price_from', 'owner', 'views', 'short_content'];
     // The slug is created automatically from the "title" field if no slug exists.
     public function sluggable()
     {

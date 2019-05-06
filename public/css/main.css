@@ -149,8 +149,8 @@ ul.hienthitindang {  margin: 10px 0px 10px 0;  padding: 0;}
 ul.hienthitindang li a {  background: #0054a6;  padding: 5px 20px;  color: #FFF;  float: left;  font-weight: 700;}
 ul.hienthitindang li a.active, ul.hienthitindang li a:hover {  background: #0E4376;}
 .maincontent{margin-top: 25px;}
-.main-l{ float:left;width: 68%;}
-.main-r{ float:right;width: 31%;}
+.main-l{ float:left;width: 71%;}
+.main-r{ float:right;width: 28%;}
 .main-l1{ width:76%;float: right;}
 .main-r1{ width:22%;float:left}
 .box1-right{}

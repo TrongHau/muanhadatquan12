@@ -77,7 +77,7 @@ class ProjectController extends CrudController
             'name' => 'area',
             'label' => 'Diện tích',
             'type' => 'text',
-            'hint' => 'Đơn vị sẽ được tính theo m2',
+            'hint' => 'Đơn vị nên được tính theo m²',
             'wrapperAttributes' => [
                 'class' => 'form-group col-md-4',
             ],
@@ -118,7 +118,12 @@ class ProjectController extends CrudController
                 'class' => 'form-group col-md-6',
             ],
         ]);
-
+        $this->crud->addField([
+            'name' => 'short_content',
+            'label' => 'Nội dung ngắn',
+            'type' => 'textarea',
+            'placeholder' => 'Nội dung ngắn thể hiện',
+        ]);
         $this->crud->addField([    // WYSIWYG
             'name' => 'content',
             'label' => 'Nội dung',
@@ -172,6 +177,7 @@ class ProjectController extends CrudController
         $this->setSaveAction();
         $sync = new SyncController();
         $sync->ProjectWard12();
+        $sync->homSliderProject();
         return $this->performSaveAction($item->getKey());
     }
 
@@ -182,6 +188,7 @@ class ProjectController extends CrudController
         // get entry ID from Request (makes sure its the last ID for nested resources)
         $sync = new SyncController();
         $sync->ProjectWard12();
+        $sync->homSliderProject();
         $id = $this->crud->getCurrentEntryId() ?? $id;
         return $this->crud->delete($id);
     }
@@ -239,6 +246,7 @@ class ProjectController extends CrudController
         $this->setSaveAction();
         $sync = new SyncController();
         $sync->ProjectWard12();
+        $sync->homSliderProject();
         return $this->performSaveAction($item->getKey());
     }
 }

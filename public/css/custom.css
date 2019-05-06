@@ -1002,3 +1002,40 @@ button:disabled {
 .slide-bar-du-an li {
     list-style: disc!important;
 }
+#excoloSlider .item_slider {
+
+}
+#excoloSlider .slide-next {
+    display: none!important;
+}
+#excoloSlider .slide-prev {
+    display: none!important;
+}
+.item_slider .fleft {
+    vertical-align: top;
+    width: 771px;
+    background-color: #ccc;
+    min-height: 270px;
+    display: table-row;
+    float: left;
+}
+.item_slider .fright {
+    float: left;
+    padding: 5px 10px 0 10px;
+    width: 215px;
+    position: relative;
+    height: 270px;
+}
+.item_slider a.avaslide {
+    text-align: center;
+    display: table-cell;
+    width: 771px;
+    height: 270px;
+    vertical-align: middle;
+}
+.tc-duan .title a {
+    color: #055699;
+    font-size: 16px;
+    font-weight: bolder;
+    line-height: 25px;
+}

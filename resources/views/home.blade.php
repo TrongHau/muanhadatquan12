@@ -1,9 +1,10 @@
 <?php
 use App\Library\Helpers;
 use Jenssegers\Agent\Agent;
-global $noibat;
+global $projectSlider;
 $Agent = new Agent();
 ?>
+@include('cache.project_slider')
 @section('meta')
     <base href="{{env('APP_URL')}}">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -26,8 +27,51 @@ $Agent = new Agent();
     <meta property="og:type" content="website" />
     <meta property="og:updated_time" content="{{time()}}" />
 @endsection
+@section('contentCSS')
+    <link href="/css/jquery.excoloSlider.css" rel="stylesheet" />
+    <script src="/js/jquery.excoloSlider.js"></script>
+    <script>
+        // Settings for Adaptive.js
+        // var ADAPT_CONFIG = {
+        //     path: 'css/',
+        //     dynamic: true,
+        //     range: [
+        //         '0px    to 760px  = mobile.min.css',
+        //         '760px  to 980px  = 720.min.css',
+        //         '980px            = 960.min.css'
+        //     ]
+        // };
+
+        $(function () {
+            $("#excoloSlider").excoloSlider();
+        });
+    </script>
+@endsection
 @extends('layouts.app')
 @section('content')
+    <div class="grid">
+        <div id="excoloSlider" class="slider">
+            @foreach($projectSlider as $item)
+            <div class="item_slider" >
+                <div class="fleft">
+                    <a class="avaslide" href="/du-an/{{$item['slug'] ?? $item['id']}}" title="{{$item['_name']}}">
+                        <img src="{{$item['gallery_image'] ? Helpers::file_path($item['id'], PUBLIC_PROJECT, true).json_decode($item['gallery_image'])[0] : THUMBNAIL_DEFAULT }}" alt="{{$item['_name']}}" width="100%" height="100%">
+                    </a>
+                </div>
+                <div class="fright">
+                    <div class="title">
+                        <h3><a href="/du-an/{{$item['slug'] ?? $item['id']}}" title=" {{$item['_name']}}" class="prj-hl-title">
+                                {{$item['_name']}}
+                            </a></h3>
+                    </div>
+                    <div class="sum prj-hl-sum">{{$item['short_content']}}</div>
+                    <div class="dotdotdot"></div>
+                    <div class="more"><a href="/du-an/{{$item['slug'] ?? $item['id']}}">Chi tiết&nbsp;<span>→</span></a></div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
     <div class="main-l">
         <div class="box1-left">
             <div class="tit_C cachtren2">

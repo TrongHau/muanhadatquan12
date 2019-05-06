@@ -76,7 +76,7 @@ global $wardSlideBar;
                 </div>
 
                 <div class="row_timkiemR clearfix">
-                    <label>Theo dự án</label>
+                    <label>Dự án</label>
                     <div class="divipt">
                         <select id="select-project" class="advance-options select-project">
                             <option value="-1" class="advance-options">-- Chọn dự án quận 12 --</option>
@@ -88,7 +88,7 @@ global $wardSlideBar;
                 </div>
 
                 <div class="row_timkiemR clearfix">
-                    <label>Theo diện tích</label>
+                    <label>Diện tích</label>
                     <div class="divipt">
                         <select id="search-advance-area" class="advance-options">
                             <option value="-1" class="advance-options" style="min-width: 168px;">-- Chọn diện tích --
@@ -127,7 +127,7 @@ global $wardSlideBar;
                         </select>           </div>
                 </div>
                 <div class="row_timkiemR clearfix">
-                    <label>Theo mức giá</label>
+                    <label>Mức giá</label>
                     <div class="divipt">
                         <select class="advance-options" id="search-advance-price">
                             <option value="-1" class="advance-options">-- Chọn mức giá --</option>
@@ -159,7 +159,7 @@ global $wardSlideBar;
                         </select>            </div>
                 </div>
                 <div class="row_timkiemR clearfix">
-                    <label>Theo số toilet</label>
+                    <label>Số toilet</label>
                     <div class="divipt">
                         <select id="search-advance-toilet" class="advance-options">
                             <option value="-1" class="advance-options" style="min-width: 168px;">-- Chọn số toilet --</option>
@@ -172,7 +172,7 @@ global $wardSlideBar;
                         </select>            </div>
                 </div>
                 <div class="row_timkiemR clearfix">
-                    <label>Theo hướng nhà</label>
+                    <label>Hướng nhà</label>
                     <div class="divipt">
                         <select id="search-advance-ddlHomeDirection" class="advance-options">
                             <option value="-1" style="min-width: 168px;">-- Chọn hướng nhà --</option>
