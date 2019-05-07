@@ -558,7 +558,12 @@ global $projectWard12;
             let old = $('#remove_imgs').val();
             $('#remove_imgs').val((old ? (old + '|') : '') + img);
         }
-
+        $('.select-province').change(function() {
+            $('#txtAddress').val($('.select-province option:selected').text());
+        });
+        $('.select-district').change(function() {
+            $('#txtAddress').val($('.select-district option:selected').text() + ', ' + $('.select-province option:selected').text());
+        });
         $('.select-ward').change(function() {
             var ward = $('.select-ward option:selected').val() ? 'Phường ' + $('.select-ward option:selected').text() + ', ' : '';
             var street = $('.select-street option:selected').val() ?  ('Đường ' + $('.select-street option:selected').text() + ', ') : '';
